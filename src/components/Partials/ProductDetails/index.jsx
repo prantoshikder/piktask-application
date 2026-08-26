@@ -1,4 +1,6 @@
-import { CircularProgress, Grid, makeStyles } from "@material-ui/core";
+"use client";
+
+import { CircularProgress, Grid } from "@/components/ui-kit";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -6,17 +8,9 @@ import { getBaseURL, imageObjSchema } from "../../../helpers";
 import ProductImage from "./ProductImage";
 import ProductInfo from "./ProductInfo";
 
-const useStyles = makeStyles((theme) => ({
-  productColumn: {
-    [theme.breakpoints.down("sm")]: {
-      maxWidth: "100%",
-      flexBasis: "100%",
-    },
-  },
-}));
+
 
 const ProductDetails = (props) => {
-  const classes = useStyles();
   const { imageID, setAllTags, location, shareUrl, setProductTitle, setThumbnail } = props;
   const user = useSelector((state) => state.user);
 
@@ -33,7 +27,7 @@ const ProductDetails = (props) => {
 
     // Match image ID
     axios
-      .get(`${process.env.REACT_APP_API_URL}/images/${imageID}`, { cancelToken: source.token })
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/images/${imageID}`, { cancelToken: source.token })
       .then(({ data }) => {
         if (data?.success) {
           setImageDetails(data?.detail);
@@ -47,7 +41,7 @@ const ProductDetails = (props) => {
 
           if (user && user?.isLoggedIn && user.role === "user") {
             axios
-              .get(`${process.env.REACT_APP_API_URL}/contributor/follow_status/${data.detail.user_id}`, {
+              .get(`${process.env.NEXT_PUBLIC_API_URL}/contributor/follow_status/${data.detail.user_id}`, {
                 cancelToken: source.token,
                 headers: { Authorization: user.token },
               })
@@ -71,7 +65,7 @@ const ProductDetails = (props) => {
     // Like status API
     if (user && user?.isLoggedIn && user?.role === "user") {
       axios
-        .get(`${process.env.REACT_APP_API_URL}/images/${imageID}/like_status`, {
+        .get(`${process.env.NEXT_PUBLIC_API_URL}/images/${imageID}/like_status`, {
           headers: { cancelToken: source.token, Authorization: user?.token },
         })
         .then(({ data }) => {
@@ -120,12 +114,12 @@ const ProductDetails = (props) => {
       <CircularProgress color="primary" />
     </div>
   ) : (
-    <Grid container spacing={4} classes={{ container: classes.itemDetailsContainer }}>
-      <Grid item md={7} sm={6} xs={12} className={classes.productColumn}>
+    <Grid container spacing={4}>
+      <Grid size={{ xs: 12, sm: 6, md: 7 }} className="max-[959.95px]:max-w-[100%] max-[959.95px]:basis-[100%]">
         <ProductImage setThumbnail={setThumbnail} imageDetails={imageDetails} />
       </Grid>
 
-      <Grid item md={5} sm={6} xs={12} className={classes.productColumn}>
+      <Grid size={{ xs: 12, sm: 6, md: 5 }} className="max-[959.95px]:max-w-[100%] max-[959.95px]:basis-[100%]">
         <ProductInfo
           productDetails={{
             isFollowing,

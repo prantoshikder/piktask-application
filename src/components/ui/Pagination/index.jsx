@@ -1,11 +1,11 @@
-import { Button } from "@material-ui/core";
+"use client";
+
+import { Button } from "@/components/ui-kit";
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory } from "@/lib/router";
 import Spacing from "../../Spacing";
-import useStyles from "./Pagination.style";
 
 const Pagination = (props) => {
-  const classes = useStyles();
   const history = useHistory();
   const { pageCount, setPageCount, count, locationPath, productPagination } = props;
   const [selected, setSelected] = useState(false);
@@ -57,11 +57,11 @@ const Pagination = (props) => {
   return (
     <>
       <Spacing space={{ height: "3rem" }} />
-      <div className={classes.pagination}>
+      <div className="flex justify-center items-center [&_button:hover]:bg-[#0773c5] [&_button:hover]:text-[#fff]">
         <Button
           onClick={handlePreviousBtn}
           disabled={selected === 1 ? true : false}
-          className={selected === 1 ? `${classes.disablePreviousButton}` : `${classes.prevButton}`}
+          className={selected === 1 ? `p-[0.6rem_4rem] [border:2px_solid_#0088f2] text-[#0088f2] rounded-[0.2rem] mr-[1rem]` : `p-[0.7rem_4rem] bg-[#0088f2] text-[#fff] rounded-[0.2rem] mr-[1rem]`}
         >
           Previous
         </Button>
@@ -73,7 +73,7 @@ const Pagination = (props) => {
         <Button
           onClick={handleNextBtn}
           disabled={selected === count ? true : false}
-          className={selected === count ? `${classes.disableNextButton}` : `${classes.nextButton}`}
+          className={selected === count ? `p-[0.5rem_6rem] [border:2px_solid_#0088f2] text-[#0088f2] rounded-[0.2rem] ml-[1rem]` : `p-[0.7rem_6rem] bg-[#0088f2] text-[#fff] rounded-[0.2rem] ml-[1rem]`}
         >
           Next
         </Button>

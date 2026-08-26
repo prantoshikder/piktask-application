@@ -1,71 +1,78 @@
-import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button } from "@material-ui/core";
-import jwt_decode from "jwt-decode";
-import React from "react";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-import GoogleLogin from "react-google-login";
-import { useDispatch } from "react-redux";
-import { useHistory, useLocation } from "react-router";
-import Spacing from "./../../Spacing/index";
-import useStyles from "./SocialLogin.style";
+"use client";
 
-const clientId = "928238679381-jf4obccehr2mq8lotat83l4q0n6l6cqi.apps.googleusercontent.com";
-const fbAppId = "2594350707375312";
+import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import FacebookLogin from "@greatsumini/react-facebook-login";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import { Button } from "@/components/ui-kit";
+import { jwtDecode as jwt_decode } from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { useHistory, useLocation } from "@/lib/router";
+import Spacing from "./../../Spacing/index";
+
+/**
+ * react-google-login and react-facebook-login are both unmaintained and do not
+ * work on React 18+, so they were replaced with @react-oauth/google and
+ * @greatsumini/react-facebook-login.
+ *
+ * The request bodies sent to /auth/google_login and /auth/facebook_login are
+ * unchanged: Google still receives a Google ID token (the `credential` field is
+ * the same JWT the old library called `tokenId`) and Facebook still receives
+ * `accessToken` + `userID`.
+ */
+const clientId =
+  process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "928238679381-jf4obccehr2mq8lotat83l4q0n6l6cqi.apps.googleusercontent.com";
+const fbAppId = process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "2594350707375312";
 
 const SocialLogin = (props) => {
-  const classes = useStyles();
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
   const { setOpenAuthModal, role } = props;
   const { from } = location.state || { from: { pathname: "/" } };
 
+  const completeLogin = (data, contributorTarget) => {
+    if (!data?.status) return;
+
+    setOpenAuthModal(false);
+    const token = data.token;
+    localStorage.setItem("token", token);
+    const decodedToken = jwt_decode(token.split(" ")[1]);
+    localStorage.setItem("profileImage", decodedToken.avatar);
+
+    if (decodedToken.email) {
+      dispatch({
+        type: "SET_USER",
+        payload: { ...decodedToken, token },
+      });
+    }
+
+    if (decodedToken.role === "contributor") {
+      history.push(contributorTarget);
+    } else if (location.pathname) {
+      history.push(location.pathname);
+    } else {
+      history.replace(from);
+    }
+  };
+
   //login with google
-  const handleGoogleLogin = async (googleData) => {
-    console.log("googleData", googleData);
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/auth/google_login`, {
+  const handleGoogleLogin = async (credentialResponse) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/google_login`, {
       method: "POST",
       body: JSON.stringify({
-        token: googleData.tokenId,
+        token: credentialResponse.credential,
         role: role,
       }),
       headers: { "Content-Type": "application/json" },
     });
 
-    const data = await res.json();
-    // store user data in localStorage
-    if (data.status) {
-      setOpenAuthModal(false);
-      const token = data.token;
-      localStorage.setItem("token", token);
-      const decodedToken = jwt_decode(token.split(" ")[1]);
-      localStorage.setItem("profileImage", decodedToken.avatar);
-
-      if (decodedToken.email) {
-        dispatch({
-          type: "SET_USER",
-          payload: {
-            ...decodedToken,
-            token,
-          },
-        });
-      }
-
-      if (decodedToken.role === "contributor") {
-        history.push("/contributor/dashboard");
-      } else if (location.pathname) {
-        history.push(location.pathname);
-      } else {
-        history.replace(from);
-      }
-    }
+    completeLogin(await res.json(), "/contributor/dashboard");
   };
 
   //login with facebook
-
   const handleFacebookLogin = async (facebookData) => {
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/auth/facebook_login`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/facebook_login`, {
       method: "POST",
       body: JSON.stringify({
         accessToken: facebookData.accessToken,
@@ -75,63 +82,28 @@ const SocialLogin = (props) => {
       headers: { "Content-Type": "application/json" },
     });
 
-    const data = await res.json();
-
-    // store user data in localStorage
-    if (data.status) {
-      setOpenAuthModal(false);
-      const token = data.token;
-      localStorage.setItem("token", token);
-      const decodedToken = jwt_decode(token.split(" ")[1]);
-      localStorage.setItem("profileImage", decodedToken.avatar);
-
-      if (decodedToken.email) {
-        dispatch({
-          type: "SET_USER",
-          payload: {
-            ...decodedToken,
-            token,
-          },
-        });
-      }
-
-      if (decodedToken.role === "contributor") {
-        history.push("/contributor/upload");
-      } else if (location.pathname) {
-        history.push(location.pathname);
-      } else {
-        history.replace(from);
-      }
-    }
+    completeLogin(await res.json(), "/contributor/upload");
   };
 
   return (
-    <div className={classes.socialsButtons}>
-      <GoogleLogin
-        clientId={clientId}
-        render={(renderProps) => (
-          <Button className={classes.googleButton} onClick={renderProps.onClick} disabled={renderProps.disabled}>
-            <FontAwesomeIcon className={classes.googleIcon} icon={faGoogle} />
-            <span>Google</span>
-          </Button>
-        )}
-        buttonText="Login"
-        onSuccess={handleGoogleLogin}
-        onFailure={handleGoogleLogin}
-        cookiePolicy={"single_host_origin"}
-      />
+    <div className="flex justify-between items-center mb-[1.5rem]">
+      {/* Google's identity flow renders its own branded button; unlike the old
+          library it cannot be swapped for a custom MUI button and still return
+          an ID token. */}
+      <GoogleOAuthProvider clientId={clientId}>
+        <GoogleLogin onSuccess={handleGoogleLogin} onError={() => {}} text="signin" shape="pill" />
+      </GoogleOAuthProvider>
 
       <Spacing space={{ margin: "0 0.5rem" }} />
 
       <FacebookLogin
         appId={fbAppId}
-        autoLoad={false}
+        onSuccess={handleFacebookLogin}
+        onFail={() => {}}
         fields="name,email,picture"
-        onClick={handleFacebookLogin}
-        callback={handleFacebookLogin}
-        render={(renderProps) => (
-          <Button className={classes.facebookBtn} onClick={renderProps.onClick} disabled={renderProps.disabled}>
-            <FontAwesomeIcon className={classes.facebookIconBtn} icon={faFacebookF} />
+        render={({ onClick }) => (
+          <Button className="flex items-center p-[0.8rem_5rem] [border:1px_solid_#425993] rounded-[4px] text-[white] bg-[#425993] [transition:all_0.3s_linear] [&_span]:text-[1.8rem] [&_span]:text-[#fff] hover:bg-[#213567] max-[479.95px]:p-[0.6rem_5rem] max-[479.95px]:[&_span]:text-[1.5rem]" onClick={onClick}>
+            <FontAwesomeIcon className="text-[white] text-[1.6rem] mr-[0.8rem]!" icon={faFacebookF} />
             <span>Facebook</span>
           </Button>
         )}

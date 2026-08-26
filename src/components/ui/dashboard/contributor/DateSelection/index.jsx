@@ -1,10 +1,10 @@
-import { Button, FormControl, Select, Typography } from "@material-ui/core";
+"use client";
+
+import { Button, FormControl, Select, Typography } from "@/components/ui-kit";
 import moment from "moment";
 import React, { useState } from "react";
-import useStyles from "./DateSelection.style";
 
 const DateSelection = (props) => {
-  const classes = useStyles();
   const { setSearchInput, earningManagementBtn } = props;
 
   const fromMonths = moment.months();
@@ -59,14 +59,14 @@ const DateSelection = (props) => {
   };
 
   return (
-    <div className={classes.dateRanges}>
-      <div className={classes.statisticsFormWrapper}>
-        <div className={classes.selectPeriodFrom}>
-          <div className={classes.fields}>
-            <Typography className={classes.fieldTitle} variant="subtitle1">
+    <div className="p-[2rem] mb-[2rem] bg-[#fff] shadow-[0_8px_12px_3px_rgb(0_0_0_/_6%)]">
+      <div className="pb-[1rem]">
+        <div className="flex items-center flex-wrap max-[990px]:flex-col max-[990px]:items-start">
+          <div className="mr-[1.8rem] max-[960px]:mb-[1.8rem]">
+            <Typography className="text-[1.4rem] text-[#4D4D4D] mb-[.2rem]" variant="subtitle1">
               From
             </Typography>
-            <FormControl variant="outlined" className={classes.formControl}>
+            <FormControl variant="outlined" className="mr-[1.5rem] [&_select]:pt-[1.3rem] [&_select]:pb-[1.3rem] [&_select]:bg-[#fff] [&_fieldset]:border-[#E0E0E0]">
               {/* <InputLabel htmlFor="months" >Months</InputLabel> */}
               <Select
                 native
@@ -85,7 +85,7 @@ const DateSelection = (props) => {
                   ))}
               </Select>
             </FormControl>
-            <FormControl variant="outlined" className={classes.formControl}>
+            <FormControl variant="outlined" className="mr-[1.5rem] [&_select]:pt-[1.3rem] [&_select]:pb-[1.3rem] [&_select]:bg-[#fff] [&_fieldset]:border-[#E0E0E0]">
               {/* <InputLabel htmlFor="months" >Months</InputLabel> */}
               <Select
                 native
@@ -102,7 +102,7 @@ const DateSelection = (props) => {
                 ))}
               </Select>
             </FormControl>
-            <FormControl variant="outlined" className={classes.formControl}>
+            <FormControl variant="outlined" className="mr-[1.5rem] [&_select]:pt-[1.3rem] [&_select]:pb-[1.3rem] [&_select]:bg-[#fff] [&_fieldset]:border-[#E0E0E0]">
               {/* <InputLabel htmlFor="months" >Months</InputLabel> */}
               <Select
                 native
@@ -120,11 +120,11 @@ const DateSelection = (props) => {
               </Select>
             </FormControl>
           </div>
-          <div className={classes.fields}>
-            <Typography className={classes.fieldTitle} variant="subtitle1">
+          <div className="mr-[1.8rem] max-[960px]:mb-[1.8rem]">
+            <Typography className="text-[1.4rem] text-[#4D4D4D] mb-[.2rem]" variant="subtitle1">
               To
             </Typography>
-            <FormControl variant="outlined" className={classes.formControl}>
+            <FormControl variant="outlined" className="mr-[1.5rem] [&_select]:pt-[1.3rem] [&_select]:pb-[1.3rem] [&_select]:bg-[#fff] [&_fieldset]:border-[#E0E0E0]">
               {/* <InputLabel htmlFor="months" >Months</InputLabel> */}
               <Select
                 native
@@ -143,7 +143,7 @@ const DateSelection = (props) => {
                   ))}
               </Select>
             </FormControl>
-            <FormControl variant="outlined" className={classes.formControl}>
+            <FormControl variant="outlined" className="mr-[1.5rem] [&_select]:pt-[1.3rem] [&_select]:pb-[1.3rem] [&_select]:bg-[#fff] [&_fieldset]:border-[#E0E0E0]">
               {/* <InputLabel htmlFor="months" >Months</InputLabel> */}
               <Select
                 native
@@ -160,7 +160,7 @@ const DateSelection = (props) => {
                 ))}
               </Select>
             </FormControl>
-            <FormControl variant="outlined" className={classes.formControl}>
+            <FormControl variant="outlined" className="mr-[1.5rem] [&_select]:pt-[1.3rem] [&_select]:pb-[1.3rem] [&_select]:bg-[#fff] [&_fieldset]:border-[#E0E0E0]">
               {/* <InputLabel htmlFor="months" >Months</InputLabel> */}
               <Select
                 native
@@ -179,7 +179,7 @@ const DateSelection = (props) => {
             </FormControl>
           </div>
 
-          <Button onClick={handleDateSubmit} className={classes.showMoreBtn}>
+          <Button onClick={handleDateSubmit} className="p-[0.6rem_1.5rem] bg-[#0088f2] text-[#fff] mt-[2.5rem] [border:.2rem_solid] border-[#0088f2] [transition:all_0.3s_linear] hover:bg-[#0773c5] hover:border-[#0773c5] hover:text-[#fff]">
             {earningManagementBtn ? "Display Statistics" : "View More"}
           </Button>
         </div>

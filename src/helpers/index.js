@@ -3,16 +3,92 @@ export const getYear = (date) => {
 };
 
 export const dateFormat = (time) => {
-  // switch(time) {
-  //     case time!:
-  //     break;
-  //     default:
-  // }
-
   return time;
 };
 
+const EMPTY_BASE_URLS = {
+  bucket_base_url: "",
+  profiles: "",
+  images: "",
+  categories: "",
+  blog_images: "",
+};
+
+const BASE_URL_GLOBAL = "__PIKTASK_BASE_URLS__";
+const BASE_URL_STORAGE_KEY = "imageBaseURL";
+
+const pickBaseURLs = (urls) => ({
+  bucket_base_url: urls.bucket_base_url,
+  profiles: urls.profiles,
+  images: urls.images,
+  categories: urls.categories,
+  blog_images: urls.blog_images,
+});
+
+/**
+ * Seeds the image base URLs.
+ *
+ * Under CRA these came from a /client/urls call in App.jsx and lived only in
+ * localStorage, which is unreachable during a server render. They are now also
+ * mirrored onto a global so that getBaseURL() resolves identically on the
+ * server, during hydration, and on the client.
+ */
+export const setBaseURL = (urls) => {
+  if (!urls) return;
+
+  const picked = pickBaseURLs(urls);
+  globalThis[BASE_URL_GLOBAL] = picked;
+
+  if (typeof window !== "undefined") {
+    window.localStorage.setItem(BASE_URL_STORAGE_KEY, JSON.stringify(urls));
+  }
+};
+
+/**
+ * Always returns an object, never undefined — call sites index straight into
+ * the result (`getBaseURL().bucket_base_url`), so returning undefined as the
+ * CRA version did would throw during SSR and on a cold cache.
+ */
+export const getBaseURL = () => {
+  if (globalThis[BASE_URL_GLOBAL]) {
+    return globalThis[BASE_URL_GLOBAL];
+  }
+
+  if (typeof window === "undefined") {
+    return EMPTY_BASE_URLS;
+  }
+
+  const clientURL = window.localStorage.getItem(BASE_URL_STORAGE_KEY);
+  if (!clientURL) return EMPTY_BASE_URLS;
+
+  try {
+    const picked = pickBaseURLs(JSON.parse(clientURL));
+    globalThis[BASE_URL_GLOBAL] = picked;
+    return picked;
+  } catch {
+    return EMPTY_BASE_URLS;
+  }
+};
+
+/**
+ * Joins a base URL with an image path.
+ *
+ * Image sources may be absolute (Unsplash returns fully-qualified URLs) or a
+ * path relative to the storage bucket. Concatenating a base onto an absolute
+ * URL would corrupt it, so absolute values are returned untouched.
+ */
+export const joinImageUrl = (base, value) => {
+  if (!value) return "";
+  if (/^(https?:)?\/\//i.test(value) || value.startsWith("data:")) return value;
+  return `${base || ""}${value}`;
+};
+
 export const imageObjSchema = (schemaData) => {
+  if (typeof document === "undefined") return;
+
+  const target = document.querySelector('script[data-test="image-object"]');
+  if (!target) return;
+
   const schemaObj = {
     ...schemaData,
     "@context": "http://schema.org",
@@ -22,31 +98,18 @@ export const imageObjSchema = (schemaData) => {
     license: "https://piktask.com/license-agreement",
   };
 
-  document.querySelector('script[data-test="image-object"]').append(JSON.stringify(schemaObj));
+  target.textContent = JSON.stringify(schemaObj);
 };
 
 export const expiredLoginTime = () => {
-  localStorage.removeItem("token");
+  if (typeof window === "undefined") return undefined;
+
+  window.localStorage.removeItem("token");
   return (window.location.href = "/login");
 };
 
-export const getBaseURL = () => {
-  const clientURL = localStorage.getItem("imageBaseURL");
-
-  if (clientURL) {
-    const client = JSON.parse(clientURL);
-    return {
-      bucket_base_url: client.bucket_base_url,
-      profiles: client.profiles,
-      images: client.images,
-      categories: client.categories,
-      blog_images: client.blog_images,
-    };
-  }
-};
-
 export const getWords = (amount, str) => {
-  const strArray = str.split(" ");
+  const strArray = String(str ?? "").split(" ");
   const newDescription = strArray.splice(0, amount).join(" ");
 
   return newDescription;

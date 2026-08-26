@@ -1,6 +1,7 @@
-import { Button, CircularProgress, TextField } from "@material-ui/core";
+"use client";
+
+import { Button, CircularProgress, TextField } from "@/components/ui-kit";
 import React, { ChangeEvent, FC, MouseEvent } from "react";
-import useStyles from "./inputField.styles";
 
 type inputProps = {
   type?: string;
@@ -15,7 +16,6 @@ type inputProps = {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 export const InputField: FC<inputProps> = (props) => {
-  const classes = useStyles();
   const {
     type,
     label,
@@ -41,7 +41,7 @@ export const InputField: FC<inputProps> = (props) => {
       variant={defaultVariant}
       style={{ ...others }}
       fullWidth
-      className={classes.inputField}
+      className="mb-[2rem] [&_.ant-input]:p-[15px_14px]"
       value={value}
       onChange={onChange}
       disabled={disabled}
@@ -57,7 +57,6 @@ type ButtonProps = {
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 };
 export const CustomBtn: FC<ButtonProps> = (props) => {
-  const classes = useStyles();
   const { disabledBtn, isLoading, text, onClick, styles, ...rest } = props;
 
   return (
@@ -67,7 +66,7 @@ export const CustomBtn: FC<ButtonProps> = (props) => {
         size="medium"
         variant="contained"
         fullWidth
-        className={classes.authBtn}
+        className="bg-[#0088f2] p-[6px_16px] text-[#fff] text-[1.6rem] hover:bg-[#0773c5]"
         disableRipple
         onClick={onClick}
         style={{ ...styles }}

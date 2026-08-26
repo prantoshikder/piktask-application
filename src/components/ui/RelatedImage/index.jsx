@@ -1,14 +1,14 @@
-import { Grid } from "@material-ui/core";
+"use client";
+
+import { Grid } from "@/components/ui-kit";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Loader from "../Loader";
 import Pagination from "../Pagination";
 import Product from "../Products/Product";
-import useStyles from "./RelatedImage.style";
 
 const RelatedImage = ({ imageID }) => {
-  const classes = useStyles();
   const user = useSelector((state) => state.user);
   const [isLoading, setLoading] = useState(true);
   const [relatedImage, setRelatedImage] = useState([]);
@@ -25,9 +25,9 @@ const RelatedImage = ({ imageID }) => {
     const source = CancelToken.source();
 
     if (user?.isLoggedIn && user?.id && user?.role === "user") {
-      relatedImageURL = `${process.env.REACT_APP_API_URL}/images/${imageID}/related_image?limit=${limit}&page=${pageCount}&user_id=${user?.id}`;
+      relatedImageURL = `${process.env.NEXT_PUBLIC_API_URL}/images/${imageID}/related_image?limit=${limit}&page=${pageCount}&user_id=${user?.id}`;
     } else {
-      relatedImageURL = `${process.env.REACT_APP_API_URL}/images/${imageID}/related_image?limit=${limit}&page=${pageCount}`;
+      relatedImageURL = `${process.env.NEXT_PUBLIC_API_URL}/images/${imageID}/related_image?limit=${limit}&page=${pageCount}`;
     }
     axios
       .get(relatedImageURL, { cancelToken: source.token })
@@ -48,20 +48,20 @@ const RelatedImage = ({ imageID }) => {
 
   return (
     <>
-      <Grid classes={{ container: classes.container }} container spacing={2}>
+      <Grid container spacing={2}>
         {isLoading ? (
           <Loader />
         ) : (
           relatedImage?.length > 0 &&
           relatedImage?.map((photo) => (
-            <Grid key={photo?.image_id} item xs={6} sm={4} md={3} className={classes.productItem}>
+            <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo?.image_id} className="max-[576px]:max-w-[100%] max-[576px]:basis-[100%]">
               <Product photo={photo} />
             </Grid>
           ))
         )}
       </Grid>
       {/* <div>
-        <Button className={classes.loadMoreBtn}>Load More</Button>
+        <Button>Load More</Button>
       </div> */}
       {totalProduct > limit && <Pagination productPagination count={count} pageCount={pageCount} setPageCount={setPageCount} />}
     </>

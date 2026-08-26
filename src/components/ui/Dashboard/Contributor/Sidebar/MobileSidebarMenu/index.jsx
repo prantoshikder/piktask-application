@@ -1,13 +1,13 @@
-import { Collapse, List, ListItem, ListItemText } from "@material-ui/core";
-import { ExpandLess, ExpandMore } from "@material-ui/icons";
+"use client";
+
+import { Collapse, List, ListItem, ListItemText } from "@/components/ui-kit";
+import { UpOutlined as ExpandLess, DownOutlined as ExpandMore } from "@ant-design/icons";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import useStyles from "./MobileSidebarMenu.styles";
+import { Link } from "@/lib/router";
 
 const MobileSidebarMenu = () => {
   const user = useSelector((state) => state.user);
-  const classes = useStyles();
   const anchorRef = useRef(null);
   const [value, setValue] = useState(0);
   const [open, setOpen] = useState(false);
@@ -57,11 +57,11 @@ const MobileSidebarMenu = () => {
   };
   return (
     <>
-      <List component="nav" aria-labelledby="nested-sidebar-nav" className={classes.mobileSidebarMenu}>
+      <List component="nav" aria-labelledby="nested-sidebar-nav" className="bg-[#001c30] h-[100%] [&_span]:text-[#fff] [&_.pk-selected]:bg-[#022238]">
         <ListItem
           classes={{
-            gutters: classes.gutters,
-            selected: classes.selectedItem,
+            gutters: undefined,
+            selected: undefined,
           }}
           component={Link}
           to="/contributor/dashboard"
@@ -71,10 +71,10 @@ const MobileSidebarMenu = () => {
         </ListItem>
         <ListItem
           classes={{
-            gutters: classes.gutters,
-            selected: classes.selectedItem,
+            gutters: undefined,
+            selected: undefined,
           }}
-          className={classes.dropdownMenu}
+          className="[&_svg]:text-[#91999D]"
           onClick={handleClick}
           component={Link}
           to="/contributor/upload"
@@ -85,20 +85,20 @@ const MobileSidebarMenu = () => {
         </ListItem>
 
         <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding className={classes.submenuContainer}>
-            <ListItem component={Link} to="/contributor/pending" className={classes.nested} selected={value === 0}>
+          <List component="div" disablePadding>
+            <ListItem component={Link} to="/contributor/pending" selected={value === 0}>
               <ListItemText primary="Not yet submitted" />
             </ListItem>
 
-            <ListItem component={Link} to="/contributor/revision" className={classes.nested} selected={value === 1 && selectedItem === 3}>
+            <ListItem component={Link} to="/contributor/revision" selected={value === 1 && selectedItem === 3}>
               <ListItemText primary="Under Revision" />
             </ListItem>
 
-            <ListItem component={Link} to="/contributor/reject" className={classes.nested} selected={value === 1 && selectedItem === 4}>
+            <ListItem component={Link} to="/contributor/reject" selected={value === 1 && selectedItem === 4}>
               <ListItemText primary="Rejections" />
             </ListItem>
 
-            <ListItem component={Link} to="/contributor/publish" className={classes.nested} selected={value === 1 && selectedItem === 5}>
+            <ListItem component={Link} to="/contributor/publish" selected={value === 1 && selectedItem === 5}>
               <ListItemText primary="Published" />
             </ListItem>
           </List>
@@ -106,8 +106,8 @@ const MobileSidebarMenu = () => {
 
         <ListItem
           classes={{
-            gutters: classes.gutters,
-            selected: classes.selectedItem,
+            gutters: undefined,
+            selected: undefined,
           }}
           onClick={handleClick}
           component={Link}
@@ -118,8 +118,8 @@ const MobileSidebarMenu = () => {
         </ListItem>
         <ListItem
           classes={{
-            gutters: classes.gutters,
-            selected: classes.selectedItem,
+            gutters: undefined,
+            selected: undefined,
           }}
           onClick={handleClick}
           component={Link}
@@ -130,8 +130,8 @@ const MobileSidebarMenu = () => {
         </ListItem>
         <ListItem
           classes={{
-            gutters: classes.gutters,
-            selected: classes.selectedItem,
+            gutters: undefined,
+            selected: undefined,
           }}
           onClick={handleClick}
           component={Link}
@@ -143,8 +143,8 @@ const MobileSidebarMenu = () => {
 
         <ListItem
           classes={{
-            gutters: classes.gutters,
-            selected: classes.selectedItem,
+            gutters: undefined,
+            selected: undefined,
           }}
           onClick={handleClick}
           component={Link}

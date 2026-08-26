@@ -1,46 +1,17 @@
-import { Button, makeStyles, Tooltip } from "@material-ui/core";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+"use client";
+
+import { Button, Tooltip } from "@/components/ui-kit";
+import { HeartFilled as FavoriteIcon } from "@ant-design/icons";
 import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import likeIcon from "../../../../../assets/icons/likeIcon.svg";
-import SignUpModal from "../../../../../pages/Authentication/SignUpModal";
+import SignUpModal from "../../../../../views/Authentication/SignUpModal";
 
-const useStyles = makeStyles((theme) => ({
-  likeBtn: {
-    padding: "1rem 1.5rem",
-    backgroundColor: theme.palette.primary.main,
-    "&:hover": {
-      backgroundColor: theme.palette.secondary.main,
-    },
-    "& img": {
-      width: "2.7rem",
-    },
 
-    [theme.breakpoints.down(480)]: {
-      padding: "0.4rem 1.5rem",
-    },
-  },
-  tooltip: {
-    fontSize: "1.3rem",
-  },
-  likedBtn: {
-    padding: "1rem 1.5rem",
-    backgroundColor: "#E1E3EB",
-    "& svg": {
-      color: "#0088f2",
-      fontSize: "2.9rem",
-    },
-
-    [theme.breakpoints.down(480)]: {
-      padding: "0.4rem 1.5rem",
-    },
-  },
-}));
 
 const FavouriteButton = ({ productDetails }) => {
-  const classes = useStyles();
   const user = useSelector((state) => state.user);
 
   const [role, setRole] = useState("");
@@ -53,7 +24,7 @@ const FavouriteButton = ({ productDetails }) => {
       setOpenAuthModal(true);
     } else if (user?.id !== productDetails?.imageDetails?.user_id && user && user?.isLoggedIn && user?.role === "user") {
       axios
-        .post(`${process.env.REACT_APP_API_URL}/images/${productDetails?.imageID}/like`, {}, { headers: { Authorization: user?.token } })
+        .post(`${process.env.NEXT_PUBLIC_API_URL}/images/${productDetails?.imageID}/like`, {}, { headers: { Authorization: user?.token } })
         .then(({ data }) => {
           if (data?.status) {
             productDetails?.setLike(true);
@@ -82,12 +53,12 @@ const FavouriteButton = ({ productDetails }) => {
       {user?.id !== productDetails?.imageDetails?.user_id && (
         <>
           {!productDetails?.isLike ? (
-            <Button className={classes.likeBtn} onClick={handleLikeBtn} value="user">
-              <img src={likeIcon} alt="like Button" width="27px" height="24px" />
+            <Button className="p-[1rem_1.5rem] bg-[#143340] hover:bg-[#0088f2] [&_img]:w-[2.7rem] max-[479.95px]:p-[0.4rem_1.5rem]" onClick={handleLikeBtn} value="user">
+              <img src={likeIcon.src} alt="like Button" width="27px" height="24px" />
             </Button>
           ) : (
-            <Tooltip title="You already liked the image." placement="top" arrow classes={{ tooltip: classes.tooltip }}>
-              <Button className={classes.likedBtn} onClick={handleLikeBtn}>
+            <Tooltip title="You already liked the image." placement="top" arrow classes={{ tooltip: "text-[1.3rem]" }}>
+              <Button className="p-[1rem_1.5rem] bg-[#E1E3EB] [&_svg]:text-[#0088f2] [&_svg]:text-[2.9rem] max-[479.95px]:p-[0.4rem_1.5rem]" onClick={handleLikeBtn}>
                 <FavoriteIcon />
               </Button>
             </Tooltip>

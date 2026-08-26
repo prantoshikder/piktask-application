@@ -1,18 +1,18 @@
-import { Button, Tab, Tabs, Toolbar } from "@material-ui/core";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+"use client";
+
+import { Button, Tab, Tabs, Toolbar } from "@/components/ui-kit";
+import { UserOutlined as AccountCircleIcon } from "@ant-design/icons";
+import { CaretDownOutlined as ArrowDropDownIcon } from "@ant-design/icons";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink } from "@/lib/router";
 import signInIcon from "../../../../assets/icons/signInIcon.svg";
 import logo from "../../../../assets/Logo/piktask.png";
-import { getBaseURL } from "../../../../helpers";
-import SignUpModal from "../../../../pages/Authentication/SignUpModal";
+import { getBaseURL, joinImageUrl } from "../../../../helpers";
+import SignUpModal from "../../../../views/Authentication/SignUpModal";
 import CustomPopper from "../../CustomPopper";
-import useStyles from "./DesktopMenu.styles";
 
-const DesktopMenu = ({ history }) => {
-  const classes = useStyles();
+const DesktopMenu = () => {
   const anchorRef = useRef(null);
   const user = useSelector((state) => state.user);
 
@@ -25,7 +25,7 @@ const DesktopMenu = ({ history }) => {
     return () => {
       document.body.style.backgroundColor = "";
     };
-  }, [user, history]);
+  }, [user]);
 
   const handleChange = (event, index) => {
     setValue(index);
@@ -55,38 +55,38 @@ const DesktopMenu = ({ history }) => {
 
   return (
     <>
-      <div className={classes.container}>
-        <Toolbar disableGutters className={classes.mainHeaderToolbar}>
-          <Button component={Link} to="/" className={classes.logoWrapper} disableRipple>
-            <img src={logo} className={classes.logo} alt="Piktask" width="153px" height="41px" />
+      <div className="h-[100%]">
+        <Toolbar disableGutters className="h-[100%] max-[768.95px]:hidden">
+          <Button component={Link} to="/" className="w-[153px] mr-[2rem] p-[0] hover:bg-[transparent] max-[1024px]:w-[13rem] max-[1024px]:[&_img]:w-[100%]" disableRipple>
+            <img src={logo.src} className="w-[100%] block" alt="Piktask" width="153px" height="41px" />
           </Button>
 
-          <Tabs value={value} className={classes.menuTab} classes={{ indicator: classes.menuUnderline }} onChange={handleChange} aria-label="main navigation">
-            <Tab className={classes.menuItem} disableRipple component={NavLink} to={`/category/business-card-mockup`} label="Business Card Mockup" />
+          <Tabs value={value} className="ml-[25px]" classes={{ indicator: "h-[0] bg-[transparent]" }} onChange={handleChange} aria-label="main navigation">
+            <Tab className="opacity-[1] min-w-[1rem] text-[14px] [transition:all_0.3s_ease] [&.active]:text-[#0088f2] last:mr-[3rem] hover:text-[#0088f2] max-[1024px]:mr-[0] max-[1024px]:pl-[.5rem] max-[1024px]:text-[1.4rem] max-[1024px]:last:mr-[.5rem]" disableRipple component={NavLink} to={`/category/business-card-mockup`} label="Business Card Mockup" />
 
-            <Tab className={classes.menuItem} disableRipple component={NavLink} to="/category/text-effect" label="Text Effect" />
+            <Tab className="opacity-[1] min-w-[1rem] text-[14px] [transition:all_0.3s_ease] [&.active]:text-[#0088f2] last:mr-[3rem] hover:text-[#0088f2] max-[1024px]:mr-[0] max-[1024px]:pl-[.5rem] max-[1024px]:text-[1.4rem] max-[1024px]:last:mr-[.5rem]" disableRipple component={NavLink} to="/category/text-effect" label="Text Effect" />
 
-            <Tab className={classes.menuItem} disableRipple component={NavLink} to="/category/social-media-banner" label="Social Media Banner" />
+            <Tab className="opacity-[1] min-w-[1rem] text-[14px] [transition:all_0.3s_ease] [&.active]:text-[#0088f2] last:mr-[3rem] hover:text-[#0088f2] max-[1024px]:mr-[0] max-[1024px]:pl-[.5rem] max-[1024px]:text-[1.4rem] max-[1024px]:last:mr-[.5rem]" disableRipple component={NavLink} to="/category/social-media-banner" label="Social Media Banner" />
 
-            <Tab className={classes.menuItem} disableRipple component={NavLink} to="/category/game" label="Game" />
+            <Tab className="opacity-[1] min-w-[1rem] text-[14px] [transition:all_0.3s_ease] [&.active]:text-[#0088f2] last:mr-[3rem] hover:text-[#0088f2] max-[1024px]:mr-[0] max-[1024px]:pl-[.5rem] max-[1024px]:text-[1.4rem] max-[1024px]:last:mr-[.5rem]" disableRipple component={NavLink} to="/category/game" label="Game" />
 
-            <Tab className={classes.menuItem} disableRipple component={NavLink} to="/category/logo-mockup" label="Logo Mockup" />
+            <Tab className="opacity-[1] min-w-[1rem] text-[14px] [transition:all_0.3s_ease] [&.active]:text-[#0088f2] last:mr-[3rem] hover:text-[#0088f2] max-[1024px]:mr-[0] max-[1024px]:pl-[.5rem] max-[1024px]:text-[1.4rem] max-[1024px]:last:mr-[.5rem]" disableRipple component={NavLink} to="/category/logo-mockup" label="Logo Mockup" />
           </Tabs>
 
-          <Toolbar disableGutters className={classes.toolBarContainer}>
+          <Toolbar disableGutters className="ml-[auto]">
             {user?.isLoggedIn && user?.role === "contributor" ? (
-              <Button className={classes.sellContentBtn} component={Link} to="/contributor/dashboard">
+              <Button className="text-[#fff] font-[400] font-['Roboto',sans-serif] capitalize text-[1.4rem] rounded-[3rem] opacity-[1] leading-[1.75] p-[0.3rem_1rem] border-[#0088f2] ml-[1rem] mr-[1rem] [border:.2rem_solid_#0088f2] [transition:all_0.3s_linear] hover:bg-[#0088f2] hover:border-[#0088f2]" component={Link} to="/contributor/dashboard">
                 Sell Your Content
               </Button>
             ) : (
-              <Button className={classes.sellContentBtn} onClick={handleClick} value="contributor">
+              <Button className="text-[#fff] font-[400] font-['Roboto',sans-serif] capitalize text-[1.4rem] rounded-[3rem] opacity-[1] leading-[1.75] p-[0.3rem_1rem] border-[#0088f2] ml-[1rem] mr-[1rem] [border:.2rem_solid_#0088f2] [transition:all_0.3s_linear] hover:bg-[#0088f2] hover:border-[#0088f2]" onClick={handleClick} value="contributor">
                 Sell Your Content
               </Button>
             )}
 
             {user?.isLoggedIn && user?.role === "user" ? (
               <div
-                className={classes.userAvatarArea}
+                className="cursor-pointer flex items-center"
                 onClick={handleToggle}
                 aria-controls={open ? "menu-list-grow" : undefined}
                 aria-haspopup="true"
@@ -95,19 +95,19 @@ const DesktopMenu = ({ history }) => {
                 {user?.isLoggedIn && user?.avatar && user?.avatar !== "null" ? (
                   <>
                     {user?.avatar_from === "own" ? (
-                      <img className={classes.avatar} src={getBaseURL().bucket_base_url + "/" + user?.avatar} alt={user?.username} width="36px" height="36px" />
+                      <img className="text-[4.8rem] w-[3.6rem] h-[3.6rem] rounded-[100%] object-cover relative right-[-0.6rem] text-[#FB5252]" src={joinImageUrl(getBaseURL().bucket_base_url + "/", user?.avatar)} alt={user?.username} width="36px" height="36px" />
                     ) : (
-                      <img className={classes.avatar} src={user?.avatar} alt={user?.username} width="36px" height="36px" />
+                      <img className="text-[4.8rem] w-[3.6rem] h-[3.6rem] rounded-[100%] object-cover relative right-[-0.6rem] text-[#FB5252]" src={user?.avatar} alt={user?.username} width="36px" height="36px" />
                     )}
                   </>
                 ) : (
-                  <AccountCircleIcon className={classes.avatar} />
+                  <AccountCircleIcon className="text-[4.8rem] w-[3.6rem] h-[3.6rem] rounded-[100%] object-cover relative right-[-0.6rem] text-[#FB5252]" />
                 )}
-                <ArrowDropDownIcon className={classes.arrowDown} />
+                <ArrowDropDownIcon className="text-[3.5rem] text-[#244e5f]" />
               </div>
             ) : (
-              <Button className={classes.signInBtn} onClick={handleClick} value="user">
-                <img className={classes.crownIcon} src={signInIcon} alt="Crown" width="14px" height="14px" />
+              <Button className="text-[#fff] font-[400] font-['Roboto',sans-serif] capitalize text-[1.4rem] rounded-[3rem] opacity-[1] leading-[1.75] bg-[#0088f2] [border:.2rem_solid_#0088f2] p-[0.3rem_1rem] [transition:all_0.3s_linear] hover:bg-[#0773c5] hover:[border:.2rem_solid_#fff] max-[480px]:p-[.8rem_1.5rem]!" onClick={handleClick} value="user">
+                <img className="mr-[.5rem] h-[1.4rem]" src={signInIcon.src} alt="Crown" width="14px" height="14px" />
                 Sign In
               </Button>
             )}

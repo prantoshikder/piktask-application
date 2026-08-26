@@ -1,31 +1,11 @@
-import { makeStyles } from "@material-ui/core";
+"use client";
+
 import React, { useEffect } from "react";
 import { getBaseURL } from "../../../../helpers";
 
-const useStyles = makeStyles((theme) => ({
-  imageWrapper: {
-    backgroundColor: theme.palette.common.white,
-    [theme.breakpoints.down(480)]: {
-      backgroundColor: "transparent",
-    },
-  },
-  image: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    padding: "2rem 2rem",
 
-    [theme.breakpoints.down("sm")]: {
-      height: "auto",
-    },
-    [theme.breakpoints.down(480)]: {
-      padding: "0",
-    },
-  },
-}));
 
 const ProductImage = ({ imageDetails, setThumbnail }) => {
-  const classes = useStyles();
   const imageThumbnail = encodeURI(`${getBaseURL().bucket_base_url}${getBaseURL().images}${imageDetails?.preview}`);
 
   useEffect(() => {
@@ -33,8 +13,8 @@ const ProductImage = ({ imageDetails, setThumbnail }) => {
   }, [setThumbnail, imageThumbnail]);
 
   return (
-    <div className={classes.imageWrapper}>
-      <img title={imageDetails.title} className={classes.image} src={imageThumbnail} alt={imageDetails?.original_name} width="817px" height="511px" />
+    <div className="bg-[#fff] max-[479.95px]:bg-[transparent]">
+      <img title={imageDetails.title} className="w-[100%] h-[100%] object-cover p-[2rem_2rem] max-[959.95px]:h-[auto] max-[479.95px]:p-[0]" src={imageThumbnail} alt={imageDetails?.original_name} width="817px" height="511px" />
     </div>
   );
 };

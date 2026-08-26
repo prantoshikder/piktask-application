@@ -1,40 +1,17 @@
-import { Button, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+"use client";
+
+import { Button, Grid } from "@/components/ui-kit";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import SectionHeading from "../Heading";
 import Loader from "../Loader";
 import Product from "./Product";
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    marginBottom: "2.2rem",
-  },
-  productItem: {
-    "@media (max-width: 576px)": {
-      maxWidth: "100%",
-      flexBasis: "100%",
-    },
-  },
-  headingButton: {
-    ...theme.typography.button,
-    padding: "0.4rem 1rem",
-    fontSize: "1.3rem",
-    fontWeight: 500,
-    color: "#1B3F4E",
-    transition: "all 0.3s linear",
 
-    "&:hover": {
-      backgroundColor: theme.palette.secondary.main,
-      color: "#fff",
-    },
-  },
-}));
 
 const Products = (props) => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const { category, count, showHeading, piktaskCollection } = props;
@@ -52,9 +29,9 @@ const Products = (props) => {
 
     if (category?.id) {
       if (user?.id && user?.role === "user") {
-        categoryURL = `${process.env.REACT_APP_API_URL}/categories/${category?.id}?user_id=${user?.id}`;
+        categoryURL = `${process.env.NEXT_PUBLIC_API_URL}/categories/${category?.id}?user_id=${user?.id}`;
       } else {
-        categoryURL = `${process.env.REACT_APP_API_URL}/categories/${category?.id}`;
+        categoryURL = `${process.env.NEXT_PUBLIC_API_URL}/categories/${category?.id}`;
       }
 
       axios
@@ -92,9 +69,9 @@ const Products = (props) => {
 
     if (piktaskCollection) {
       if (user?.id && user?.role === "user") {
-        categoryURL = `${process.env.REACT_APP_API_URL}/categories/53?limit=16&user_id=${user?.id}`;
+        categoryURL = `${process.env.NEXT_PUBLIC_API_URL}/categories/53?limit=16&user_id=${user?.id}`;
       } else {
-        categoryURL = `${process.env.REACT_APP_API_URL}/categories/53/?limit=16`;
+        categoryURL = `${process.env.NEXT_PUBLIC_API_URL}/categories/53/?limit=16`;
       }
       axios
         .get(categoryURL, { cancelToken: source.token })
@@ -126,20 +103,20 @@ const Products = (props) => {
         <>
           {piktaskProduct?.length !== 0 && (
             <SectionHeading title="Piktask Collection" large>
-              <Button className={classes.headingButton} component={Link} to={"category/piktask-collection"}>
+              <Button className="text-[#1B3F4E] font-[500] font-['Roboto',sans-serif] capitalize text-[1.3rem] rounded-[3rem] opacity-[1] leading-[1.75] p-[0.4rem_1rem] [transition:all_0.3s_linear] hover:bg-[#0088f2] hover:text-[#fff]" component={Link} to={"category/piktask-collection"}>
                 See More
               </Button>
             </SectionHeading>
           )}
 
-          <Grid classes={{ container: classes.container }} container spacing={2}>
+          <Grid classes={{ container: "mb-[2.2rem]" }} container spacing={2}>
             {isLoading ? (
               <Loader item={piktaskProduct} />
             ) : (
               <>
                 {piktaskProduct?.length > 0 &&
                   piktaskProduct?.slice(0, 16).map((photo) => (
-                    <Grid key={photo?.image_id} item xs={6} sm={4} md={3} className={classes.productItem}>
+                    <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo?.image_id} className="max-[576px]:max-w-[100%] max-[576px]:basis-[100%]">
                       <Product key={photo?.image_id} catId={piktaskProduct?.id} photo={photo} />
                     </Grid>
                   ))}
@@ -151,20 +128,20 @@ const Products = (props) => {
         <>
           {images?.length !== 0 && showHeading && (
             <SectionHeading title={category?.name} large>
-              <Button className={classes.headingButton} component={Link} to={`category/${category?.slug}`}>
+              <Button className="text-[#1B3F4E] font-[500] font-['Roboto',sans-serif] capitalize text-[1.3rem] rounded-[3rem] opacity-[1] leading-[1.75] p-[0.4rem_1rem] [transition:all_0.3s_linear] hover:bg-[#0088f2] hover:text-[#fff]" component={Link} to={`category/${category?.slug}`}>
                 See More
               </Button>
             </SectionHeading>
           )}
 
-          <Grid classes={{ container: classes.container }} container spacing={2}>
+          <Grid classes={{ container: "mb-[2.2rem]" }} container spacing={2}>
             {isLoading ? (
               <Loader item={images} />
             ) : (
               <>
                 {images?.length > 0 &&
                   images?.slice(0, count).map((photo) => (
-                    <Grid key={photo?.image_id} item xs={6} sm={4} md={3} className={classes.productItem}>
+                    <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo?.image_id} className="max-[576px]:max-w-[100%] max-[576px]:basis-[100%]">
                       <Product key={photo?.image_id} catId={category?.id} photo={photo} />
                     </Grid>
                   ))}

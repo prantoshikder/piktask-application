@@ -1,10 +1,10 @@
 "use client";
 
-import { Button, Checkbox, FormControlLabel, Radio, RadioGroup, TextField, Typography } from "@mui/material";
+import { Button, Checkbox, FormControlLabel, Radio, RadioGroup, TextField, Typography } from "@/components/ui-kit";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, Redirect, useLocation } from "@/lib/router";
+import { Link, Redirect, useHistory, useLocation } from "@/lib/router";
 import { toast } from "react-toastify";
 import formIconBottom from "../../../assets/formIconBottom.png";
 import formIconTop from "../../../assets/formIconTop.png";
@@ -16,10 +16,9 @@ import { sendSignInLinkToEmail } from "firebase/auth";
 import { auth } from "../../../database";
 import { imageObjSchema } from "../../../helpers";
 import Layout from "../../../Layout";
-import useStyles from "../Auth.styles";
 
-const Registration = ({ history }) => {
-  const { classes } = useStyles();
+const Registration = () => {
+  const history = useHistory();
   const location = useLocation();
   const user = useSelector((state) => state.user);
 
@@ -164,32 +163,32 @@ const Registration = ({ history }) => {
     <Layout title="Signup">
       {isRedirectTo && <Redirect to="/confirm-signup" />}
       <Header />
-      <div className={classes.rootContainer}>
+      <div className="w-[53rem] left-[50%] relative [transform:translate(-50%,0%)] max-[768px]:w-[70%] max-[768px]:p-[0_2rem] max-[479.95px]:w-[100%]">
         <Spacing space={{ height: "5rem" }} />
 
-        <div className={classes.formPageContainer}>
-          <img src={formIconTop} alt="Background Icon" className={classes.backgroundIconTop} />
-          <div className={classes.formWrapper}>
-            <div className={classes.formWrapperInner}>
-              <div className={classes.formHeading}>
-                <Typography className={classes.formTitle} variant="h2">
+        <div className="rounded-[1rem] overflow-hidden relative bg-[#fff] max-[768px]:p-[0_2.5rem]">
+          <img src={formIconTop.src} alt="Background Icon" className="absolute top-[-.5rem] left-[0] w-[16rem] max-[768px]:w-[15rem] max-[479.95px]:w-[13rem]" />
+          <div className="relative m-[2rem_0_2.5rem] max-[768px]:m-[0]">
+            <div className="w-[46rem] m-[0_auto_3rem] max-[768px]:w-[100%] max-[768px]:mb-[1.5rem]">
+              <div className="text-center m-[3rem_0_2.5rem] max-[768px]:m-[2rem_0_1em]">
+                <Typography className="mb-[0.4rem] text-[2.4rem] text-center" variant="h2">
                   Sign Up
                 </Typography>
-                <Typography className={classes.formSubtitle}>With your social network</Typography>
+                <Typography className="text-[1.6rem]">With your social network</Typography>
               </div>
 
               <div>
-                {/* <Typography variant="subtitle1" className={classes.formDevider}>
+                {/* <Typography variant="subtitle1">
                   Or
                 </Typography> */}
 
                 <div>
-                  <form autoComplete="off" className={classes.form} onSubmit={handleSubmit}>
+                  <form autoComplete="off" className="max-[768px]:[&_input]:p-[11px_14px] max-[768px]:[&_label]:text-[1.4rem] max-[768px]:[&_label]:top-[-.6rem]" onSubmit={handleSubmit}>
                     <TextField
                       fullWidth
                       variant="outlined"
                       label="User name"
-                      className={classes.formControl}
+                      className="mb-[1.5rem] [&_input]:border-[#CBCBCB] [&_input:focus]:[outline-color:red] max-[768px]:mb-[1.5rem]"
                       name="username"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
@@ -198,21 +197,21 @@ const Registration = ({ history }) => {
                       fullWidth
                       variant="outlined"
                       label="Email"
-                      className={classes.formControl}
+                      className="mb-[1.5rem] [&_input]:border-[#CBCBCB] [&_input:focus]:[outline-color:red] max-[768px]:mb-[1.5rem]"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
-                    <div className={classes.passwordField}>
+                    <div className="flex items-center relative [&_img]:absolute [&_img]:top-[1.5rem] [&_img]:right-[3rem] [&_img]:w-[2rem] [&_img]:cursor-pointer max-[768px]:[&_img]:w-[2rem]">
                       <TextField
                         fullWidth
                         variant="outlined"
                         label="Password"
                         type={value ? "text" : "password"}
-                        className={classes.formControl}
+                        className="mb-[1.5rem] [&_input]:border-[#CBCBCB] [&_input:focus]:[outline-color:red] max-[768px]:mb-[1.5rem]"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
-                      <img src={lockIcon} alt="Show or hide password" onClick={handleShowHidePassword} />
+                      <img src={lockIcon.src} alt="Show or hide password" onClick={handleShowHidePassword} />
                     </div>
 
                     <RadioGroup onChange={handleUserRole} row aria-label="gender" name="row-radio-buttons-group">
@@ -220,7 +219,7 @@ const Registration = ({ history }) => {
                       <FormControlLabel value="contributor" control={<Radio />} label="Contributor" />
                     </RadioGroup>
 
-                    <Typography variant="body1" className={classes.helpText}>
+                    <Typography variant="body1" className="text-center mb-[1rem] text-[1.3rem] font-[500] max-[768px]:p-[0] max-[768px]:mb-[1rem]">
                       Your password must be at least 6 characters long and must contain letters, numbers and special characters. Cannot contain whitespace.
                     </Typography>
 
@@ -229,21 +228,21 @@ const Registration = ({ history }) => {
                       label=" I do not wish to receive news and promotions from Piktask LLC by email."
                       labelPlacement="end"
                       control={<Checkbox color="primary" />}
-                      className={classes.checkboxLabel}
+                      className="pb-[3rem] mr-[0] [&_span]:text-[#143340] [&_span]:text-[1.3rem]"
                     />
-                    <Button variant="contained" fullWidth className={classes.formButton} type="submit" disabled={!username || !email || !password || !role}>
+                    <Button variant="contained" fullWidth className="bg-[#3B9EE8] text-[2rem] rounded-[0] font-[400] shadow-[none] mt-[-1.8rem] mb-[3rem] p-[0.8rem_2rem] [&_span]:text-[#fff] hover:bg-[#3092da] hover:shadow-[none] max-[768px]:mb-[.5rem] max-[768px]:p-[.5rem_2rem] max-[768px]:text-[1.6rem]" type="submit" disabled={!username || !email || !password || !role}>
                       Sign Up
                     </Button>
                   </form>
 
-                  <Button component={Link} to="/login" className={classes.formLink} disableRipple>
+                  <Button component={Link} to="/login" className="text-[#0088f2] block text-center text-[1.5rem] font-[500] hover:bg-[transparent] max-[768px]:mt-[18px] max-[768px]:relative max-[768px]:left-[50%] max-[768px]:[transform:translateX(-50%)] max-[768px]:inline-block" disableRipple>
                     Already registered? Log in
                   </Button>
                 </div>
               </div>
             </div>
           </div>
-          <img src={formIconBottom} alt="Piktask" className={classes.backgroundIconBottom} />
+          <img src={formIconBottom.src} alt="Piktask" className="absolute bottom-[-.5rem] right-[-.1rem] w-[16rem] max-[768px]:w-[15rem] max-[479.95px]:w-[11rem]" />
         </div>
         <Spacing space={{ height: "5rem" }} />
       </div>

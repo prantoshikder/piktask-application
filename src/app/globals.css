@@ -1,0 +1,130 @@
+/*
+ * Layer order decides who wins. `antd` is declared first, so it has the lowest
+ * priority and every Tailwind utility overrides Ant Design's component styles.
+ * (Layer statements are allowed before @import.)
+ */
+@layer antd;
+
+@import "tailwindcss";
+
+/*
+ * Base rules carried over verbatim from the old styled-components
+ * globalStyles.ts. The 62.5% root font-size is load-bearing: every rem value
+ * in the app was authored against it (1.4rem === 14px), so removing it would
+ * rescale the entire UI.
+ */
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 62.5%;
+  }
+
+  body {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    background-color: #f8f8f8;
+  }
+
+  body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #f5f5f5;
+  }
+
+  body::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f5f5f5;
+  }
+
+  body::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 28, 48, 0.6);
+  }
+}
+
+/*
+ * Grid engine for src/components/ui-kit/grid.jsx.
+ *
+ * Reproduces MUI's 12-column Grid on this project's breakpoints (xs 480,
+ * sm 960, md 1280, lg 1540, xl 1920) rather than Ant's 24-column / 576px scale.
+ * The component supplies --pk-<breakpoint> widths; each query below inherits
+ * the previous one when a breakpoint is not specified, matching MUI's
+ * mobile-first cascade.
+ */
+@layer components {
+  .pk-grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--pk-col-gap, 0px);
+    row-gap: var(--pk-row-gap, 0px);
+  }
+
+  .pk-grid-item {
+    box-sizing: border-box;
+    width: var(--pk-w, 100%);
+    --pk-w: 100%;
+  }
+
+  @media (min-width: 480px) {
+    .pk-grid-item { --pk-w: var(--pk-xs, 100%); }
+  }
+  @media (min-width: 960px) {
+    .pk-grid-item { --pk-w: var(--pk-sm, var(--pk-xs, 100%)); }
+  }
+  @media (min-width: 1280px) {
+    .pk-grid-item { --pk-w: var(--pk-md, var(--pk-sm, var(--pk-xs, 100%))); }
+  }
+  @media (min-width: 1540px) {
+    .pk-grid-item { --pk-w: var(--pk-lg, var(--pk-md, var(--pk-sm, var(--pk-xs, 100%)))); }
+  }
+  @media (min-width: 1920px) {
+    .pk-grid-item { --pk-w: var(--pk-xl, var(--pk-lg, var(--pk-md, var(--pk-sm, var(--pk-xs, 100%))))); }
+  }
+
+  /* A container that is also an item still needs its own width. */
+  .pk-grid-container.pk-grid-item { width: var(--pk-w, 100%); }
+}
+
+/*
+ * Baseline geometry that MUI used to provide and Ant does not.
+ *
+ * These live in @layer components: above `antd` (so they beat Ant's defaults)
+ * but below `utilities` (so any Tailwind class on a call site still wins).
+ */
+@layer components {
+  /*
+   * Ant pins buttons to a fixed control height (32px by default). The design
+   * sizes buttons from their own padding and line-height, so a fixed height
+   * clips the label out of the pill.
+   */
+  .ant-btn {
+    height: auto;
+    min-height: 0;
+  }
+
+  /* MUI Button defaults, for the variants rendered as a link via `component`. */
+  .pk-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 8px;
+    cursor: pointer;
+  }
+
+  /* MUI Tab defaults - this is what spaced the header navigation apart. */
+  .pk-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+}

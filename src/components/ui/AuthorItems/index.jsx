@@ -1,6 +1,6 @@
 "use client";
 
-import { Container, Grid, Tab, Tabs } from "@mui/material";
+import { Container, Grid, Tab, Tabs } from "@/components/ui-kit";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -9,10 +9,8 @@ import ProductNotFound from "../ProductNotFound";
 import Product from "../Products/Product";
 import Pagination from "./../Pagination/index";
 import { usePathname } from "next/navigation";
-import useStyles from "./AuthorItems.styles";
 
 const AuthorItems = ({ imageSummery, userId }) => {
-  const { classes } = useStyles();
   const locationPath = usePathname();
   const user = useSelector((state) => state.user);
 
@@ -76,15 +74,15 @@ const AuthorItems = ({ imageSummery, userId }) => {
 
   return (
     <Container>
-      <Grid container className={classes.authorItemTags}>
+      <Grid container className="mt-[3.2rem] mb-[3.2rem] flex justify-center">
         <Tabs
           value={value}
           onChange={handleActiveButton}
           aria-label="Author item count"
           classes={{
-            root: classes.root,
-            flexContainer: classes.flexContainer,
-            indicator: classes.indicator,
+            root: "shadow-[0_2px_13px_5px_rgb(0_0_0_/_10%)]",
+            flexContainer: "bg-[#fff] flex items-center justify-center p-[1rem_0.6rem] flex-wrap max-[479.95px]:p-[0] max-[479.95px]:justify-start",
+            indicator: "h-[0]",
           }}
         >
           {imageSummery?.length > 0 &&
@@ -93,22 +91,22 @@ const AuthorItems = ({ imageSummery, userId }) => {
                 key={index}
                 value={index}
                 label={`${tag.extension} (${tag.images})`}
-                className={classes.tagButton}
-                classes={{ selected: classes.selected }}
+                className="bg-[#fff] shadow-[0px_3px_1px_-2px_rgb(0_0_0_/_20%),0px_2px_2px_0px_rgb(0_0_0_/_14%),0px_1px_5px_0px_rgb(0_0_0_/_12%)] flex-[1] m-[0_0.6rem] [border:none] rounded-[0] text-[1.4rem] font-[500] text-[#1B3F4E] uppercase [transition:all_0.3s_linear] hover:shadow-[none] hover:bg-[#0088f2] hover:text-[#fff] max-[479.95px]:flex-[auto]"
+                classes={{ selected: "bg-[#0088f2] text-[#fff]" }}
                 onClick={() => handleAuthorResource(tag)}
               />
             ))}
         </Tabs>
       </Grid>
 
-      <Grid classes={{ container: classes.container }} container spacing={2}>
+      <Grid classes={{ container: "mb-[4rem]" }} container spacing={2}>
         {isLoading ? (
           <Loader />
         ) : (
           <>
             {authorAllResource?.length ? (
               authorAllResource?.map((photo) => (
-                <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo.image_id} className={classes.productItem}>
+                <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo.image_id} className="max-[576px]:max-w-[100%] max-[576px]:basis-[100%]">
                   <Product photo={photo} />
                 </Grid>
               ))

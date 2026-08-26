@@ -1,7 +1,10 @@
 "use client";
 
-import { Button, Card, FormControl, Select, TextField, Typography, useMediaQuery } from "@mui/material";
-import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
+import { Button, Card, FormControl, Select, TextField, Typography, useMediaQuery } from "@/components/ui-kit";
+import mobileProfileBanner from "../../../../assets/banner/account-mobileProfile.jpg";
+import tabletProfileBanner from "../../../../assets/banner/account-TabletProfile.jpg";
+import profileBanner from "../../../../assets/banner/profile-banner.jpg";
+import { CameraOutlined as PhotoCameraIcon } from "@ant-design/icons";
 import axios from "axios";
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,14 +22,12 @@ import AdminHeader from "../../../../components/ui/dashboard/contributor/Header"
 import Sidebar from "../../../../components/ui/dashboard/contributor/Sidebar";
 import Loader from "../../../../components/ui/Loader";
 import allCountry from "../../../../data/countryList.json";
-import { expiredLoginTime, getBaseURL } from "../../../../helpers/index";
+import { expiredLoginTime, getBaseURL, joinImageUrl } from "../../../../helpers/index";
 import Layout from "../../../../Layout";
-import useStyles from "./AccountSettings.styles";
 
 const Footer = lazy(() => import("../../../../components/ui/Footer"));
 
 const AccountSettings = () => {
-  const { classes } = useStyles();
   const dispatch = useDispatch();
   const mobileView = useMediaQuery("(max-width:769px)");
   const user = useSelector((state) => state.user);
@@ -348,28 +349,28 @@ const AccountSettings = () => {
 
   return (
     <Layout title="Profile">
-      <div className={classes.adminRoot}>
-        {mobileView ? null : <Sidebar className={classes.adminSidebar} />}
+      <div className="">
+        {mobileView ? null : <Sidebar className="mt-[0rem] max-[768.95px]:hidden" />}
 
-        <main className={classes.content}>
+        <main className="p-[0] ml-[28rem] max-[768.95px]:w-[100%] max-[768.95px]:ml-[0rem]">
           <AdminHeader />
 
           <Suspense fallback={<Loader />}>
-            <div className={classes.profileContentWrapper}>
-              <div className={classes.settingsHero}>
-                <div className={classes.authorProfileImage}>
+            <div className="mt-[10rem] m-[2rem]">
+              <div className={"[background-position:center_center] bg-cover bg-no-repeat flex items-center relative justify-center h-[20rem] mb-[2.5rem] p-[5rem_0] before:bg-[rgba(0,28,48,0.4)] before:content-[\"\"] before:absolute before:top-[0] before:left-[0] before:w-[100%] before:h-[100%] bg-[image:var(--settings-d)] max-[768.95px]:bg-[image:var(--settings-t)] max-[575.95px]:bg-[image:var(--settings-m)]"} style={{ "--settings-d": `url(${profileBanner.src})`, "--settings-t": `url(${tabletProfileBanner.src})`, "--settings-m": `url(${mobileProfileBanner.src})` }}>
+                <div className="p-[0.5rem] bg-[#ddd] w-[10rem] h-[10rem] rounded-[50%] relative overflow-hidden z-[1] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:rounded-[50%] [&_img]:object-cover group group">
                   {profilePicture ? (
                     <div>
-                      <img src={getBaseURL().bucket_base_url + "/" + profilePicture} alt={user?.username} width="90px" height="90px" />
+                      <img src={joinImageUrl(getBaseURL().bucket_base_url + "/", profilePicture)} alt={user?.username} width="90px" height="90px" />
                     </div>
                   ) : (
-                    <img src={authorImage} alt={user?.username} width="90px" height="90px" />
+                    <img src={authorImage.src} alt={user?.username} width="90px" height="90px" />
                   )}
 
-                  <div className={classes.avatarOverlay}>
-                    <div className={classes.bgOverlay}>
+                  <div className="bottom-[0] left-[50%] absolute [transform:translateX(-50%)] opacity-[0] invisible group-hover:opacity-[1] group-hover:visible group-hover:[transition:all_0.3s_linear] group-hover:cursor-pointer group-hover:opacity-[1] group-hover:visible group-hover:[transition:all_0.3s_linear] group-hover:cursor-pointer">
+                    <div className="w-[10rem] h-[10rem] rounded-[50%] flex justify-center items-center bg-[rgba(0,0,0,0.6)] overflow-hidden">
                       <label htmlFor="upload_photo">
-                        <PhotoCameraIcon className={classes.uploadIcon} />
+                        <PhotoCameraIcon className="text-[2.5rem] text-[#fff] cursor-pointer" />
                         <input type="file" name="profile_picture" accept="image/*" id="upload_photo" style={{ display: "none" }} onChange={handleUpdateImage} />
                       </label>
                     </div>
@@ -378,45 +379,45 @@ const AccountSettings = () => {
               </div>
               {/* Ends Hero */}
 
-              <div className={classes.settingsFormWrapper}>
-                <form onSubmit={handleSubmit} className={classes.selectPeriodFrom}>
-                  <Card className={classes.cardRoot}>
-                    <div className={classes.headingWrapper}>
-                      <Typography className={classes.settingsFormTitle} variant="h4">
+              <div>
+                <form onSubmit={handleSubmit}>
+                  <Card className="mb-[2.5rem] shadow-[rgba(0,0,0,0.1)_0px_10px_15px_-3px,rgba(0,0,0,0.05)_0px_4px_6px_-2px]">
+                    <div className="mb-[3.5rem]">
+                      <Typography className="text-[#114960] font-[700] p-[3rem]" variant="h4">
                         Personal Information
                       </Typography>
-                      <hr className={classes.seperator} />
+                      <hr className="border-[0] h-[.1rem] bg-[rgb(112_112_112_/_38%)] w-[100%]" />
                     </div>
 
-                    <div className={classes.cardWrapper}>
-                      <div className={classes.fieldsGroup}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }}>
+                    <div className="p-[.6rem_2rem_2rem] mb-[2rem]">
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }}>
                           <TextField
                             id="name"
                             label="Name"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                           />
                         </FormControl>
 
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.lastField}>
-                          <TextField id="username" label="User Name" variant="outlined" className={`${classes.inputField}`} value={username} disabled />
+                        <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }} className="max-[960px]:mb-[2rem]!">
+                          <TextField id="username" label="User Name" variant="outlined" className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]" value={username} disabled />
                         </FormControl>
                       </div>
 
-                      <div className={classes.fieldsGroup}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }}>
-                          <TextField id="email" label="Email" variant="outlined" className={`${classes.inputField}`} value={email} />
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }}>
+                          <TextField id="email" label="Email" variant="outlined" className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]" value={email} />
                         </FormControl>
 
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }}>
+                        <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }}>
                           <TextField
                             fullWidth
                             variant="outlined"
                             label="Website"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                             name="website"
                             value={website}
                             onChange={(e) => setWebsite(e.target.value)}
@@ -424,20 +425,20 @@ const AccountSettings = () => {
                         </FormControl>
                       </div>
 
-                      <div className={classes.fieldsGroup}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.lastField}>
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }} className="max-[960px]:mb-[2rem]!">
                           <TextField
                             id="phonenumber"
                             label="Phone Number"
                             type="number"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                           />
                         </FormControl>
 
-                        <FormControl variant="outlined" fullWidth classes={{ fullWidth: classes.fullWidth }}>
+                        <FormControl variant="outlined" fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }}>
                           <TextField
                             SelectProps={{
                               native: true,
@@ -445,7 +446,7 @@ const AccountSettings = () => {
                             select
                             variant="outlined"
                             label="Country"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                             value={countryName}
                             onChange={(e) => setCountryName(e.target.value)}
                             onClick={handleCountries}
@@ -462,48 +463,48 @@ const AccountSettings = () => {
                         </FormControl>
                       </div>
 
-                      <div className={classes.fieldsGroup}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }}>
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }}>
                           <TextField
                             id="city"
                             label="Your State/City"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                             value={city}
                             onChange={(e) => setCity(e.target.value)}
                           ></TextField>
                         </FormControl>
 
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.lastField}>
+                        <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }} className="max-[960px]:mb-[2rem]!">
                           <TextField
                             id="postalcode"
                             label="Zip/Postal Code"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                             value={zipCode}
                             onChange={(e) => setZipCode(e.target.value)}
                           />
                         </FormControl>
                       </div>
 
-                      <div className={classes.fieldsGroup}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }}>
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }}>
                           <TextField
                             id="address"
                             label="Current Address"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                             value={locationAddress}
                             onChange={(e) => setLocationAddress(e.target.value)}
                           />
                         </FormControl>
 
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.lastField}>
+                        <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }} className="max-[960px]:mb-[2rem]!">
                           <TextField
                             id="billingaddress"
                             label="Billing Address"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                             value={billingsAddress}
                             onChange={(e) => setBillingsAddress(e.target.value)}
                           />
@@ -513,18 +514,18 @@ const AccountSettings = () => {
                     {/* Card Wrapper ends */}
                   </Card>
 
-                  <Card className={classes.cardRoot}>
-                    <div className={classes.headingWrapper}>
-                      <Typography className={classes.settingsFormTitle} variant="h4">
+                  <Card className="mb-[2.5rem] shadow-[rgba(0,0,0,0.1)_0px_10px_15px_-3px,rgba(0,0,0,0.05)_0px_4px_6px_-2px]">
+                    <div className="mb-[3.5rem]">
+                      <Typography className="text-[#114960] font-[700] p-[3rem]" variant="h4">
                         Add Payment Method
                       </Typography>
-                      <hr className={classes.seperator} />
+                      <hr className="border-[0] h-[.1rem] bg-[rgb(112_112_112_/_38%)] w-[100%]" />
                     </div>
 
-                    <div className={classes.cardWrapper}>
-                      <div className={classes.fieldsGroup}>
-                        <FormControl variant="outlined" fullWidth classes={{ fullWidth: classes.fullWidth }}>
-                          <Select native value={payment} onChange={(e) => setPayment(e.target.value)} className={classes.selectArea}>
+                    <div className="p-[.6rem_2rem_2rem] mb-[2rem]">
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[0]">
+                        <FormControl variant="outlined" fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }}>
+                          <Select native value={payment} onChange={(e) => setPayment(e.target.value)} className="[&_svg]:w-[3rem] [&_svg]:text-[4rem] [&_svg]:top-[5px]">
                             {paymentMethod ? (
                               paymentMethod?.map((paymentValue, index) => (
                                 <option key={index} value={paymentValue.name}>
@@ -538,13 +539,13 @@ const AccountSettings = () => {
                         </FormControl>
 
                         {payment === "PayPal" && (
-                          <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }}>
+                          <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }}>
                             <TextField
                               fullWidth
                               variant="outlined"
                               label="Paypal Email"
                               name="paypalEmail"
-                              className={`${classes.inputField}`}
+                              className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                               value={paypalAccount}
                               onChange={(e) => setPaypalAccount(e.target.value)}
                             />
@@ -552,13 +553,13 @@ const AccountSettings = () => {
                         )}
 
                         {payment === "Payoneer" && (
-                          <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }}>
+                          <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }}>
                             <TextField
                               fullWidth
                               variant="outlined"
                               label="Payoneer Email"
                               name="payoneerEmail"
-                              className={`${classes.inputField}`}
+                              className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                               value={payoneerAccount}
                               onChange={(e) => setPayoneerAccount(e.target.value)}
                             />
@@ -566,12 +567,12 @@ const AccountSettings = () => {
                         )}
 
                         {payment === "Bank" && (
-                          <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }}>
+                          <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }}>
                             <TextField
                               id="name"
                               label="Account Name"
                               variant="outlined"
-                              className={`${classes.inputField}`}
+                              className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                               placeholder="Account Name"
                               value={accountName}
                               onChange={(e) => setAccountName(e.target.value)}
@@ -582,27 +583,27 @@ const AccountSettings = () => {
 
                       {payment === "Bank" && (
                         <div>
-                          <div className={classes.fieldsGroup}>
-                            <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.inputImage}>
+                          <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[0]">
+                            <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }}>
                               <TextField
                                 type="number"
                                 id="accountNumber"
                                 label="Account Number"
                                 variant="outlined"
-                                className={`${classes.inputField}`}
+                                className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                                 placeholder="Account Number"
                                 value={accountNumber}
                                 onChange={(e) => setAccountNumber(e.target.value)}
                               />
                             </FormControl>
 
-                            <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }}>
+                            <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }}>
                               <TextField
                                 id="routingNumber"
                                 type="number"
                                 label="Routing Number"
                                 variant="outlined"
-                                className={`${classes.inputField}`}
+                                className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                                 placeholder="Routing Number"
                                 value={routingNumber}
                                 onChange={(e) => setRoutingNumber(e.target.value)}
@@ -610,26 +611,26 @@ const AccountSettings = () => {
                             </FormControl>
                           </div>
 
-                          <div className={classes.fieldsGroup}>
-                            <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.inputImage}>
+                          <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[0]">
+                            <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }}>
                               <TextField
                                 type="number"
                                 id="swiftCode"
                                 label="Swift Code"
                                 variant="outlined"
-                                className={`${classes.inputField}`}
+                                className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                                 placeholder="Swift Code"
                                 value={swiftCode}
                                 onChange={(e) => setSwiftCode(e.target.value)}
                               />
                             </FormControl>
 
-                            <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }}>
+                            <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }}>
                               <TextField
                                 id="branch"
                                 label="Branch"
                                 variant="outlined"
-                                className={`${classes.inputField}`}
+                                className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                                 placeholder="Branch"
                                 value={branch}
                                 onChange={(e) => setBranch(e.target.value)}
@@ -638,18 +639,18 @@ const AccountSettings = () => {
                           </div>
 
                           <div>
-                            <FormControl className={classes.bankCountryName} classes={{ fullWidth: classes.fullWidth }}>
+                            <FormControl className="w-[49%] pl-[1rem] [align-items:left] [justify-content:left] mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] min-[2000px]:w-[49.6%] [@media(max-width:2250px)_and_(min-width:2100px)]:w-[49.5%] [@media(max-width:2000px)_and_(min-width:1700px)]:w-[49.3%] max-[960px]:w-[100%] max-[960px]:pl-[0rem]! max-[960px]:flex-col max-[960px]:mb-[0]" classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }}>
                               <TextField
                                 id="bankCountry"
                                 label="Country"
                                 variant="outlined"
-                                className={`${classes.inputField}`}
+                                className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                                 placeholder="Bank Country"
                                 value={bankCountry}
                                 onChange={(e) => setBankCountry(e.target.value)}
                               />
                             </FormControl>
-                            <Button type="submit" className={classes.profileInfoSaveBtn}>
+                            <Button type="submit" className="h-[5.5rem] w-[24rem] text-[#fff] float-right mr-[1rem] [border:0.5px_solid_#0088f2] bg-[#0088f2] [transition:all_0.3s_linear] hover:bg-[#0773c5] max-[899.95px]:hidden">
                               Save Changes
                             </Button>
                           </div>
@@ -659,19 +660,19 @@ const AccountSettings = () => {
                   </Card>
                   {/* Add payment method ends */}
 
-                  <Card className={classes.cardRoot}>
-                    <div className={classes.headingWrapper}>
-                      <Typography className={classes.settingsFormTitle} variant="h4">
+                  <Card className="mb-[2.5rem] shadow-[rgba(0,0,0,0.1)_0px_10px_15px_-3px,rgba(0,0,0,0.05)_0px_4px_6px_-2px]">
+                    <div className="mb-[3.5rem]">
+                      <Typography className="text-[#114960] font-[700] p-[3rem]" variant="h4">
                         Professional Portfolio
                       </Typography>
-                      <hr className={classes.seperator} />
+                      <hr className="border-[0] h-[.1rem] bg-[rgb(112_112_112_/_38%)] w-[100%]" />
                     </div>
 
-                    <div className={classes.cardWrapper}>
-                      <div className={`${classes.fieldsGroup} ${classes.linkField}`}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.portfolioLink}>
-                          <label htmlFor="shutterstock" className={classes.portfolioIconWrapper}>
-                            <img src={shutterstockIcon} alt="Shutterstock Icon" width="25px" height="57px" />
+                    <div className="p-[.6rem_2rem_2rem] mb-[2rem]">
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[0] max-[960px]:mb-[inherit] max-[960px]:last:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }} className="relative pl-[8rem] [&_fieldset]:rounded-tl-[0] [&_fieldset]:rounded-bl-[0] [&_fieldset]:[border-left-color:transparent]">
+                          <label htmlFor="shutterstock" className="absolute left-[0] top-[-.5rem] w-[8rem] h-[5.85rem] flex justify-center [border:1px_solid_rgba(0,0,0,0.23)] [&_img]:w-[2.5rem] [&_img]:h-[auto]">
+                            <img src={shutterstockIcon.src} alt="Shutterstock Icon" width="25px" height="57px" />
                           </label>
 
                           <TextField
@@ -680,7 +681,7 @@ const AccountSettings = () => {
                             // helperText={errors.shutterstock}
                             label="Your Shutterstock Account"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                             placeholder="Your Shutterstock Account"
                             value={shutterstock}
                             onChange={(e) => setShutterstock(e.target.value)}
@@ -688,16 +689,16 @@ const AccountSettings = () => {
                         </FormControl>
                       </div>
 
-                      <div className={`${classes.fieldsGroup} ${classes.linkField}`}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.portfolioLink}>
-                          <label htmlFor="pinterest" className={classes.portfolioIconWrapper}>
-                            <img src={pinterestIcon} alt="Pinterest Icon" width="25px" height="57px" />
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[0] max-[960px]:mb-[inherit] max-[960px]:last:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }} className="relative pl-[8rem] [&_fieldset]:rounded-tl-[0] [&_fieldset]:rounded-bl-[0] [&_fieldset]:[border-left-color:transparent]">
+                          <label htmlFor="pinterest" className="absolute left-[0] top-[-.5rem] w-[8rem] h-[5.85rem] flex justify-center [border:1px_solid_rgba(0,0,0,0.23)] [&_img]:w-[2.5rem] [&_img]:h-[auto]">
+                            <img src={pinterestIcon.src} alt="Pinterest Icon" width="25px" height="57px" />
                           </label>
                           <TextField
                             id="pinterest"
                             label="Your Pinterest Account"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                             placeholder="Your Pinterest Account"
                             value={pinterest}
                             onChange={(e) => setPinterest(e.target.value)}
@@ -705,10 +706,10 @@ const AccountSettings = () => {
                         </FormControl>
                       </div>
 
-                      <div className={`${classes.fieldsGroup} ${classes.linkField}`}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.portfolioLink}>
-                          <label htmlFor="behance" className={classes.portfolioIconWrapper}>
-                            <img src={behanceIcon} alt="Behance Icon" width="25px" height="57px" />
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[0] max-[960px]:mb-[inherit] max-[960px]:last:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }} className="relative pl-[8rem] [&_fieldset]:rounded-tl-[0] [&_fieldset]:rounded-bl-[0] [&_fieldset]:[border-left-color:transparent]">
+                          <label htmlFor="behance" className="absolute left-[0] top-[-.5rem] w-[8rem] h-[5.85rem] flex justify-center [border:1px_solid_rgba(0,0,0,0.23)] [&_img]:w-[2.5rem] [&_img]:h-[auto]">
+                            <img src={behanceIcon.src} alt="Behance Icon" width="25px" height="57px" />
                           </label>
                           <TextField
                             id="behance"
@@ -716,7 +717,7 @@ const AccountSettings = () => {
                             // helperText={errors.behance}
                             label="Your Behance Account"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                             placeholder="Your Behance Account"
                             value={behance}
                             onChange={(e) => setBehance(e.target.value)}
@@ -724,10 +725,10 @@ const AccountSettings = () => {
                         </FormControl>
                       </div>
 
-                      <div className={`${classes.fieldsGroup} ${classes.linkField}`}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.portfolioLink}>
-                          <label htmlFor="dribbble" className={classes.portfolioIconWrapper}>
-                            <img src={dribbbleIcon} alt="Dribbble Icon" width="25px" height="57px" />
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[0] max-[960px]:mb-[inherit] max-[960px]:last:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }} className="relative pl-[8rem] [&_fieldset]:rounded-tl-[0] [&_fieldset]:rounded-bl-[0] [&_fieldset]:[border-left-color:transparent]">
+                          <label htmlFor="dribbble" className="absolute left-[0] top-[-.5rem] w-[8rem] h-[5.85rem] flex justify-center [border:1px_solid_rgba(0,0,0,0.23)] [&_img]:w-[2.5rem] [&_img]:h-[auto]">
+                            <img src={dribbbleIcon.src} alt="Dribbble Icon" width="25px" height="57px" />
                           </label>
                           <TextField
                             id="dribbble"
@@ -735,7 +736,7 @@ const AccountSettings = () => {
                             // helperText={errors.dribbble}
                             label="Your Dribbble Account"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                             placeholder="Your Dribbble Account"
                             value={dribbble}
                             onChange={(e) => setDribbble(e.target.value)}
@@ -746,19 +747,19 @@ const AccountSettings = () => {
                   </Card>
                   {/* Ends Professional Portfolio */}
 
-                  <Card className={classes.cardRoot}>
-                    <div className={classes.headingWrapper}>
-                      <Typography className={classes.settingsFormTitle} variant="h4">
+                  <Card className="mb-[2.5rem] shadow-[rgba(0,0,0,0.1)_0px_10px_15px_-3px,rgba(0,0,0,0.05)_0px_4px_6px_-2px]">
+                    <div className="mb-[3.5rem]">
+                      <Typography className="text-[#114960] font-[700] p-[3rem]" variant="h4">
                         Social Link
                       </Typography>
-                      <hr className={classes.seperator} />
+                      <hr className="border-[0] h-[.1rem] bg-[rgb(112_112_112_/_38%)] w-[100%]" />
                     </div>
 
-                    <div className={classes.cardWrapper}>
-                      <div className={`${classes.fieldsGroup} ${classes.linkField}`}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.portfolioLink}>
-                          <label htmlFor="facebook" className={classes.portfolioIconWrapper}>
-                            <img src={facebookIcon} className={classes.facebookIcon} alt="Facebook Icon" width="25px" height="57px" />
+                    <div className="p-[.6rem_2rem_2rem] mb-[2rem]">
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[0] max-[960px]:mb-[inherit] max-[960px]:last:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }} className="relative pl-[8rem] [&_fieldset]:rounded-tl-[0] [&_fieldset]:rounded-bl-[0] [&_fieldset]:[border-left-color:transparent]">
+                          <label htmlFor="facebook" className="absolute left-[0] top-[-.5rem] w-[8rem] h-[5.85rem] flex justify-center [border:1px_solid_rgba(0,0,0,0.23)] [&_img]:w-[2.5rem] [&_img]:h-[auto]">
+                            <img src={facebookIcon.src} alt="Facebook Icon" width="25px" height="57px" />
                           </label>
                           <TextField
                             id="facebook"
@@ -766,7 +767,7 @@ const AccountSettings = () => {
                             // helperText={errors.facebook}
                             label="Your Facebook Account"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                             placeholder="Your Facebook Account"
                             value={facebook}
                             onChange={(e) => setFacebook(e.target.value)}
@@ -774,10 +775,10 @@ const AccountSettings = () => {
                         </FormControl>
                       </div>
 
-                      <div className={`${classes.fieldsGroup} ${classes.linkField}`}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.portfolioLink}>
-                          <label htmlFor="twitter" className={classes.portfolioIconWrapper}>
-                            <img src={twitterIcon} alt="Twitter Icon" width="25px" height="57px" />
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[0] max-[960px]:mb-[inherit] max-[960px]:last:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }} className="relative pl-[8rem] [&_fieldset]:rounded-tl-[0] [&_fieldset]:rounded-bl-[0] [&_fieldset]:[border-left-color:transparent]">
+                          <label htmlFor="twitter" className="absolute left-[0] top-[-.5rem] w-[8rem] h-[5.85rem] flex justify-center [border:1px_solid_rgba(0,0,0,0.23)] [&_img]:w-[2.5rem] [&_img]:h-[auto]">
+                            <img src={twitterIcon.src} alt="Twitter Icon" width="25px" height="57px" />
                           </label>
                           <TextField
                             id="twitter"
@@ -785,7 +786,7 @@ const AccountSettings = () => {
                             // helperText={errors.twitter}
                             label="Your Twitter Account"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                             placeholder="Your Twitter Account"
                             value={twitter}
                             onChange={(e) => setTwitter(e.target.value)}
@@ -793,10 +794,10 @@ const AccountSettings = () => {
                         </FormControl>
                       </div>
 
-                      <div className={`${classes.fieldsGroup} ${classes.linkField}`}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.portfolioLink}>
-                          <label htmlFor="linkedin" className={classes.portfolioIconWrapper}>
-                            <img src={linkedinIcon} alt="Linkedin Icon" width="25px" height="57px" />
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[0] max-[960px]:mb-[inherit] max-[960px]:last:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }} className="relative pl-[8rem] [&_fieldset]:rounded-tl-[0] [&_fieldset]:rounded-bl-[0] [&_fieldset]:[border-left-color:transparent]">
+                          <label htmlFor="linkedin" className="absolute left-[0] top-[-.5rem] w-[8rem] h-[5.85rem] flex justify-center [border:1px_solid_rgba(0,0,0,0.23)] [&_img]:w-[2.5rem] [&_img]:h-[auto]">
+                            <img src={linkedinIcon.src} alt="Linkedin Icon" width="25px" height="57px" />
                           </label>
                           <TextField
                             id="linkedin"
@@ -804,7 +805,7 @@ const AccountSettings = () => {
                             // helperText={errors.linkedin}
                             label="Your Linkedin Account"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                             placeholder="Your Linkedin Account"
                             value={linkedin}
                             onChange={(e) => setLinkedin(e.target.value)}
@@ -812,10 +813,10 @@ const AccountSettings = () => {
                         </FormControl>
                       </div>
 
-                      <div className={`${classes.fieldsGroup} ${classes.linkField}`}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.portfolioLink}>
-                          <label htmlFor="instagram" className={classes.portfolioIconWrapper}>
-                            <img src={instagramIcon} alt="Instagram Icon" width="25px" height="57px" />
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[0] max-[960px]:mb-[inherit] max-[960px]:last:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem]" }} className="relative pl-[8rem] [&_fieldset]:rounded-tl-[0] [&_fieldset]:rounded-bl-[0] [&_fieldset]:[border-left-color:transparent]">
+                          <label htmlFor="instagram" className="absolute left-[0] top-[-.5rem] w-[8rem] h-[5.85rem] flex justify-center [border:1px_solid_rgba(0,0,0,0.23)] [&_img]:w-[2.5rem] [&_img]:h-[auto]">
+                            <img src={instagramIcon.src} alt="Instagram Icon" width="25px" height="57px" />
                           </label>
                           <TextField
                             id="instagram"
@@ -823,7 +824,7 @@ const AccountSettings = () => {
                             // helperText={errors.instagram}
                             label="Your Instagram Account"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#114960] [&_label]:text-[1.3rem]"
                             placeholder="Your Instagram Account"
                             value={instagram}
                             onChange={(e) => setInstagram(e.target.value)}
@@ -834,9 +835,9 @@ const AccountSettings = () => {
                   </Card>
                   {/* Ends Professional Portfolio */}
 
-                  <div className={classes.buttonGroup}>
-                    <Button className={`${classes.settingsBtn} ${classes.restoreBtn}`}>Restore All Attributes</Button>
-                    <Button type="submit" className={`${classes.settingsBtn} ${classes.saveBtn}`}>
+                  <div className="flex justify-end">
+                    <Button className="p-[1rem_2rem] text-[#fff] text-[1.4rem] rounded-[.5rem] bg-[#ACB0C8] mr-[2rem] hover:bg-[rgb(149_154_185)]">Restore All Attributes</Button>
+                    <Button type="submit" className="p-[1rem_2rem] text-[#fff] text-[1.4rem] rounded-[.5rem] bg-[#0088f2] [transition:all_0.3s_linear] hover:bg-[#0773c5]">
                       Save All Changes
                     </Button>
                   </div>

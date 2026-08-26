@@ -1,49 +1,16 @@
 "use client";
 
-import { Dialog, Typography } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import { makeStyles } from "tss-react/mui";
+import { Dialog, Typography } from "@/components/ui-kit";
+import { CloseOutlined as CloseIcon } from "@ant-design/icons";
 import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { CustomBtn, InputField } from "../../../../../components/InputField";
 
-const useStyles = makeStyles()({
-  withdrawModal: {
-    "& .MuiDialog-paperWidthSm": {
-      width: "40rem",
-    },
-  },
-  closeModal: {
-    marginLeft: "auto",
-    padding: "1rem",
-    color: "#0088f2",
-    cursor: "pointer",
-  },
-  withdrawInfo: {
-    padding: "0rem 5rem 4rem",
-    maxWidth: "50rem",
-  },
-  withdrawTitle: {
-    textAlign: "center",
-    fontSize: "1.6rem",
-    fontWeight: "500",
-    marginBottom: "2rem",
-  },
-  amountField: {
-    "& p": {
-      color: "red",
-      fontSize: "1.2rem",
-      fontWeight: "500",
-      marginBottom: "1rem",
-      marginTop: "-1rem",
-    },
-  },
-});
+
 
 const WithdrawModal = (props) => {
-  const { classes } = useStyles();
   const user = useSelector((state) => state.user);
   const {
     openWithdrawModal,
@@ -111,13 +78,13 @@ const WithdrawModal = (props) => {
         onClose={closeWithdrawModal}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        className={classes.withdrawModal}
+        className="[&_.ant-modal-content]:w-[40rem]"
       >
-        <div className={classes.closeModal}>
-          <CloseIcon fontSize="large" onClick={() => setWithdrawModal(false)} />
+        <div className="ml-[auto] p-[1rem] text-[#0088f2] cursor-pointer">
+          <CloseIcon onClick={() => setWithdrawModal(false)} />
         </div>
-        <div className={classes.withdrawInfo}>
-          <Typography variant="h5" className={classes.withdrawTitle}>
+        <div className="p-[0rem_5rem_4rem] max-w-[50rem]">
+          <Typography variant="h5" className="text-center text-[1.6rem] font-[500] mb-[2rem]">
             {"Apply for withdrawal"}
           </Typography>
           <form onSubmit={handleSubmit}>
@@ -156,7 +123,7 @@ const WithdrawModal = (props) => {
                 />
               </>
             )}
-            <div className={classes.amountField}>
+            <div className="[&_p]:text-[red] [&_p]:text-[1.2rem] [&_p]:font-[500] [&_p]:mb-[1rem] [&_p]:mt-[-1rem]">
               <InputField
                 label="Amount"
                 type="number"

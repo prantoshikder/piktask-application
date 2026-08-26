@@ -1,6 +1,6 @@
 "use client";
 
-import { useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@/components/ui-kit";
 import axios from "axios";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
@@ -15,10 +15,8 @@ import Footer from "../../../../components/ui/Footer";
 import Pagination from "../../../../components/ui/Pagination";
 import { expiredLoginTime } from "../../../../helpers";
 import Layout from "../../../../Layout";
-import useStyles from "./Publish.styles";
 
 const Publish = () => {
-  const { classes } = useStyles();
   const dispatch = useDispatch();
   const location = useLocation();
   const locationPath = location.pathname;
@@ -77,14 +75,14 @@ const Publish = () => {
 
   return (
     <Layout title="Publish">
-      <div className={classes.adminRoot}>
-        {mobileView ? null : <Sidebar className={classes.adminSidebar} />}
+      <div className="">
+        {mobileView ? null : <Sidebar className="mt-[0rem] max-[768.95px]:hidden" />}
 
-        <main className={classes.content}>
+        <main className="p-[0] ml-[28rem] max-[768.95px]:w-[100%] max-[768.95px]:ml-[0rem]">
           <AdminHeader />
 
-          <div className={classes.publishFileWrapper}>
-            <div className={classes.headingWrapepr}>
+          <div className="mt-[10rem] m-[2rem] min-h-[60vh]">
+            <div className="flex items-center justify-between mt-[2rem] mb-[1.5rem]">
               <Heading tag="h2">Publish File</Heading>
             </div>
 

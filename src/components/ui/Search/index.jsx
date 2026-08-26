@@ -1,9 +1,9 @@
 "use client";
 
-import { ClickAwayListener, Grow, IconButton, Input, MenuItem, Paper, Popper, useMediaQuery } from "@mui/material";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import CloseIcon from "@mui/icons-material/Close";
+import { ClickAwayListener, Grow, IconButton, Input, MenuItem, Paper, Popper, useMediaQuery } from "@/components/ui-kit";
+import { CaretDownOutlined as ArrowDropDownIcon } from "@ant-design/icons";
+import { CaretUpOutlined as ArrowDropUpIcon } from "@ant-design/icons";
+import { CloseOutlined as CloseIcon } from "@ant-design/icons";
 import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
@@ -12,7 +12,6 @@ import { useHistory } from "@/lib/router";
 import { toast } from "react-toastify";
 import searchIcon from "../../../assets/search.svg";
 import { useDebounce } from "../../../lib/hooks/debounceHook";
-import useStyles from "./Search.styles";
 import SearchItem from "./SearchItem";
 
 const containerVariants = {
@@ -31,7 +30,6 @@ const containerTransition = {
 };
 
 const Search = () => {
-  const { classes } = useStyles();
   const history = useHistory();
   const searchRef = useRef("");
   const anchorRef = useRef("");
@@ -205,11 +203,11 @@ const Search = () => {
 
   return (
     <>
-      <form action="" autoComplete="off" onSubmit={handleSearch} className={classes.formSubmit}>
-        <motion.div className={classes.searchWrapper} variants={containerVariants} transition={containerTransition} ref={parentRef}>
+      <form action="" autoComplete="off" onSubmit={handleSearch} className="w-[100%]">
+        <motion.div className="flex flex-row items-center justify-center w-[100%] relative" variants={containerVariants} transition={containerTransition} ref={parentRef}>
           <Input
             fullWidth
-            className={classes.inputField}
+            className="bg-[#fff] [border:none] p-[.5rem_3rem] text-[18px] h-[5.2rem] rounded-tl-[.3rem] rounded-bl-[.2rem] max-[959.95px]:h-[4.5rem] max-[479.95px]:h-[4rem]"
             id="search"
             aria-describedby="search-resources"
             placeholder="Search All Resources"
@@ -224,7 +222,7 @@ const Search = () => {
           <AnimatePresence>
             {isExpanded && (
               <motion.div
-                className={classes.closeIcon}
+                className="absolute right-[29%]"
                 key="close-icon"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -241,17 +239,17 @@ const Search = () => {
 
           {!mobileView && (
             <>
-              <div className={classes.searchBorder} />
+              <div className="bg-[rgb(0_0_0_/_12%)] h-[36px] w-[1px] absolute left-[-3px]" />
               <div
                 ref={anchorRef}
                 onClick={() => {
                   handleSearchToggle();
                   loadCategories();
                 }}
-                className={classes.searchCats}
+                className="bg-[#fff] rounded-[0] h-[5.2rem] min-w-[140px] relative flex items-center [&_>span]:block [&_>span]:mr-[0.5rem] [&_>span]:min-w-[140px] [&_>span]:text-[#666] hover:bg-[#fff] hover:text-[#666] [&_svg]:absolute [&_svg]:right-[5px] [&_svg]:text-[#666] max-[959.95px]:h-[4.5rem] max-[576.95px]:hidden"
               >
                 <span>{searchCategoryName}</span>
-                {openSearchCategory ? <ArrowDropUpIcon fontSize="large" /> : <ArrowDropDownIcon fontSize="large" />}
+                {openSearchCategory ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
               </div>
 
               <Popper open={openSearchCategory} anchorEl={anchorRef.current} role={undefined} transition disablePortal style={{ zIndex: 9999 }}>
@@ -262,15 +260,15 @@ const Search = () => {
                       transformOrigin: placement === "bottom" ? "center top" : "center bottom",
                     }}
                   >
-                    <Paper className={classes.categoryPaper}>
+                    <Paper className="h-[450px] overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:w-[8px] [&::-webkit-scrollbar]:rounded-[20px] [&::-webkit-scrollbar-track]:bg-[#ddd] [&::-webkit-scrollbar-track]:rounded-[20px] [&::-webkit-scrollbar-thumb]:bg-[#999] [&::-webkit-scrollbar-thumb]:rounded-[20px] [&::-webkit-scrollbar-thumb]:w-[6px]">
                       <ClickAwayListener onClickAway={handleClose}>
-                        <ul id="search-category-lists" onKeyDown={handleListKeyDown} className={classes.searchCatItem}>
+                        <ul id="search-category-lists" onKeyDown={handleListKeyDown} className="p-[1rem_0rem]">
                           {categories?.length !== 0 ? (
                             categories?.map((category) => (
                               <li
                                 key={category?.id}
                                 data-id={category?.id}
-                                className={classes.categoryList}
+                                className="list-none cursor-pointer p-[0.8rem_2rem] [transition:all_0.3s_linear] hover:bg-[rgba(0,0,0,0.04)]"
                                 onClick={(e) => {
                                   handleCategoryItem(e);
                                   handleCloseCatSearch();
@@ -291,28 +289,28 @@ const Search = () => {
             </>
           )}
 
-          <button type="submit" className={classes.searchIconWrapper}>
-            <img className={classes.searchIcon} src={searchIcon} alt="Search" width="22px" height="52px" />
+          <button type="submit" className="bg-[#0088f2] w-[122px] h-[5.2rem] cursor-pointer [border:none] text-center rounded-tr-[.2rem] rounded-br-[.2rem] max-[959.95px]:h-[4.5rem] max-[479.95px]:h-[4rem] max-[479.95px]:w-[76px]">
+            <img className="text-[#fff] w-[2.2rem] h-[100%]" src={searchIcon.src} alt="Search" width="22px" height="52px" />
           </button>
 
           {isExpanded && (
-            <div className={classes.searchResultWrapper}>
-              <div className={classes.searchContent}>
+            <div className="bg-[#FFF] min-h-[300px] max-h-[400px] overflow-y-auto overflow-x-hidden shadow-[rgba(100,100,111,0.2)_0px_7px_29px_0px;] absolute rounded-bl-[3px] rounded-br-[3px] top-[59px] w-[100%] left-[0] z-[1] opacity-[99] [&::-webkit-scrollbar-track]:[-webkit-box-shadow:inset_0_0_6px_rgba(0,0,0,0.3)] [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-track]:bg-[#F5F5F5] [&::-webkit-scrollbar]:w-[10px] [&::-webkit-scrollbar]:bg-[#F5F5F5] [&::-webkit-scrollbar-thumb]:rounded-[10px] [&::-webkit-scrollbar-thumb]:[-webkit-box-shadow:inset_0_0_6px_rgba(0,0,0,.3)] [&::-webkit-scrollbar-thumb]:bg-[rgba(0,28,48,0.6)]">
+              <div className="w-[auto] h-[300px] flex flex-col">
                 {/* Show this while typing */}
                 {isLoading && (
-                  <div className={classes.loadingWrapper}>
+                  <div className="w-[100%] h-[100%] flex items-center justify-center [&_>p]:text-[#a1a1a1] [&_>p]:text-[14px] [&_>p]:flex [&_>p]:self-center [&_>p]:[justify-self:center]">
                     <p>Loading...</p>
                   </div>
                 )}
 
                 {!isLoading && isEmpty && !noSearchResults && (
-                  <div className={classes.loadingWrapper}>
+                  <div className="w-[100%] h-[100%] flex items-center justify-center [&_>p]:text-[#a1a1a1] [&_>p]:text-[14px] [&_>p]:flex [&_>p]:self-center [&_>p]:[justify-self:center]">
                     <p>Start typing to search</p>
                   </div>
                 )}
 
                 {!isLoading && noSearchResults && (
-                  <div className={classes.loadingWrapper}>
+                  <div className="w-[100%] h-[100%] flex items-center justify-center [&_>p]:text-[#a1a1a1] [&_>p]:text-[14px] [&_>p]:flex [&_>p]:self-center [&_>p]:[justify-self:center]">
                     <p>No resources found</p>
                   </div>
                 )}
@@ -321,7 +319,7 @@ const Search = () => {
                   <div onClick={collapseContainer}>
                     {searchResults?.length > 0 &&
                       searchResults?.map((item, index) => (
-                        <div key={index} className={active === index ? `${classes.active}` : ""}>
+                        <div key={index} className={active === index ? `shadow-[0_0px_10px_rgb(0_0_0_/_10%)] bg-[#f8f8f8]` : ""}>
                           <SearchItem key={index} selected={selected} item={item} />
                         </div>
                       ))}

@@ -70,6 +70,19 @@ export const getBaseURL = () => {
   }
 };
 
+/**
+ * Joins a base URL with an image path.
+ *
+ * Image sources may be absolute (Unsplash returns fully-qualified URLs) or a
+ * path relative to the storage bucket. Concatenating a base onto an absolute
+ * URL would corrupt it, so absolute values are returned untouched.
+ */
+export const joinImageUrl = (base, value) => {
+  if (!value) return "";
+  if (/^(https?:)?\/\//i.test(value) || value.startsWith("data:")) return value;
+  return `${base || ""}${value}`;
+};
+
 export const imageObjSchema = (schemaData) => {
   if (typeof document === "undefined") return;
 

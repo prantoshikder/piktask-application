@@ -1,6 +1,6 @@
 "use client";
 
-import { Container, Grid } from "@mui/material";
+import { Container, Grid } from "@/components/ui-kit";
 import React from "react";
 import Spacing from "../../../../components/Spacing";
 import UserSideBar from "../../../../components/ui/dashboard/user/UserSideBar";

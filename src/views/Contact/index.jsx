@@ -2,7 +2,7 @@
 
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Container, FormControl, TextareaAutosize, TextField, Typography } from "@mui/material";
+import { Button, Container, FormControl, TextareaAutosize, TextField, Typography } from "@/components/ui-kit";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -13,10 +13,8 @@ import Header from "../../components/ui/Header";
 import HeroSection from "../../components/ui/Hero";
 import { imageObjSchema } from "../../helpers";
 import Layout from "../../Layout";
-import useStyles from "./Contact.style";
 
 const Contact = () => {
-  const { classes } = useStyles();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -128,33 +126,33 @@ const Contact = () => {
       <HeroSection contact isSearch />
       <Spacing space={{ height: "5rem" }} />
       <Container>
-        <div className={classes.supportWrapper}>
+        <div className="p-[0rem_30rem] max-[1199.95px]:p-[0_2rem]">
           <div>
-            <div className={classes.supportTitle}>
+            <div className="text-[black]! text-[2.2rem]">
               <Typography variant="h2">Software and Service :</Typography>
             </div>
             <Spacing space={{ height: "1rem" }} />
             <div>
-              <Typography className={classes.description}>
+              <Typography className="text-justify text-[#173050] text-[1.6rem] leading-[28px]">
                 Our Team piktask 24/7 is dedicated to support our beloved Customers.We have a good support team to the client.if you need any assistance for any
                 software or service.You can just Email us directly at : bdtask@gmail.com or info@bdtask.com or submit a ticket. Our Response time is 24 hours
                 maximum.
               </Typography>
               <Spacing space={{ height: "3rem" }} />
-              <div className={classes.termsTitle}>
+              <div>
                 <Typography variant="h2">Submit a request </Typography>
               </div>
               <Spacing space={{ height: "1rem" }} />
 
-              <form autoComplete="off" onSubmit={handleSubmit} className={classes.contactForm}>
-                <FormControl fullWidth className={classes.fieldWrapper}>
+              <form autoComplete="off" onSubmit={handleSubmit} className="bg-[White] rounded-[4px] p-[2.2rem] shadow-[3px_3px_10px_#cacaca8a]">
+                <FormControl fullWidth className="mb-[1.4rem] [&_label]:mb-[0.5rem] [&_label>span]:text-[red]">
                   <label htmlFor="name">
                     Name <span>*</span>
                   </label>
                   <TextField
                     id="name"
                     InputLabelProps={{ shrink: true }}
-                    className={classes.inputField}
+                    className="[&_input]:p-[1.28rem_1.5rem] focus:[border:1px_solid_gray]! after:border-[gray] [&_p]:text-[14px]"
                     placeholder="Name"
                     variant="outlined"
                     fullWidth
@@ -163,14 +161,14 @@ const Contact = () => {
                     onChange={(e) => setName(e.target.value)}
                   />
                 </FormControl>
-                <FormControl fullWidth className={classes.fieldWrapper}>
+                <FormControl fullWidth className="mb-[1.4rem] [&_label]:mb-[0.5rem] [&_label>span]:text-[red]">
                   <label htmlFor="email">
                     Email <span>*</span>
                   </label>
                   <TextField
                     id="email"
                     InputLabelProps={{ shrink: true }}
-                    className={classes.inputField}
+                    className="[&_input]:p-[1.28rem_1.5rem] focus:[border:1px_solid_gray]! after:border-[gray] [&_p]:text-[14px]"
                     placeholder="Email"
                     variant="outlined"
                     fullWidth
@@ -180,13 +178,12 @@ const Contact = () => {
                   />
                 </FormControl>
 
-                <FormControl fullWidth className={classes.fieldWrapper}>
+                <FormControl fullWidth className="mb-[1.4rem] [&_label]:mb-[0.5rem] [&_label>span]:text-[red]">
                   <label htmlFor="license">
                     What your problem is about? <span>*</span>
                   </label>
                   <TextField
                     id="license"
-                    className={classes.usagesInput}
                     select
                     label=""
                     variant="outlined"
@@ -204,21 +201,21 @@ const Contact = () => {
                       ))}
                   </TextField>
                 </FormControl>
-                <FormControl fullWidth className={classes.fieldWrapper}>
+                <FormControl fullWidth className="mb-[1.4rem] [&_label]:mb-[0.5rem] [&_label>span]:text-[red]">
                   <label htmlFor="description">
                     Description <span>*</span>
                   </label>
                   <TextareaAutosize
                     id="description"
-                    className={classes.formDescription}
+                    className="w-[100%] max-w-[100%] text-[1.5rem] p-[1rem] rounded-[5px]"
                     aria-label="minimum height"
                     minRows={6}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                   />
                 </FormControl>
-                <Button variant="contained" className={classes.sentBtn} type="submit" disabled={isLoading}>
-                  <FontAwesomeIcon icon={faEnvelope} className={classes.sentIcon} />
+                <Button variant="contained" className="p-[1rem_3rem] ml-[50%] [transform:translateX(-50%)] [border:none] rounded-[3px] text-[18px] cursor-pointer bg-[#0088f2] text-[white] [transition:all_0.3s_linear] hover:bg-[#0773c5] max-[479.95px]:w-[100%] max-[479.95px]:ml-[0%] max-[479.95px]:text-[14px] max-[479.95px]:p-[1rem_0.9rem] max-[479.95px]:[transform:translateX(0%)]" type="submit" disabled={isLoading}>
+                  <FontAwesomeIcon icon={faEnvelope} className="mr-[7px]" />
                   {isLoading ? "Sending..." : "Send"}
                 </Button>
               </form>

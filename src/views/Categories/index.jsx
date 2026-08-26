@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Container, Grid } from "@mui/material";
+import { Button, Container, Grid } from "@/components/ui-kit";
 import axios from "axios";
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { Link } from "@/lib/router";
@@ -11,14 +11,12 @@ import ProductNotFound from "../../components/ui/ProductNotFound";
 import { getBaseURL, imageObjSchema } from "../../helpers";
 import Layout from "../../Layout";
 import Loader from "./../../components/ui/Loader/index";
-import useStyles from "./Categories.style";
 
 const HeroSection = lazy(() => import("../../components/ui/Hero"));
 const CallToAction = lazy(() => import("../../components/ui/CallToAction"));
 const Footer = lazy(() => import("../../components/ui/Footer"));
 
 const Categories = () => {
-  const { classes } = useStyles();
   const [isLoading, setLoading] = useState(true);
   const [popularCategories, setPopularCategories] = useState([]);
   const [thumbnail, setThumbnail] = useState("");
@@ -69,25 +67,25 @@ const Categories = () => {
 
       <Suspense fallback={<Loader />}>
         <Container>
-          <Grid classes={{ container: classes.container }} container spacing={2}>
+          <Grid container spacing={2}>
             {isLoading ? (
               <CategoryItemLoader />
             ) : (
               <>
                 {popularCategories?.length ? (
                   popularCategories?.map((photo) => (
-                    <Grid size={{ xs: 12, sm: 4, md: 3 }} key={photo.id} className={classes.productItem}>
-                      <div className={classes.catItemWrapper}>
-                        <div className={classes.catItem}>
+                    <Grid size={{ xs: 12, sm: 4, md: 3 }} key={photo.id}>
+                      <div className="flex flex-col justify-center relative w-[100%]">
+                        <div>
                           <Link to={`/category/${photo.slug}`}>
                             <img
-                              className={classes.catImage}
+                              className="cursor-pointer w-[100%] h-[240px] object-cover"
                               src={getBaseURL().bucket_base_url + getBaseURL().categories + photo?.thumbnail}
                               alt={`${photo?.name}`}
                             />
                           </Link>
 
-                          <Button className={classes.catName} component={Link} to={`/category/${photo.slug}`}>
+                          <Button className="mt-[-3px] z-[99] bg-[#ffffff] text-[#333333] text-[1.9rem] h-[50px] w-[100%] rounded-[0]" component={Link} to={`/category/${photo.slug}`}>
                             {photo?.name}
                           </Button>
                         </div>

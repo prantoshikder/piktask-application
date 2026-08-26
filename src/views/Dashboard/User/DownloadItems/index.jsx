@@ -1,7 +1,6 @@
 "use client";
 
-import { makeStyles } from "tss-react/mui";
-import { Container, Grid } from "@mui/material";
+import { Container, Grid } from "@/components/ui-kit";
 import axios from "axios";
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -19,17 +18,9 @@ import Layout from "../../../../Layout";
 const UserSideBar = lazy(() => import("../../../../components/ui/dashboard/user/UserSideBar"));
 const Footer = lazy(() => import("../../../../components/ui/Footer"));
 
-const useStyles = makeStyles()({
-  cardItem: {
-    "@media (max-width: 576px)": {
-      maxWidth: "100%",
-      flexBasis: "100%",
-    },
-  },
-});
+
 
 const DownloadItems = () => {
-  const { classes } = useStyles();
   const location = useLocation();
   const user = useSelector((state) => state.user);
   const locationPath = location.pathname;
@@ -91,15 +82,15 @@ const DownloadItems = () => {
       <Container>
         <Grid container spacing={2}>
           <Suspense fallback={<Loader />}>
-            <Grid size={{ xs: 12, sm: 3, md: 3 }} className={classes.cardItem}>
+            <Grid size={{ xs: 12, sm: 3, md: 3 }} className="max-[576px]:max-w-[100%] max-[576px]:basis-[100%]">
               <UserSideBar />
             </Grid>
           </Suspense>
 
           <Suspense fallback={<Loader />}>
-            <Grid size={{ xs: 12, sm: 9, md: 9 }} className={classes.cardItem}>
+            <Grid size={{ xs: 12, sm: 9, md: 9 }} className="max-[576px]:max-w-[100%] max-[576px]:basis-[100%]">
               <SectionHeading title="Download" large />
-              <Grid classes={{ container: classes.container }} container spacing={2}>
+              <Grid container spacing={2}>
                 {isLoading ? (
                   <Loader />
                 ) : (
@@ -109,7 +100,7 @@ const DownloadItems = () => {
                         <Grid
                           size={{ xs: 6, sm: 4, md: 3 }}
                           key={photo.image_id}
-                          // className={classes.productItem}
+                          //
                         >
                           <Product photo={photo} />
                         </Grid>

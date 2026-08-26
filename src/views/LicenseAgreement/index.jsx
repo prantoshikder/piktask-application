@@ -1,6 +1,6 @@
 "use client";
 
-import { Container, Typography } from "@mui/material";
+import { Container, Typography } from "@/components/ui-kit";
 import React, { useEffect } from "react";
 import thumbnail from "../../assets/banner/hero-banner.jpg";
 import Spacing from "../../components/Spacing";
@@ -9,11 +9,8 @@ import Header from "../../components/ui/Header";
 import HeroSection from "../../components/ui/Hero";
 import { imageObjSchema } from "../../helpers";
 import Layout from "../../Layout";
-import useStyles from "./LicenseAgreement.style";
 
 const LicenseAgreement = () => {
-  const { classes } = useStyles();
-
   useEffect(() => {
     const schemaObj = {
       name: document.title,
@@ -32,25 +29,25 @@ const LicenseAgreement = () => {
       <HeroSection license size="medium" isSearch />
       <Spacing space={{ height: "5rem" }} />
       <Container>
-        <div className={classes.licenseWrapper}>
+        <div className="p-[0rem_20rem] max-[768.95px]:p-[0_2rem]">
           <div>
-            <div className={classes.licenseTitle}>
+            <div className="text-[black]! text-[2.2rem]">
               <Typography variant="h2">What we own : </Typography>
             </div>
             <Spacing space={{ height: "1rem" }} />
             <div>
-              <Typography className={classes.description}>
+              <Typography className="text-justify text-[#173050] text-[1.6rem] leading-[28px]">
                 We own all the Piktask content that we have put on Piktask. This includes the design,Software,Website, Theme, Template,Idea, Feelings, and look
                 and feel of the Piktask sites, and copyright, trademarks, designs and other intellectual property on Piktask. We own all the Softwares,
                 Application, logos, service marks and trade names on Piktask site. You will not copy, distribute, modify or make derivative works of any of our
                 Piktask Content or use any of our intellectual property in any way not expressly stated in these terms.
               </Typography>
               <Spacing space={{ height: "3rem" }} />
-              <div className={classes.licenseTitle}>
+              <div className="text-[black]! text-[2.2rem]">
                 <Typography variant="h2">License Description : </Typography>
               </div>
               <Spacing space={{ height: "1rem" }} />
-              <Typography className={classes.description}>
+              <Typography className="text-justify text-[#173050] text-[1.6rem] leading-[28px]">
                 Piktask authorizes the User in a non-transferable, non-exclusive manner and on a worldwide basis for the duration of the relevant rights; to
                 download, use and modify the Piktask Content, as expressly permitted by the applicable license and subject to this document. The licence is a
                 single-seat license that authorizes only one natural person to download and use the content. No other person (including employees, colleagues)

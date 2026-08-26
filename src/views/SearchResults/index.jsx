@@ -1,6 +1,6 @@
 "use client";
 
-import { CircularProgress, Container, Grid, Typography } from "@mui/material";
+import { CircularProgress, Container, Grid, Typography } from "@/components/ui-kit";
 import axios from "axios";
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -14,14 +14,12 @@ import Layout from "../../Layout";
 import SignUpModal from "../Authentication/SignUpModal";
 import Loader from "./../../components/ui/Loader/index";
 import { getBaseURL, imageObjSchema } from "./../../helpers/index";
-import useStyles from "./SearchResults.styles";
 
 const HeroSection = lazy(() => import("../../components/ui/Hero"));
 const CallToAction = lazy(() => import("../../components/ui/CallToAction"));
 const Footer = lazy(() => import("../../components/ui/Footer"));
 
 const SearchResults = () => {
-  const { classes } = useStyles();
   const { pathname } = useLocation();
   const location = useLocation();
   const locationPath = location.pathname;
@@ -40,7 +38,9 @@ const SearchResults = () => {
   let limit = 24;
   const count = Math.ceil(totalProduct / limit);
 
-  const [, searchQuery, categoryID] = pathname.split("=");
+  // Expected shape is /search/title=<term>&category_id=<id>. A URL without an
+  // "=" (a hand-typed /search/foo, for instance) used to crash the render.
+  const [, searchQuery = "", categoryID] = pathname.split("=");
   const [keyword] = searchQuery.split("&");
   const [searchKey] = searchQuery.split("&");
 
@@ -112,12 +112,12 @@ const SearchResults = () => {
       <Suspense fallback={<Loader />}>
         <Container>
           {totalProduct > 0 && (
-            <Typography className={classes.totalResources} variant="h3">
+            <Typography className="text-[2.2rem] p-[3rem_0rem] max-[425.95px]:p-[2.5rem_0_3rem]" variant="h3">
               {`${totalProduct} Resources for "${searchKey.replace(/-/g, " ")}"`}
             </Typography>
           )}
 
-          <Grid classes={{ container: classes.container }} container spacing={2}>
+          <Grid container spacing={2}>
             {searchResults === null ? (
               <div
                 style={{
@@ -134,7 +134,7 @@ const SearchResults = () => {
               <>
                 {searchResults.length ? (
                   searchResults?.map((photo) => (
-                    <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo.image_id} className={classes.productItem}>
+                    <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo.image_id} className="max-[576px]:max-w-[100%] max-[576px]:basis-[100%]">
                       <Product photo={photo} />
                     </Grid>
                   ))

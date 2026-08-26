@@ -1,6 +1,6 @@
 "use client";
 
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography } from "@/components/ui-kit";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -12,11 +12,9 @@ import Footer from "../../../components/ui/Footer";
 import Header from "../../../components/ui/Header";
 import { imageObjSchema } from "../../../helpers";
 import Layout from "../../../Layout";
-import useStyles from "../ResetPassword/ResetPassword.styles";
 import HeroSection from "./../../../components/ui/Hero/index";
 
 const ConfirmSignup = () => {
-  const { classes } = useStyles();
   const history = useHistory();
   const location = useLocation();
   const user = useSelector((state) => state.user);
@@ -120,15 +118,15 @@ const ConfirmSignup = () => {
       <Container>
         <Grid container spacing={0} alignItems="center" justifyContent="center">
           <Grid size={{ xs: 12, sm: 6, md: 6 }}>
-            <div className={classes.cardWrapper} style={{ padding: "4rem" }}>
-              <div className={classes.cardHeadingWrapper}>
-                <Typography className={classes.cardHeading} variant="h2">
+            <div className="bg-[#fff] rounded-[4px] basis-[40%] max-[479.95px]:w-[30rem]" style={{ padding: "4rem" }}>
+              <div className="text-center">
+                <Typography className="text-[3rem] text-[#13303C]" variant="h2">
                   Confirm Signup
                 </Typography>
 
                 <Spacing space={{ height: "1.5rem" }} />
 
-                <Typography className={classes.cardSubtitle}>
+                <Typography className="text-[#13303C] w-[70%] m-[auto]">
                   We've sent you an email with some digits. Please check your email and enter below to confirm your signup.
                 </Typography>
               </div>

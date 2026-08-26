@@ -1,6 +1,6 @@
 "use client";
 
-import { Container, Typography } from "@mui/material";
+import { Container, Typography } from "@/components/ui-kit";
 import React from "react";
 import rightArrow from "../../../../assets/icons/stepArrow.svg";
 import Spacing from "../../../../components/Spacing";
@@ -8,20 +8,18 @@ import CallToAction from "../../../../components/ui/CallToAction";
 import Footer from "../../../../components/ui/Footer";
 import HeroSection from "../../../../components/ui/Hero";
 import Layout from "../../../../Layout";
-import useStyles from "./JoinNow.style";
 
 const JoinNow = () => {
-  const { classes } = useStyles();
   return (
     <Layout title="Join Now | Piktask">
       <HeroSection size="large" contributorUser isSearch />
       <Spacing space={{ height: "2.5rem" }} />
       {/* Instruction  */}
-      <div className={classes.instructionArea}>
+      <div className="bg-[#fff] p-[5rem]">
         <Container>
-          <div className={classes.instructionWrapper}>
-            <div className={classes.instructionContent}>
-              <div className={classes.instructionBy}>
+          <div className="flex justify-around items-center">
+            <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center [&_h1]:text-[12rem] [&_h1]:text-[#ddd] [&_h1]:font-[700] [&_h1]:mr-[2rem] [&_h2]:text-[12rem] [&_h2]:text-[#ddd] [&_h2]:font-[700] [&_h2]:mr-[0.4rem] [&_h4]:text-[2rem] [&_h4]:text-[#143340] [&_h4]:font-[500] [&_h5]:text-[1.4rem] [&_h5]:text-[#0088f2] [&_h5]:font-[500] [&_p]:text-[1.4rem] [&_p]:text-[#143340] [&_p]:font-[400]">
                 <div>
                   <Typography variant="h2">1</Typography>
                 </div>
@@ -31,12 +29,12 @@ const JoinNow = () => {
                   <Typography variant="h5">Join now</Typography>
                 </div>
               </div>
-              <div className={classes.rightArrow}>
-                <img src={rightArrow} alt="rightArrow" />
+              <div className="ml-[14rem] [&_img]:w-[6rem]">
+                <img src={rightArrow.src} alt="rightArrow" />
               </div>
             </div>
-            <div className={classes.instructionContent}>
-              <div className={classes.instructionBy}>
+            <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center [&_h1]:text-[12rem] [&_h1]:text-[#ddd] [&_h1]:font-[700] [&_h1]:mr-[2rem] [&_h2]:text-[12rem] [&_h2]:text-[#ddd] [&_h2]:font-[700] [&_h2]:mr-[0.4rem] [&_h4]:text-[2rem] [&_h4]:text-[#143340] [&_h4]:font-[500] [&_h5]:text-[1.4rem] [&_h5]:text-[#0088f2] [&_h5]:font-[500] [&_p]:text-[1.4rem] [&_p]:text-[#143340] [&_p]:font-[400]">
                 <div>
                   <Typography variant="h1">2</Typography>
                 </div>
@@ -46,12 +44,12 @@ const JoinNow = () => {
                   <Typography variant="h4">best artwork</Typography>
                 </div>
               </div>
-              <div className={classes.rightArrow}>
-                <img src={rightArrow} alt="rightArrow" />
+              <div className="ml-[14rem] [&_img]:w-[6rem]">
+                <img src={rightArrow.src} alt="rightArrow" />
               </div>
             </div>
-            <div className={classes.instructionContent}>
-              <div className={classes.instructionBy}>
+            <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center [&_h1]:text-[12rem] [&_h1]:text-[#ddd] [&_h1]:font-[700] [&_h1]:mr-[2rem] [&_h2]:text-[12rem] [&_h2]:text-[#ddd] [&_h2]:font-[700] [&_h2]:mr-[0.4rem] [&_h4]:text-[2rem] [&_h4]:text-[#143340] [&_h4]:font-[500] [&_h5]:text-[1.4rem] [&_h5]:text-[#0088f2] [&_h5]:font-[500] [&_p]:text-[1.4rem] [&_p]:text-[#143340] [&_p]:font-[400]">
                 <div>
                   <Typography variant="h1">3</Typography>
                 </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Container } from "@mui/material";
+import { Button, Container } from "@/components/ui-kit";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "@/lib/router";
@@ -10,7 +10,6 @@ import Header from "../../components/ui/Header";
 import HeroSection from "../../components/ui/Hero";
 import Loader from "../../components/ui/Loader";
 import { imageObjSchema } from "../../helpers";
-import useStyles from "./Home.styles";
 
 const Layout = lazy(() => import("../../Layout"));
 const SectionHeading = lazy(() => import("../../components/ui/Heading"));
@@ -21,7 +20,6 @@ const Products = lazy(() => import("../../components/ui/Products"));
 const CallToAction = lazy(() => import("../../components/ui/CallToAction"));
 
 const Home = () => {
-  const { classes } = useStyles();
   const categories = useSelector((state) => state.popularCategories);
   const [popularCats, setPopularCats] = useState([]);
   const [scrolling, setScrolling] = useState(0);
@@ -73,7 +71,7 @@ const Home = () => {
           <Suspense fallback={<Loader />}>
             <Spacing space={{ height: "3rem" }} />
             <SectionHeading title="Popular Album Collection" large>
-              <Button className={classes.headingButton} component={Link} to="/categories">
+              <Button className="text-[#1B3F4E] font-[500] font-['Roboto',sans-serif] capitalize text-[1.3rem] rounded-[3rem] opacity-[1] leading-[1.75] p-[0.4rem_1rem] [transition:all_0.3s_linear] hover:bg-[#0088f2] hover:text-[#fff]" component={Link} to="/categories">
                 See More
               </Button>
             </SectionHeading>
@@ -121,7 +119,7 @@ const Home = () => {
         {/* <Container>
         <SectionHeading title="Top Selling Author" large>
         <Button
-        className={classes.headingButton}
+        className="text-[#1B3F4E] font-[500] font-['Roboto',sans-serif] capitalize text-[1.3rem] rounded-[3rem] opacity-[1] leading-[1.75] p-[0.4rem_1rem] [transition:all_0.3s_linear] hover:bg-[#0088f2] hover:text-[#fff]"
         component={Link}
             to="/sellers"
             >

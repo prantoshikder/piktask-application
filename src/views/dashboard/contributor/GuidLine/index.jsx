@@ -1,7 +1,7 @@
 "use client";
 
-import { Box, Grid, Tab, Typography, useMediaQuery } from "@mui/material";
-import { TabContext, TabList, TabPanel } from "@mui/lab";
+import { Box, Grid, Tab, Typography, useMediaQuery } from "@/components/ui-kit";
+import { TabContext, TabList, TabPanel } from "@/components/ui-kit";
 import React, { useState } from "react";
 import PhotoImage from "../../../../assets/guidLine-Images/photo.jpg";
 import PSDImage from "../../../../assets/guidLine-Images/psd.jpg";
@@ -11,10 +11,8 @@ import AdminHeader from "../../../../components/ui/dashboard/contributor/Header"
 import Sidebar from "../../../../components/ui/dashboard/contributor/Sidebar";
 import Footer from "../../../../components/ui/Footer";
 import Layout from "../../../../Layout";
-import useStyles from "./guidLine.styles";
 
 const GuidLine = () => {
-  const { classes } = useStyles();
   const [value, setValue] = useState("1");
   const mobileView = useMediaQuery("(max-width:769px)");
 
@@ -24,15 +22,15 @@ const GuidLine = () => {
 
   return (
     <Layout title="Guidline">
-      <div className={classes.adminRoot}>
-        {mobileView ? null : <Sidebar className={classes.adminSidebar} />}
+      <div className="">
+        {mobileView ? null : <Sidebar className="mt-[0rem] max-[768.95px]:hidden" />}
 
-        <main className={classes.content}>
+        <main className="p-[0] ml-[28rem] max-[768.95px]:w-[100%] max-[768.95px]:ml-[0rem]">
           <AdminHeader />
-          <div className={classes.guidelineGridContainer}>
+          <div className="p-[1.5rem_1rem_0rem_1rem] mt-[8rem]">
             <div>
               <Spacing space={{ height: "3rem" }} />
-              <Grid className={classes.guidLineMenu}>
+              <Grid className="flex justify-center items-center">
                 <Box sx={{ width: "100%", typography: "body1" }}>
                   <TabContext value={value}>
                     <Box
@@ -44,22 +42,22 @@ const GuidLine = () => {
                         justifyContent: "center",
                       }}
                     >
-                      <TabList onChange={handleChange} aria-label="lab API tabs example" classes={{ indicator: classes.menuUnderline }}>
-                        <Tab className={classes.guidLineMenuItem} disableRipple label="Vector" value="1" />
-                        <Tab className={classes.guidLineMenuItem} disableRipple label="PSD" value="2" />
-                        <Tab className={classes.guidLineMenuItem} disableRipple label="Photo" value="3" />
+                      <TabList onChange={handleChange} aria-label="lab API tabs example" classes={{ indicator: "h-[0] bg-[transparent]" }}>
+                        <Tab className="bg-[#0088f2] text-[#fff] m-[0rem_1rem] rounded-[3px] p-[0.2rem_2rem]" disableRipple label="Vector" value="1" />
+                        <Tab className="bg-[#0088f2] text-[#fff] m-[0rem_1rem] rounded-[3px] p-[0.2rem_2rem]" disableRipple label="PSD" value="2" />
+                        <Tab className="bg-[#0088f2] text-[#fff] m-[0rem_1rem] rounded-[3px] p-[0.2rem_2rem]" disableRipple label="Photo" value="3" />
                       </TabList>
                     </Box>
 
                     <Spacing space={{ height: "2rem" }} />
 
                     <TabPanel value="1">
-                      <div className={classes.guidLineWrapper}>
-                        <div className={classes.guidLineTitle}>
+                      <div className="p-[0rem_10rem] max-[1198.95px]:p-[0rem_0.5rem]">
+                        <div>
                           <Typography variant="h1">Vector guidelines</Typography>
                         </div>
                         <Spacing space={{ height: "3rem" }} />
-                        <div className={classes.guidLineContent}>
+                        <div className="[&_p]:leading-[4rem] [&_p]:text-justify [&_p]:max-[768.95px]:leading-[3rem] [&_span]:font-[500] [&_span]:text-[1.5rem]">
                           <Typography>
                             <span>1. TECHNICAL REQUIREMENTS</span>
                           </Typography>
@@ -86,12 +84,12 @@ const GuidLine = () => {
                           </Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={VectorImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={VectorImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={VectorImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={VectorImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />
@@ -131,12 +129,12 @@ const GuidLine = () => {
                           </Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={VectorImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={VectorImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={VectorImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={VectorImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />
@@ -148,12 +146,12 @@ const GuidLine = () => {
                           </Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={VectorImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={VectorImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={VectorImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={VectorImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />
@@ -165,12 +163,12 @@ const GuidLine = () => {
                           </Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={VectorImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={VectorImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={VectorImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={VectorImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />
@@ -202,12 +200,12 @@ const GuidLine = () => {
                           <Typography>If this message does not appear, the file will be rejected with the reason "MISSING IMAGE NOT INCLUDED".</Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={VectorImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={VectorImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={VectorImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={VectorImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />
@@ -227,12 +225,12 @@ const GuidLine = () => {
                           </Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={VectorImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={VectorImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={VectorImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={VectorImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />
@@ -250,12 +248,12 @@ const GuidLine = () => {
                     </TabPanel>
 
                     <TabPanel value="2">
-                      <div className={classes.guidLineWrapper}>
-                        <div className={classes.guidLineTitle}>
+                      <div className="p-[0rem_10rem] max-[1198.95px]:p-[0rem_0.5rem]">
+                        <div>
                           <Typography variant="h1">PSD guidelines</Typography>
                         </div>
                         <Spacing space={{ height: "3rem" }} />
-                        <div className={classes.guidLineContent}>
+                        <div className="[&_p]:leading-[4rem] [&_p]:text-justify [&_p]:max-[768.95px]:leading-[3rem] [&_span]:font-[500] [&_span]:text-[1.5rem]">
                           <Typography>
                             <span>1. MOCKUPS</span>
                           </Typography>
@@ -283,12 +281,12 @@ const GuidLine = () => {
                           </Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={PSDImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PSDImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={PSDImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PSDImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />
@@ -308,12 +306,12 @@ const GuidLine = () => {
                           </Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={PSDImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PSDImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={PSDImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PSDImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />
@@ -377,12 +375,12 @@ const GuidLine = () => {
                           </Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={PSDImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PSDImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={PSDImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PSDImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />
@@ -401,12 +399,12 @@ const GuidLine = () => {
                           </Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={PSDImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PSDImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={PSDImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PSDImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />
@@ -486,12 +484,12 @@ const GuidLine = () => {
                           </Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={PSDImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PSDImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={PSDImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PSDImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />
@@ -531,12 +529,12 @@ const GuidLine = () => {
                     </TabPanel>
 
                     <TabPanel value="3">
-                      <div className={classes.guidLineWrapper}>
-                        <div className={classes.guidLineTitle}>
+                      <div className="p-[0rem_10rem] max-[1198.95px]:p-[0rem_0.5rem]">
+                        <div>
                           <Typography variant="h1">Photo guidelines</Typography>
                         </div>
 
-                        <div className={classes.guidLineContent}>
+                        <div className="[&_p]:leading-[4rem] [&_p]:text-justify [&_p]:max-[768.95px]:leading-[3rem] [&_span]:font-[500] [&_span]:text-[1.5rem]">
                           <Spacing space={{ height: "3rem" }} />
                           <Typography>
                             <span>1. TECHNICAL REQUIREMENTS</span>
@@ -566,12 +564,12 @@ const GuidLine = () => {
                           </Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={PhotoImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PhotoImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={PhotoImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PhotoImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />
@@ -583,12 +581,12 @@ const GuidLine = () => {
                           </Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={PhotoImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PhotoImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={PhotoImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PhotoImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />
@@ -600,12 +598,12 @@ const GuidLine = () => {
                           </Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={PhotoImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PhotoImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={PhotoImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PhotoImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />
@@ -638,12 +636,12 @@ const GuidLine = () => {
                           </Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={PhotoImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PhotoImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={PhotoImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PhotoImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />
@@ -657,12 +655,12 @@ const GuidLine = () => {
                           </Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={PhotoImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PhotoImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={PhotoImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PhotoImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />
@@ -674,12 +672,12 @@ const GuidLine = () => {
                           </Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={PhotoImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PhotoImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={PhotoImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PhotoImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />
@@ -691,12 +689,12 @@ const GuidLine = () => {
                           </Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={PhotoImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PhotoImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={PhotoImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PhotoImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />
@@ -724,12 +722,12 @@ const GuidLine = () => {
                           </Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={PhotoImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PhotoImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={PhotoImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PhotoImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />
@@ -740,12 +738,12 @@ const GuidLine = () => {
                           </Typography>
 
                           <Spacing space={{ height: "3rem" }} />
-                          <div className={classes.guidLineImageWrapper}>
-                            <div className={classes.guidLineImage}>
-                              <img src={PhotoImage} alt="Piktask" />
+                          <div className="flex max-[576.95px]:flex-col">
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PhotoImage.src} alt="Piktask" />
                             </div>
-                            <div className={classes.guidLineImage}>
-                              <img src={PhotoImage} alt="Piktask" />
+                            <div className="w-[65rem] h-[20rem] m-[1rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[768.95px]:w-[100%] max-[768.95px]:h-[100%] max-[768.95px]:m-[1rem_0]">
+                              <img src={PhotoImage.src} alt="Piktask" />
                             </div>
                           </div>
                           <Spacing space={{ height: "3rem" }} />

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Container, FormControl, Grid, TextareaAutosize, Typography } from "@mui/material";
+import { Button, Container, FormControl, Grid, TextareaAutosize, Typography } from "@/components/ui-kit";
 import axios from "axios";
 import moment from "moment";
 import React, { lazy, Suspense, useEffect, useState } from "react";
@@ -27,18 +27,17 @@ import RelatedBlogs from "../../components/ui/Blog/RelatedBlogs";
 import Header from "../../components/ui/Header";
 import SectionHeading from "../../components/ui/Heading";
 import { getBaseURL, imageObjSchema } from "../../helpers";
+import { useCurrentUrl } from "@/lib/browser";
 import Layout from "../../Layout";
 import SignUpModal from "../Authentication/SignUpModal";
 import Loader from "./../../components/ui/Loader/index";
-import useStyles from "./SinglePost.styles";
 
 const HeroSection = lazy(() => import("../../components/ui/Hero"));
 const Footer = lazy(() => import("../../components/ui/Footer"));
 
 const SingleBlogPost = () => {
-  const { classes } = useStyles();
   const { id } = useParams();
-  const shareUrl = window.location.href;
+  const shareUrl = useCurrentUrl();
   const user = useSelector((state) => state.user);
   const [openAuthModal, setOpenAuthModal] = useState(false);
 
@@ -142,15 +141,15 @@ const SingleBlogPost = () => {
 
       <Suspense fallback={<Loader />}>
         <Container>
-          <Grid container spacing={3} className={classes.blogContainer}>
-            <Grid size={{ xs: 12, sm: 8, md: 8 }} className={classes.blogsItem}>
-              <div className={classes.blogImageWrapper}>
+          <Grid container spacing={3} className="p-[0rem_15rem] max-[769px]:p-[0rem_2rem] max-[576px]:p-[0rem_0rem]">
+            <Grid size={{ xs: 12, sm: 8, md: 8 }} className="max-[576px]:max-w-[100%] max-[576px]:basis-[100%]">
+              <div className="h-[400px] shadow-[0px_0px_10px_#ddd] [&_img]:h-[100%] [&_img]:w-[100%] [&_img]:object-cover">
                 <img src={thumbnail} alt={blogDetails?.category} />
               </div>
 
               <Spacing space={{ height: "2rem" }} />
-              <div className={classes.blogAuthorInfo}>
-                <div className={classes.shareSocialMedia}>
+              <div className="text-[#000] [&_h3]:leading-[4rem] [&_h3]:text-[3rem] [&_p]:leading-[3rem]">
+                <div className="flex justify-between">
                   <div>
                     <Typography style={{ fontWeight: "500", fontSize: "1.8rem" }}>{blogDetails?.category}</Typography>
                   </div>
@@ -187,20 +186,20 @@ const SingleBlogPost = () => {
               </div>
 
               <Spacing space={{ height: "3rem" }} />
-              <div className={classes.blogContent}>
+              <div className="[&_p]:leading-[3rem]">
                 <Typography>{blogDetails?.description}</Typography>
               </div>
               <Spacing space={{ height: "3rem" }} />
 
-              <div className={classes.blogImageWrapper}>
+              <div className="h-[400px] shadow-[0px_0px_10px_#ddd] [&_img]:h-[100%] [&_img]:w-[100%] [&_img]:object-cover">
                 <img src={thumbnail} alt={blogDetails?.category} />
               </div>
               <Spacing space={{ height: "4rem" }} />
-              <div className={classes.blogContent}>
+              <div className="[&_p]:leading-[3rem]">
                 <Typography>{blogDetails?.description}</Typography>
               </div>
               <Spacing space={{ height: "4rem" }} />
-              <div className={classes.blogContent}>
+              <div className="[&_p]:leading-[3rem]">
                 <Typography>{blogDetails?.description}</Typography>
               </div>
 
@@ -208,27 +207,27 @@ const SingleBlogPost = () => {
 
               <div>
                 <form onSubmit={handleCommentPost}>
-                  <FormControl fullWidth className={classes.fieldWrapper}>
+                  <FormControl fullWidth className="mb-[1.4rem] [&_label]:mb-[0.5rem] [&_label>span]:text-[red]">
                     <label htmlFor="description">Description</label>
                     <TextareaAutosize
                       id="description"
                       autoComplete="off"
-                      className={classes.formDescription}
+                      className="relative w-[100%] max-w-[100%] text-[1.5rem] p-[1rem] rounded-[5px] shadow-[0_8px_12px_3px_rgb(0_0_0_/_6%)] border-[#ddd]"
                       aria-label="minimum height"
                       minRows={6}
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
                     />
                   </FormControl>
-                  <Button variant="contained" className={classes.sentBtn} type="submit" disabled={isLoading}>
+                  <Button variant="contained" className="p-[0.8rem_3.5rem] [border:none] rounded-[10rem] text-[1.4rem] cursor-pointer bg-[#0088f2] text-[white] [transition:all_0.3s_linear] hover:bg-[#0773c5] max-[479.95px]:w-[100%] max-[479.95px]:ml-[0%] max-[479.95px]:text-[14px] max-[479.95px]:p-[1rem_0.9rem] max-[479.95px]:[transform:translateX(0%)]" type="submit" disabled={isLoading}>
                     {isLoading ? "Sending..." : "Send"}
                   </Button>
                 </form>
               </div>
             </Grid>
 
-            <Grid size={{ xs: 12, sm: 4, md: 4 }} className={classes.blogsItem}>
-              <Grid container spacing={0} className={classes.postsWrapper}>
+            <Grid size={{ xs: 12, sm: 4, md: 4 }} className="max-[576px]:max-w-[100%] max-[576px]:basis-[100%]">
+              <Grid container spacing={0} className="mb-[2rem] flex justify-center flex-wrap [@media(max-width:768)]:justify-start">
                 <SectionHeading title="Recent Blog" large></SectionHeading>
                 {recentBlogsPost?.length > 0 && recentBlogsPost?.slice(0, 3).map((post) => <Post recentBlog key={post?.id} post={post} />)}
               </Grid>
@@ -236,7 +235,7 @@ const SingleBlogPost = () => {
           </Grid>
 
           <Spacing space={{ height: "5rem" }} />
-          <div className={classes.blogContainer}>
+          <div className="p-[0rem_15rem] max-[769px]:p-[0rem_2rem] max-[576px]:p-[0rem_0rem]">
             <RelatedBlogs blogID={id} />
           </div>
         </Container>

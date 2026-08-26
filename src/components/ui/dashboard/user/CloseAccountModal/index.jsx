@@ -1,12 +1,11 @@
 "use client";
 
-import { Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Typography } from "@mui/material";
+import { Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Typography } from "@/components/ui-kit";
 import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "@/lib/router";
 import { toast } from "react-toastify";
-import useStyles from "./CloseAccountModal.style";
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -26,7 +25,6 @@ function a11yProps(index) {
 }
 
 const CloseAccountModal = () => {
-  const { classes } = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -75,7 +73,7 @@ const CloseAccountModal = () => {
   };
 
   return (
-    <Card className={classes.closedAccount}>
+    <Card className="mt-[1.6rem] shadow-[0_1px_2px_0_rgb(0_0_0_/_10%)] cursor-pointer [&_a]:no-underline [&_p]:text-[1.6rem] [&_p]:font-[400] [&_p]:text-[#E21313] [&_p]:text-center [&_p]:mb-[-0.3rem]">
       <CardContent>
         <Typography onClick={handleDialogOpen}>Close My Account</Typography>
       </CardContent>
@@ -83,14 +81,14 @@ const CloseAccountModal = () => {
       {/* close account modal */}
 
       <Dialog
-        className={classes.closeAccountDialog}
+        className="[&_div_div]:max-w-[100%] [&_div_div]:max-[479.95px]:w-[100%]"
         open={alertDialog}
         onClose={handleDialogClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <TabPanel {...a11yProps(0)} value={tabIndex} index={0}>
-          <DialogTitle className={classes.closeAccountTitle}>{"Are you sure?"}</DialogTitle>
+          <DialogTitle className="[&_h2]:text-[1.8rem]!">{"Are you sure?"}</DialogTitle>
 
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
@@ -99,15 +97,15 @@ const CloseAccountModal = () => {
           </DialogContent>
 
           <DialogActions>
-            <Button onClick={handleDialogClose} className={classes.keepAccountBtn} autoFocus>
+            <Button onClick={handleDialogClose} className="text-[white] bg-[#0088f2] [transition:all_0.3s_linier] hover:bg-[#0773c5]" autoFocus>
               keep Account
             </Button>
             {user.signupBy !== "email" ? (
-              <Button onClick={handleCloseAccount} className={classes.closeAccountBtn} autoFocus>
+              <Button onClick={handleCloseAccount} className="text-[white] bg-[#f91c0c] [transition:all_0.3s_linier] hover:bg-[#b71c1c]" autoFocus>
                 Close Account
               </Button>
             ) : (
-              <Button onClick={handleChangeTab} className={classes.closeAccountBtn} autoFocus>
+              <Button onClick={handleChangeTab} className="text-[white] bg-[#f91c0c] [transition:all_0.3s_linier] hover:bg-[#b71c1c]" autoFocus>
                 Close Account
               </Button>
             )}
@@ -116,11 +114,10 @@ const CloseAccountModal = () => {
 
         <TabPanel {...a11yProps(1)} value={tabIndex} index={1}>
           <div style={{ padding: "2rem", width: "60rem" }}>
-            <DialogTitle className={classes.closeAccountsTitle}>{"Are you sure?"}</DialogTitle>
+            <DialogTitle className="p-[1rem_0rem] [&_h2]:text-[1.8rem]! [&_h2]:pl-[0rem]">{"Are you sure?"}</DialogTitle>
 
             <form onSubmit={handleCloseAccount}>
               <TextField
-                className={classes.passwordField}
                 fullWidth
                 variant="outlined"
                 label="Password"
@@ -131,10 +128,10 @@ const CloseAccountModal = () => {
               />
 
               <DialogActions>
-                <Button onClick={handleDialogClose} className={classes.keepAccountBtn} autoFocus>
+                <Button onClick={handleDialogClose} className="text-[white] bg-[#0088f2] [transition:all_0.3s_linier] hover:bg-[#0773c5]" autoFocus>
                   keep Account
                 </Button>
-                <Button className={classes.closeAccountBtn} autoFocus type="submit">
+                <Button className="text-[white] bg-[#f91c0c] [transition:all_0.3s_linier] hover:bg-[#b71c1c]" autoFocus type="submit">
                   Close Account
                 </Button>
               </DialogActions>

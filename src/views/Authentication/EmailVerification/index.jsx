@@ -1,18 +1,17 @@
 "use client";
 
-import { Button, Card, CardContent, Typography } from "@mui/material";
+import { Button, Card, CardContent, Typography } from "@/components/ui-kit";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation } from "@/lib/router";
+import { Link, useHistory, useLocation } from "@/lib/router";
 import { signInWithEmailLink } from "firebase/auth";
 import { auth } from "../../../database";
 import { imageObjSchema } from "../../../helpers";
 import Layout from "../../../Layout";
-import useStyles from "./EmailVerification.styles";
 
-const EmailVerification = ({ history }) => {
+const EmailVerification = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
-  const { classes } = useStyles();
   const location = useLocation();
   const user = useSelector((state) => state.user);
 
@@ -72,7 +71,15 @@ const EmailVerification = ({ history }) => {
       console.log(error.message);
     }
   };
-  saveData();
+  // saveData() used to be invoked directly in the component body, which
+  // signed the user in again on every render and dereferenced window during
+  // server rendering. It runs once on mount now, and only when the values it
+  // needs have been read out of localStorage.
+  useEffect(() => {
+    if (!email || !password) return;
+    saveData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [email, password]);
 
   useEffect(() => {
     const schemaObj = {
@@ -87,17 +94,17 @@ const EmailVerification = ({ history }) => {
 
   return (
     <Layout title="Email verification">
-      <div className={classes.cardWrapper}>
-        <Card className={classes.root}>
+      <div className="w-[50rem] m-[auto]">
+        <Card className="flex items-baseline justify-center flex-col">
           <CardContent>
-            <Typography className={"classes.title"} variant="h4" gutterBottom>
+            <Typography className="undefined" variant="h4" gutterBottom>
               Thank you very much to verify your email.
             </Typography>
             <br />
             <Typography variant="h5" component="h2"></Typography>
             <Typography variant="body1">Now you are redirecting to login page or click below to login</Typography>
 
-            <Button className={classes.loginBtn} size="medium" disableRipple component={Link} to="/login">
+            <Button className="p-[0] mt-[2rem] hover:bg-[transparent]" size="medium" disableRipple component={Link} to="/login">
               Login
             </Button>
           </CardContent>

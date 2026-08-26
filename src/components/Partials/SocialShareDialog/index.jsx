@@ -1,8 +1,7 @@
 "use client";
 
-import { makeStyles } from "tss-react/mui";
-import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import { Dialog, DialogContent, DialogTitle, IconButton } from "@/components/ui-kit";
+import { CloseOutlined as CloseIcon } from "@ant-design/icons";
 import React from "react";
 import {
   FacebookIcon,
@@ -20,38 +19,19 @@ import {
 } from "react-share";
 import { getBaseURL } from "./../../../helpers/index";
 
-const useStyles = makeStyles()((theme) => ({
-  socialShareWrapper: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-  socialShareTitle: {
-    "& h2": {
-      fontSize: "1.7rem !important",
-    },
-  },
-  closeButton: {
-    height: "50%",
-    margin: "0.5rem",
-    "& span svg": {
-      fontSize: "2.5rem",
-    },
-  },
-}));
+
 
 const SocialShareDialog = ({ productDetails, setOpen, open }) => {
-  const { classes } = useStyles();
-
   const handleClose = () => {
     setOpen(false);
   };
 
   return (
     <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-      <div className={classes.socialShareWrapper}>
-        <DialogTitle className={classes.socialShareTitle}>{"Use image social link"}</DialogTitle>
+      <div className="flex justify-between">
+        <DialogTitle className="[&_h2]:text-[1.7rem]!">{"Use image social link"}</DialogTitle>
 
-        <IconButton aria-label="close" className={classes.closeButton} onClick={handleClose}>
+        <IconButton aria-label="close" className="h-[50%] m-[0.5rem] [&_span_svg]:text-[2.5rem]" onClick={handleClose}>
           <CloseIcon />
         </IconButton>
       </div>

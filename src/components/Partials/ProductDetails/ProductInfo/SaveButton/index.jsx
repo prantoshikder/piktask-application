@@ -1,51 +1,16 @@
 "use client";
 
-import { makeStyles } from "tss-react/mui";
-import PinterestIcon from "@mui/icons-material/Pinterest";
+import { PinterestOutlined as PinterestIcon } from "@ant-design/icons";
 import React from "react";
 import { PinterestShareButton } from "react-share";
 import { getBaseURL } from "../../../../../helpers";
 
-const useStyles = makeStyles()((theme) => ({
-  tooltip: {
-    fontSize: "1.3rem",
-  },
-  button: {
-    fontSize: "1.5rem",
-    padding: "0.8rem 2rem",
-    backgroundColor: "#a70000",
-    color: "#fff",
-    fontWeight: 500,
-    border: "1px solid #a70000",
-    borderRadius: 20,
-    marginLeft: "1.5rem",
-    "& svg": {
-      fontSize: "2rem",
-      marginBottom: "-0.5rem",
-      marginRight: "0.5rem",
-    },
-    [theme.breakpoints.up(1279)]: {
-      marginLeft: ".8rem",
-    },
-    [theme.breakpoints.down(480)]: {
-      padding: ".6rem 1.2rem",
-      fontSize: "1.1rem",
-      marginBottom: "0rem",
-      marginLeft: "1rem",
-    },
-  },
-  buttonIcon: {
-    width: "1.3rem",
-    padding: 0,
-    marginRight: "0.8rem",
-  },
-}));
+
 
 const SaveButton = ({ location, productDetails }) => {
-  const { classes } = useStyles();
   return (
     <PinterestShareButton url={location} media={encodeURI(`${getBaseURL().bucket_base_url}${getBaseURL().images}${productDetails?.imageDetails?.preview}`)}>
-      <div className={classes.button}>
+      <div className="text-[1.5rem] p-[0.8rem_2rem] bg-[#a70000] text-[#fff] font-[500] [border:1px_solid_#a70000] rounded-[20px] ml-[1.5rem] [&_svg]:text-[2rem] [&_svg]:mb-[-0.5rem] [&_svg]:mr-[0.5rem] min-[1279px]:ml-[.8rem] max-[479.95px]:p-[.6rem_1.2rem] max-[479.95px]:text-[1.1rem] max-[479.95px]:mb-[0rem] max-[479.95px]:ml-[1rem]">
         {/* <PinterestIcon size={20} round={true} /> */}
         <PinterestIcon />
         Save

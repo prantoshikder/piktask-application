@@ -1,6 +1,6 @@
 "use client";
 
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography } from "@/components/ui-kit";
 import React, { useEffect } from "react";
 import bdtaskMembers from "../../assets/aboutUs/bdtask_members.jpg";
 import clientMeeting from "../../assets/aboutUs/meeting_with_client.jpg";
@@ -11,11 +11,8 @@ import Header from "../../components/ui/Header";
 import HeroSection from "../../components/ui/Hero";
 import { imageObjSchema } from "../../helpers";
 import Layout from "../../Layout";
-import useStyles from "./AboutUs.style";
 
 const AboutUs = () => {
-  const { classes } = useStyles();
-
   useEffect(() => {
     const schemaObj = {
       name: document.title,
@@ -33,16 +30,16 @@ const AboutUs = () => {
       <HeroSection aboutUs isSearch />
       <Spacing space={{ height: "5rem" }} />
       <Container>
-        <div className={classes.supportWrapper}>
+        <div className="p-[0rem_20rem] max-[1199.95px]:p-[0_7rem] max-[768.95px]:p-[0_2rem]">
           <div>
-            <div className={classes.aboutTitle}>
+            <div className="text-[black]! text-[2.2rem]">
               <Typography variant="h2">About Our Company</Typography>
             </div>
             <Spacing space={{ height: "1rem" }} />
             <div>
               <Grid container>
                 <Grid size={{ xs: 12, sm: 6, md: 6 }}>
-                  <Typography className={classes.description}>
+                  <Typography className="pr-[2rem] text-justify text-[#173050] text-[1.6rem] leading-[28px] max-[768.95px]:pr-[0rem]">
                     Piktask is one of the leading Software Company in Bangladesh. At Piktask we work with cutting edge technology to support our clients and
                     also bring the best quality product in the market. Currently, we have 7000 square feet well-decorated office with a cool working environment
                     situated at B-25, Mannan Plaza, 4th Floor, Khilkhet Dhaka-1229. Just as we are very serious about our product quality, we also make sure
@@ -54,8 +51,8 @@ const AboutUs = () => {
                   </Typography>
                 </Grid>
                 <Grid size={{ xs: 12, sm: 6, md: 6 }}>
-                  <div className={classes.meetingImage}>
-                    <img src={clientMeeting} alt="Piktask" />
+                  <div className="w-[53rem] [&_img]:pt-[0.7rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover max-[1199.95px]:w-[100%] max-[768.95px]:w-[100%] max-[768.95px]:pt-[2rem]">
+                    <img src={clientMeeting.src} alt="Piktask" />
                   </div>
                 </Grid>
               </Grid>
@@ -64,13 +61,13 @@ const AboutUs = () => {
 
               <Grid container>
                 <Grid size={{ xs: 12, sm: 5, md: 5 }}>
-                  <div className={classes.historyTitle}>
+                  <div className="flex justify-between pr-[3rem] text-[black]! text-[2.2rem]">
                     <Typography variant="h2">History {"&"} background:</Typography>
-                    <div className={classes.borderLine}></div>
+                    <div className="h-[26.5rem] mt-[0.7rem] [border-right:0.7rem_solid_#0088f2] max-[899.95px]:hidden"></div>
                   </div>
                 </Grid>
                 <Grid size={{ xs: 12, sm: 7, md: 7 }}>
-                  <Typography className={classes.historyDescription}>
+                  <Typography className="text-justify text-[#173050] text-[1.6rem] leading-[28px] max-[768.95px]:pt-[1rem]">
                     The story behind the making of Piktask is quite interesting. Three young software engineers were dreaming to become entrepreneurs. And who
                     are brothers in real life. Planning, executing, developing, nurturing and managing were the 5 key factors what makes this dream to come
                     true. In 2016 their fourth brother joined the company as a creative designer which made the company more dynamic. Though Piktask started
@@ -81,8 +78,8 @@ const AboutUs = () => {
                 </Grid>
               </Grid>
               <Spacing space={{ height: "3rem" }} />
-              <div className={classes.bdtaskMembersImage}>
-                <img src={bdtaskMembers} alt="Piktask" />
+              <div className="w-[100%] [&_img]:pt-[0.7rem] [&_img]:w-[100%] [&_img]:h-[100%] [&_img]:object-cover">
+                <img src={bdtaskMembers.src} alt="Piktask" />
               </div>
 
               <Spacing space={{ height: "2rem" }} />
@@ -90,13 +87,13 @@ const AboutUs = () => {
               <Grid spacing={3} container>
                 <Grid size={{ xs: 12, sm: 6, md: 6 }}>
                   <Typography variant="h2">Mission</Typography>
-                  <Typography className={classes.missionVisionDescription}>
+                  <Typography>
                     Making quality products with reasonable pricing and establish trust in digital products among the mass people.
                   </Typography>
                 </Grid>
                 <Grid size={{ xs: 12, sm: 6, md: 6 }}>
                   <Typography variant="h2">Vision</Typography>
-                  <Typography className={classes.missionVisionDescription}>
+                  <Typography>
                     The vision of Bdtask is to introduce technology to mass people to help them improve their lifestyle and solve problems in their daily life
                     through digitalization.
                   </Typography>

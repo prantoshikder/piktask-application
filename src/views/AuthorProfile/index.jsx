@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, CircularProgress, Container, Grid, Typography } from "@mui/material";
+import { Button, CircularProgress, Container, Grid, Typography } from "@/components/ui-kit";
 import axios from "axios";
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -19,18 +19,16 @@ import twitterIcon from "../../assets/icons/twitter.svg";
 import Spacing from "../../components/Spacing";
 import Header from "../../components/ui/Header";
 import SocialShare from "../../components/ui/SocialShare";
-import { getBaseURL, imageObjSchema } from "../../helpers";
+import { getBaseURL, imageObjSchema, joinImageUrl } from "../../helpers";
 import Layout from "../../Layout";
 import SignUpModal from "../Authentication/SignUpModal";
 import Loader from "./../../components/ui/Loader/index";
-import useStyles from "./AuthorProfile.styles";
 
 const AuthorItems = lazy(() => import("../../components/ui/AuthorItems"));
 const CallToAction = lazy(() => import("../../components/ui/CallToAction"));
 const Footer = lazy(() => import("../../components/ui/Footer"));
 
 const AuthorProfile = () => {
-  const { classes } = useStyles();
   const { username } = useParams();
   const user = useSelector((state) => state.user);
 
@@ -51,7 +49,7 @@ const AuthorProfile = () => {
       .then(({ data }) => {
         if (data?.status) {
           setProfileInfo(data?.profile);
-          setThumbnail(getBaseURL().bucket_base_url + "/" + data?.profile?.avatar);
+          setThumbnail(joinImageUrl(getBaseURL().bucket_base_url + "/", data?.profile?.avatar));
           setImageSummery(data?.images_summary);
           setLoading(false);
 
@@ -170,7 +168,7 @@ const AuthorProfile = () => {
     >
       <Header />
 
-      <div className={classes.authorHero} style={{ backgroundImage: `url(${heroBanner})` }}>
+      <div className={"[background-position:center_center] bg-cover bg-no-repeat flex items-center relative p-[3rem_0] before:content-[\"\"] before:absolute before:bg-[rgba(0,0,0,0.5)] before:opacity-[0.95] before:top-[0] before:left-[0] before:w-[100%] before:h-[100%]"} style={{ backgroundImage: `url(${heroBanner.src})` }}>
         <Container>
           {isLoading ? (
             <div
@@ -187,46 +185,46 @@ const AuthorProfile = () => {
           ) : (
             <>
               {profileInfo ? (
-                <Grid container className={classes.profileWrapper}>
-                  <div className={classes.authorImg}>
+                <Grid container className="items-center justify-center relative max-[595px]:flex-col">
+                  <div className="mr-[3rem] h-[9rem] w-[9rem] [&_img]:w-[100%] [&_img]:rounded-[100%] [&_img]:p-[0.4rem] [&_img]:bg-[#707070] max-[595px]:w-[7rem] max-[595px]:h-[7rem] max-[595px]:mt-[2rem] max-[595px]:mb-[2rem] max-[595px]:mr-[0] max-[595px]:[&_img]:p-[0.4rem]">
                     {profileInfo?.avatar ? (
-                      <img src={getBaseURL().bucket_base_url + "/" + profileInfo?.avatar} alt={profileInfo?.username} width="90px" height="90px" />
+                      <img src={joinImageUrl(getBaseURL().bucket_base_url + "/", profileInfo?.avatar)} alt={profileInfo?.username} width="90px" height="90px" />
                     ) : (
-                      <img src={authorImg} alt={profileInfo?.username} width="90px" height="90px" />
+                      <img src={authorImg.src} alt={profileInfo?.username} width="90px" height="90px" />
                     )}
                   </div>
 
-                  <div className={classes.authorInfo}>
-                    <Typography className={classes.authorName} variant="h3">
+                  <div className="text-[#fff] max-[595px]:w-[auto] max-[595px]:text-center max-[595px]:items-center max-[595px]:flex max-[595px]:flex-col max-[595px]:justify-center">
+                    <Typography className="text-[#fff] text-[2rem] mb-[.8rem] mt-[2rem] max-[479.95px]:mt-[0]" variant="h3">
                       {profileInfo?.username}
                     </Typography>
 
-                    <div className={classes.resourceDetails}>
-                      <Typography className={classes.infoItem} variant="body2">
+                    <div className="flex items-center mb-[.4rem]">
+                      <Typography className={"text-[1.4rem] mr-[2.5rem] pr-[2.5rem] relative before:content-[\"\"] before:absolute before:bg-[white] before:w-[.16rem] before:h-[3.5rem] before:top-[0.5rem] before:right-[0] [&:last-child:before]:bg-[transparent] [&:last-child:before]:w-[0] [&_span]:text-[1.8rem] [&_span]:block [&_span]:font-[700] max-[576px]:mr-[1.5rem] max-[576px]:pr-[1.5rem]"} variant="body2">
                         Resources
                         <span>{profileInfo?.total_images}</span>
                       </Typography>
 
-                      <Typography className={classes.infoItem} variant="body2">
+                      <Typography className={"text-[1.4rem] mr-[2.5rem] pr-[2.5rem] relative before:content-[\"\"] before:absolute before:bg-[white] before:w-[.16rem] before:h-[3.5rem] before:top-[0.5rem] before:right-[0] [&:last-child:before]:bg-[transparent] [&:last-child:before]:w-[0] [&_span]:text-[1.8rem] [&_span]:block [&_span]:font-[700] max-[576px]:mr-[1.5rem] max-[576px]:pr-[1.5rem]"} variant="body2">
                         Followers
                         <span>{profileInfo?.total_followers}</span>
                       </Typography>
 
-                      <Typography className={classes.infoItem} variant="body2">
+                      <Typography className={"text-[1.4rem] mr-[2.5rem] pr-[2.5rem] relative before:content-[\"\"] before:absolute before:bg-[white] before:w-[.16rem] before:h-[3.5rem] before:top-[0.5rem] before:right-[0] [&:last-child:before]:bg-[transparent] [&:last-child:before]:w-[0] [&_span]:text-[1.8rem] [&_span]:block [&_span]:font-[700] max-[576px]:mr-[1.5rem] max-[576px]:pr-[1.5rem]"} variant="body2">
                         Downloads
                         <span>{profileInfo?.total_downloads}</span>
                       </Typography>
 
                       {user?.id !== profileInfo?.id && (
                         <div>
-                          <Button className={classes.followBtn} onClick={handleFollower} value="user">
+                          <Button className="text-[#fff] font-[400] font-['Roboto',sans-serif] capitalize text-[1.3rem] rounded-[3rem] opacity-[1] leading-[1.75] [border:.2rem_solid] border-[#fff] p-[0.3rem_2rem] mr-[1.5rem] hover:bg-[#0088f2] hover:border-[#0088f2] max-[1099.95px]:w-[11rem] max-[1099.95px]:text-[1.1rem] max-[1099.95px]:mr-[0] max-[1099.95px]:pl-[0.7rem] max-[1099.95px]:pr-[0.7rem]" onClick={handleFollower} value="user">
                             {!isFollowing ? <>Follow</> : <>Following</>}
                           </Button>
                         </div>
                       )}
                     </div>
 
-                    <div className={classes.authorSocials}>
+                    <div className="flex items-center [&_p]:text-[#fff]">
                       {socialMedia?.length > 0 && <Typography>Follow me: </Typography>}
                       <SocialShare title="Follow this author:" socials={socialMedia} />
                     </div>

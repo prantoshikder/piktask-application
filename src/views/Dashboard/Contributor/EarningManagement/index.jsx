@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Typography, useMediaQuery } from "@mui/material";
+import { Button, Typography, useMediaQuery } from "@/components/ui-kit";
 import axios from "axios";
 import Chart from "@/lib/chart";
 import moment from "moment";
@@ -14,7 +14,6 @@ import Sidebar from "../../../../components/ui/dashboard/contributor/Sidebar";
 import Loader from "../../../../components/ui/Loader";
 import { expiredLoginTime } from "../../../../helpers";
 import Layout from "../../../../Layout";
-import useStyles from "./EarningManagement.styles";
 import TabPanel from "./TabPanel";
 import WithdrawModal from "./WithdrawModal";
 
@@ -23,7 +22,6 @@ const Footer = lazy(() => import("../../../../components/ui/Footer"));
 
 const EarningManagement = () => {
   const refChart = useRef();
-  const { classes } = useStyles();
   const user = useSelector((state) => state.user);
   const mobileView = useMediaQuery("(max-width:769px)");
 
@@ -245,22 +243,22 @@ const EarningManagement = () => {
 
   return (
     <Layout title="Earning Management">
-      <div className={classes.adminRoot}>
-        {mobileView ? null : <Sidebar className={classes.adminSidebar} />}
+      <div className="">
+        {mobileView ? null : <Sidebar className="mt-[0rem] max-[768.95px]:hidden" />}
 
-        <main className={classes.content}>
+        <main className="p-[0] ml-[28rem] max-[768.95px]:w-[100%] max-[768.95px]:ml-[0rem]">
           <AdminHeader />
 
-          <div className={classes.earningManagementWrapper}>
-            <div className={classes.headingWrapper}>
+          <div className="mt-[10rem] m-[2rem]">
+            <div className="flex justify-between">
               <Heading tag="h2">Earning Management</Heading>
 
               <div>
-                <Button className={classes.withdrawBtn} onClick={() => handleWithdrawInfo()}>
+                <Button className="p-[0.2rem_3.5rem] bg-[#0088f2] text-[#fff] [border:.2rem_solid] border-[#0088f2] mr-[1rem] [transition:all_0.3s_linear] hover:bg-[#0773c5] hover:border-[#0773c5] hover:text-[#fff]" onClick={() => handleWithdrawInfo()}>
                   Withdraw
                 </Button>
 
-                <Button className={classes.withdrawHistoryBtn} component={Link} to="/contributor/withdraw-history">
+                <Button className="p-[0.2rem_3.5rem] text-[#0088f2] [border:.2rem_solid] border-[#0088f2] [transition:all_0.3s_linear] hover:bg-[#0773c5] hover:border-[#0773c5] hover:text-[#fff]" component={Link} to="/contributor/withdraw-history">
                   Withdraw History
                 </Button>
               </div>
@@ -272,7 +270,7 @@ const EarningManagement = () => {
 
             <Suspense fallback={<Loader />}>
               <div>
-                <Typography className={classes.formTitle} variant="h4">
+                <Typography className="mb-[1.5rem]" variant="h4">
                   Select Period
                 </Typography>
 
@@ -282,8 +280,8 @@ const EarningManagement = () => {
                   value={earningData}
                   onChange={handleChange}
                   aria-label="Earning Chart"
-                  className={classes.tabsBtnWrapper}
-                  classes={{ indicator: classes.indicator }}
+                  className="bg-[#FFF] p-[2rem]"
+                  classes={{ indicator: "bg-[transparent]" }}
                 >
                   <button
                     {...selectData(0)}
@@ -292,7 +290,7 @@ const EarningManagement = () => {
                       handleSelectedGraphRatio(e);
                     }}
                     name="earning"
-                    className={classes.earningBtn}
+                    className="p-[0.6rem_1.5rem] bg-[#0088f2]! text-[#fff] mr-[2rem] rounded-[2px] [border:.2rem_solid] border-[#0088f2] [transition:all_0.3s_linear] hover:bg-[#0773c5]! hover:border-[#0773c5] hover:text-[#fff]"
                   >
                     Earning
                   </button>
@@ -304,7 +302,7 @@ const EarningManagement = () => {
                       handleSelectedGraphRatio(e);
                     }}
                     name="download"
-                    className={classes.earningBtn}
+                    className="p-[0.6rem_1.5rem] bg-[#0088f2]! text-[#fff] mr-[2rem] rounded-[2px] [border:.2rem_solid] border-[#0088f2] [transition:all_0.3s_linear] hover:bg-[#0773c5]! hover:border-[#0773c5] hover:text-[#fff]"
                   >
                     Download
                   </button>
@@ -316,7 +314,7 @@ const EarningManagement = () => {
                       handleSelectedGraphRatio(e);
                     }}
                     name="file"
-                    className={classes.earningBtn}
+                    className="p-[0.6rem_1.5rem] bg-[#0088f2]! text-[#fff] mr-[2rem] rounded-[2px] [border:.2rem_solid] border-[#0088f2] [transition:all_0.3s_linear] hover:bg-[#0773c5]! hover:border-[#0773c5] hover:text-[#fff]"
                   >
                     Files
                   </button>

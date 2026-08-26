@@ -1,7 +1,6 @@
 "use client";
 
-import { makeStyles } from "tss-react/mui";
-import { CircularProgress, Container, Grid } from "@mui/material";
+import { CircularProgress, Container, Grid } from "@/components/ui-kit";
 import axios from "axios";
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import Spacing from "../../components/Spacing";
@@ -14,20 +13,9 @@ import { getBaseURL, imageObjSchema } from "./../../helpers/index";
 const HeroSection = lazy(() => import("../../components/ui/Hero"));
 const Footer = lazy(() => import("../../components/ui/Footer"));
 
-const useStyles = makeStyles()((theme) => ({
-  postsWrapper: {
-    marginBottom: "2rem",
-    display: "flex",
-    justifyContent: "flex-start",
-    flexWrap: "wrap",
-    "@media (max-width: 768)": {
-      justifyContent: "flex-start",
-    },
-  },
-}));
+
 
 const AllBlogs = () => {
-  const { classes } = useStyles();
   const [blogsPost, setBlogsPost] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [thumbnail, setThumbnail] = useState("");
@@ -72,7 +60,7 @@ const AllBlogs = () => {
 
       <Suspense fallback={<Loader />}>
         <Container>
-          <Grid container spacing={2} className={classes.postsWrapper}>
+          <Grid container spacing={2} className="mb-[2rem] flex justify-start flex-wrap [@media(max-width:768)]:justify-start">
             {isLoading ? (
               <div
                 style={{

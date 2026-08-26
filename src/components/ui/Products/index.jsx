@@ -1,7 +1,6 @@
 "use client";
 
-import { Button, Grid } from "@mui/material";
-import { makeStyles } from "tss-react/mui";
+import { Button, Grid } from "@/components/ui-kit";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,33 +9,9 @@ import SectionHeading from "../Heading";
 import Loader from "../Loader";
 import Product from "./Product";
 
-const useStyles = makeStyles()((theme) => ({
-  container: {
-    marginBottom: "2.2rem",
-  },
-  productItem: {
-    "@media (max-width: 576px)": {
-      maxWidth: "100%",
-      flexBasis: "100%",
-    },
-  },
-  headingButton: {
-    ...theme.typography.button,
-    padding: "0.4rem 1rem",
-    fontSize: "1.3rem",
-    fontWeight: 500,
-    color: "#1B3F4E",
-    transition: "all 0.3s linear",
 
-    "&:hover": {
-      backgroundColor: theme.palette.secondary.main,
-      color: "#fff",
-    },
-  },
-}));
 
 const Products = (props) => {
-  const { classes } = useStyles();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const { category, count, showHeading, piktaskCollection } = props;
@@ -128,20 +103,20 @@ const Products = (props) => {
         <>
           {piktaskProduct?.length !== 0 && (
             <SectionHeading title="Piktask Collection" large>
-              <Button className={classes.headingButton} component={Link} to={"category/piktask-collection"}>
+              <Button className="text-[#1B3F4E] font-[500] font-['Roboto',sans-serif] capitalize text-[1.3rem] rounded-[3rem] opacity-[1] leading-[1.75] p-[0.4rem_1rem] [transition:all_0.3s_linear] hover:bg-[#0088f2] hover:text-[#fff]" component={Link} to={"category/piktask-collection"}>
                 See More
               </Button>
             </SectionHeading>
           )}
 
-          <Grid classes={{ container: classes.container }} container spacing={2}>
+          <Grid classes={{ container: "mb-[2.2rem]" }} container spacing={2}>
             {isLoading ? (
               <Loader item={piktaskProduct} />
             ) : (
               <>
                 {piktaskProduct?.length > 0 &&
                   piktaskProduct?.slice(0, 16).map((photo) => (
-                    <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo?.image_id} className={classes.productItem}>
+                    <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo?.image_id} className="max-[576px]:max-w-[100%] max-[576px]:basis-[100%]">
                       <Product key={photo?.image_id} catId={piktaskProduct?.id} photo={photo} />
                     </Grid>
                   ))}
@@ -153,20 +128,20 @@ const Products = (props) => {
         <>
           {images?.length !== 0 && showHeading && (
             <SectionHeading title={category?.name} large>
-              <Button className={classes.headingButton} component={Link} to={`category/${category?.slug}`}>
+              <Button className="text-[#1B3F4E] font-[500] font-['Roboto',sans-serif] capitalize text-[1.3rem] rounded-[3rem] opacity-[1] leading-[1.75] p-[0.4rem_1rem] [transition:all_0.3s_linear] hover:bg-[#0088f2] hover:text-[#fff]" component={Link} to={`category/${category?.slug}`}>
                 See More
               </Button>
             </SectionHeading>
           )}
 
-          <Grid classes={{ container: classes.container }} container spacing={2}>
+          <Grid classes={{ container: "mb-[2.2rem]" }} container spacing={2}>
             {isLoading ? (
               <Loader item={images} />
             ) : (
               <>
                 {images?.length > 0 &&
                   images?.slice(0, count).map((photo) => (
-                    <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo?.image_id} className={classes.productItem}>
+                    <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo?.image_id} className="max-[576px]:max-w-[100%] max-[576px]:basis-[100%]">
                       <Product key={photo?.image_id} catId={category?.id} photo={photo} />
                     </Grid>
                   ))}

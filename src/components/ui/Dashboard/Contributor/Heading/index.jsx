@@ -1,6 +1,6 @@
 "use client";
 
-import { Typography } from "@mui/material";
+import { Typography } from "@/components/ui-kit";
 import React from "react";
 
 const Heading = ({ tag, children, ...rest }) => {

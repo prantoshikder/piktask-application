@@ -5,15 +5,13 @@ import Footer from "../../components/ui/Footer";
 import Header from "../../components/ui/Header";
 import HeroSection from "../../components/ui/Hero";
 import Layout from "../../Layout";
-import useStyles from "./Subscription.style";
 
 const Subscription = () => {
-  const { classes } = useStyles();
   return (
     <Layout title="Subscription" description="This is subscription page">
       <Header />
       <HeroSection />
-      <h1 className={classes.headerText}>Subscription page are coming soon....</h1>
+      <h1 className="h-[200px] text-center pt-[80px]">Subscription page are coming soon....</h1>
       <Footer />
     </Layout>
   );

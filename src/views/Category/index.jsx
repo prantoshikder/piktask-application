@@ -1,10 +1,11 @@
 "use client";
 
-import { Button, Container, FormControl, Grid, Select, Typography } from "@mui/material";
-import CircularProgress from "@mui/material/CircularProgress";
+import { Button, Container, FormControl, Grid, Select, Typography } from "@/components/ui-kit";
+import { CircularProgress } from "@/components/ui-kit";
 import axios from "axios";
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { usePathname } from "next/navigation";
 import { Link, useParams } from "@/lib/router";
 import Header from "../../components/ui/Header";
 import Pagination from "../../components/ui/Pagination";
@@ -13,16 +14,14 @@ import Product from "../../components/ui/Products/Product";
 import Layout from "../../Layout";
 import Loader from "./../../components/ui/Loader/index";
 import { getBaseURL, imageObjSchema } from "./../../helpers/index";
-import useStyles from "./Category.styles";
 
 const HeroSection = lazy(() => import("../../components/ui/Hero"));
 const CallToAction = lazy(() => import("../../components/ui/CallToAction"));
 const Footer = lazy(() => import("../../components/ui/Footer"));
 
 const Category = () => {
-  const { classes } = useStyles();
   const { catName } = useParams();
-  const locationPath = document.location.pathname;
+  const locationPath = usePathname();
   const user = useSelector((state) => state.user);
 
   const [popularSearchKeywords, setPopularSearchKeywords] = useState([]);
@@ -169,12 +168,12 @@ const Category = () => {
       <Suspense fallback={<Loader />}>
         <Container>
           {categoryProducts?.length > 0 && (
-            <div className={classes.shortList}>
-              <div className={classes.shortListWrapper}>
-                <Typography className={classes.shortListTag}>Sort by:</Typography>
-                <FormControl variant="outlined" className={classes.formControl}>
+            <div className="float-right max-[425.95px]:hidden">
+              <div className="mt-[32px] flex items-center">
+                <Typography className="w-[7rem] text-[14px] text-center text-[#5f7d95] max-[1279.95px]:block">Sort by:</Typography>
+                <FormControl variant="outlined">
                   <Select
-                    className={classes.selectSortItem}
+                    className="[&_Select]:p-[7px_23px_7px_9px]! [&_svg]:mr-[-7px] [&_svg]:h-[21px] [&_svg]:w-[25px]"
                     native
                     onChange={getCategoryProducts}
                     inputProps={{
@@ -196,7 +195,7 @@ const Category = () => {
 
         <Container>
           {totalProduct > 0 && (
-            <Typography className={classes.totalResources} variant="h3">
+            <Typography className="text-[2.2rem] p-[3rem_0rem] max-[425.95px]:p-[2.5rem_0_3rem]" variant="h3">
               {`${totalProduct} Resources`}
             </Typography>
           )}
@@ -214,10 +213,10 @@ const Category = () => {
               <CircularProgress color="primary" />
             </div>
           ) : (
-            <Grid classes={{ container: classes.container }} container spacing={2}>
+            <Grid classes={{ container: "mb-[3rem]" }} container spacing={2}>
               {categoryProducts?.length > 0 ? (
                 categoryProducts?.map((photo) => (
-                  <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo?.image_id} className={classes.productItem}>
+                  <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo?.image_id} className="max-[576px]:max-w-[100%] max-[576px]:basis-[100%]">
                     <Product photo={photo} />
                   </Grid>
                 ))
@@ -231,15 +230,15 @@ const Category = () => {
         </Container>
       </Suspense>
 
-      <div className={classes.tagWrapper}>
+      <div className="max-[425.95px]:hidden">
         <Container>
           <Grid container>
-            <Grid className={classes.tagsContainer}>
-              <Typography className={classes.tagTitle} variant="h3">
+            <Grid className="flex flex-wrap items-center mt-[4.5rem] mb-[2.8rem]">
+              <Typography className="text-center text-[2.2rem] mr-[2rem] max-[1279.95px]:block max-[959.95px]:w-[100%] max-[959.95px]:mb-[1.5rem]" variant="h3">
                 Popular Search:
               </Typography>
               {popularSearchKeywords?.map((tag, index) => (
-                <Button className={classes.tagButton} key={index} tag={tag} component={Link} to={`/tag/${tag}`}>
+                <Button className="text-[#143340] font-[400] font-['Roboto',sans-serif] capitalize text-[1.4rem] rounded-[3rem] opacity-[1] leading-[1.75] bg-[#F8F8F8] [border:1px_solid_rgb(150_164_173_/_54%)] p-[0.4rem_2.5rem] no-underline [&:not(last-child)]:mr-[1.2rem] hover:no-underline max-[959.95px]:pr-[3.2rem] max-[959.95px]:pl-[3.2rem] max-[959.95px]:mb-[1.5rem] max-[959.95px]:w-[auto] max-[959.95px]:text-[1.5rem]" key={index} tag={tag} component={Link} to={`/tag/${tag}`}>
                   {tag}
                 </Button>
               ))}

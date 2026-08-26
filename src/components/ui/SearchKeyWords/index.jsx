@@ -1,13 +1,11 @@
 "use client";
 
-import { Typography } from "@mui/material";
+import { Typography } from "@/components/ui-kit";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "@/lib/router";
-import useStyles from "./SearchKeyWords.styles";
 
 const SearchKeyWords = ({ popularKeywords }) => {
-  const { classes } = useStyles();
   const [popularSearchKeywords, setPopularSearchKeywords] = useState([]);
 
   useEffect(() => {
@@ -29,8 +27,8 @@ const SearchKeyWords = ({ popularKeywords }) => {
   return (
     <>
       {popularKeywords && (
-        <div className={classes.popularSearch}>
-          <Typography variant="h5" className={classes.searchTitle}>
+        <div className="p-[2rem_0rem] w-[100%] flex flex-wrap justify-center [&_a]:no-underline max-[769px]:p-[2rem_3rem] max-[479.95px]:hidden">
+          <Typography variant="h5" className="text-[#fff] text-[16px] m-[0px_5px] font-[400] max-[1024px]:mb-[1.5rem] max-[768px]:mb-[1rem] max-[479.95px]:mb-[0.5rem]">
             Popular Search :
           </Typography>
           {Array.isArray(popularSearchKeywords) &&
@@ -39,7 +37,7 @@ const SearchKeyWords = ({ popularKeywords }) => {
                 key={index}
                 to={`/tag/${keyWord.toLowerCase().replace(/\s/g, "-")}`}
               >
-                <Typography variant="h5" className={classes.searchTitle}>
+                <Typography variant="h5" className="text-[#fff] text-[16px] m-[0px_5px] font-[400] max-[1024px]:mb-[1.5rem] max-[768px]:mb-[1rem] max-[479.95px]:mb-[0.5rem]">
                   {keyWord},
                 </Typography>
               </Link>

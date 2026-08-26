@@ -1,7 +1,7 @@
 "use client";
 
-import { Checkbox, Dialog, DialogContent, FormControlLabel, Grid, Tab, Tabs, Typography } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import { Checkbox, Dialog, DialogContent, FormControlLabel, Grid, Tab, Tabs, Typography } from "@/components/ui-kit";
+import { CloseOutlined as CloseIcon } from "@ant-design/icons";
 import axios from "axios";
 import { jwtDecode as jwt_decode } from "jwt-decode";
 import React, { useEffect, useState } from "react";
@@ -17,7 +17,6 @@ import Spacing from "../../../components/Spacing";
 import SocialLogin from "../../../components/ui/SocialLogin";
 import { sendSignInLinkToEmail } from "firebase/auth";
 import { auth } from "../../../database";
-import useStyles from "./SignUpModal.styles";
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -37,7 +36,6 @@ function a11yProps(index) {
 }
 
 const SignUpModal = (props) => {
-  const { classes } = useStyles();
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -237,13 +235,13 @@ const SignUpModal = (props) => {
         aria-labelledby="authentication-dialog"
         aria-describedby="authentication-dialog"
         style={{ backgroundColor: "rgb(20 51 64 / 77%)" }}
-        className={classes.dialogModal}
+        className="[&_.ant-modal-content]:max-w-[800px]"
       >
         <DialogContent style={{ padding: 0, overflow: "hidden" }}>
           <Grid container>
             <Grid size={{ xs: 12, sm: 5 }}>
-              <div className={classes.leftPanel}>
-                <img className={classes.authLogo} src={logoWhite} alt="Piktask" width="120px" height="47px" />
+              <div className="bg-[#0088f2] p-[2.5rem] w-[100%] h-[100%] [&_p]:text-[#fff] [&_p]:font-[500] [&_p]:text-[13px] [&_p]:leading-[2] [&_img]:w-[100%] min-[1441px]:p-[2.5rem_2.5rem_7rem_2.5rem] max-[768.95px]:hidden">
+                <img className="max-w-[120px] mb-[1.5rem]" src={logoWhite.src} alt="Piktask" width="120px" height="47px" />
                 <Typography>Enjoy Free Download Now!</Typography>
                 <Typography>* Get 50% OFF Discount for Premium Plan</Typography>
                 <Typography>* Download 6 Images for Free Everyday</Typography>
@@ -251,25 +249,25 @@ const SignUpModal = (props) => {
 
                 <Spacing space={{ height: 30 }} />
 
-                <img src={authImage} alt="Piktask" />
+                <img src={authImage.src} alt="Piktask" />
               </div>
             </Grid>
 
             <Grid size={{ xs: 12, sm: 7 }}>
-              <div className={classes.rightPanel}>
-                <div className={classes.closeModal}>
-                  <CloseIcon fontSize="large" onClick={() => setOpenAuthModal(false)} />
+              <div className="p-[2rem] h-[100%] max-[768.95px]:p-[1.5rem]">
+                <div className="float-right mt-[-15px] text-[#0088f2] cursor-pointer max-[768.95px]:hidden max-[768.95px]:mt-[0]">
+                  <CloseIcon onClick={() => setOpenAuthModal(false)} />
                 </div>
                 <Tabs
                   value={tabIndex}
                   onChange={handleChangeTab}
                   aria-label="authentication tabs"
-                  className={classes.tabsWrapper}
-                  classes={{ indicator: classes.menuUnderline }}
+                  className="[&_.pk-tabs]:justify-center [&_.pk-tabs]:pb-[2.5rem]"
+                  classes={{ indicator: "h-[0] bg-[transparent]" }}
                   variant="fullWidth"
                 >
-                  <Tab label="Login" {...a11yProps(0)} className={classes.tabItem} classes={{ selected: classes.selected }} disableRipple />
-                  <Tab label="Sign Up" {...a11yProps(1)} className={classes.tabItem} classes={{ selected: classes.selected }} disableRipple />
+                  <Tab label="Login" {...a11yProps(0)} className="text-[#646464] text-[17px] [transition:all_0.3s_linear] rounded-[0] hover:shadow-[rgba(33,35,38,0.1)_0px_10px_10px_-10px] hover:text-[#0088f2]" classes={{ selected: "text-[#0088f2] shadow-[rgba(33,35,38,0.1)_0px_10px_10px_-10px]" }} disableRipple />
+                  <Tab label="Sign Up" {...a11yProps(1)} className="text-[#646464] text-[17px] [transition:all_0.3s_linear] rounded-[0] hover:shadow-[rgba(33,35,38,0.1)_0px_10px_10px_-10px] hover:text-[#0088f2]" classes={{ selected: "text-[#0088f2] shadow-[rgba(33,35,38,0.1)_0px_10px_10px_-10px]" }} disableRipple />
                 </Tabs>
                 {/* End tabs */}
 
@@ -288,7 +286,7 @@ const SignUpModal = (props) => {
 
                 <Spacing space={{ height: "1rem" }} />
 
-                <div className={classes.horizontalLine}>
+                <div className="bg-[#CBCBCB] h-[1px] relative [&_span]:absolute [&_span]:bg-[#fff] [&_span]:left-[50%] [&_span]:[transform:translate(-50%,-41%)] [&_span]:p-[0_5px] [&_span]:[font-style:italic] [&_span]:text-[13px]">
                   <span>OR</span>
                 </div>
 
@@ -299,7 +297,7 @@ const SignUpModal = (props) => {
                   <form onSubmit={handleSignIn}>
                     <InputField label="User Name / Email" name="userName" value={authData.userName} onChange={handleAuthData} />
 
-                    <div className={classes.passwordField}>
+                    <div className="flex items-center relative [&_img]:absolute [&_img]:top-[.8rem] [&_img]:right-[3rem] [&_img]:w-[2rem] [&_img]:cursor-pointer max-[768px]:[&_img]:w-[2rem]">
                       <InputField
                         label="Password"
                         type={passwordValue ? "text" : "password"}
@@ -307,7 +305,7 @@ const SignUpModal = (props) => {
                         value={authData.password}
                         onChange={handleAuthData}
                       />
-                      <img src={lockIcon} alt="Show or hide password" onClick={handleShowHidePassword} width="20px" height="23px" />
+                      <img src={lockIcon.src} alt="Show or hide password" onClick={handleShowHidePassword} width="20px" height="23px" />
                     </div>
 
                     <CustomBtn disabled={isLoading} type="submit" text="Sign In" />
@@ -315,11 +313,11 @@ const SignUpModal = (props) => {
 
                   <Spacing space={{ height: "1.5rem" }} />
 
-                  <Link to="/reset-password" className={classes.passwordResetLink}>
+                  <Link to="/reset-password" className="text-[17px] text-[#0088f2] text-center block no-underline hover:underline">
                     Password Reset
                   </Link>
 
-                  <div className={classes.signUpLink}>
+                  <div className="mt-[19%] text-[17px] text-center [&_span]:cursor-pointer [&_span]:text-[#0088f2]">
                     Not a member? <span onClick={handleChangeTab}>Sign Up</span>
                   </div>
                 </TabPanel>
@@ -331,7 +329,7 @@ const SignUpModal = (props) => {
 
                     <InputField label="Email" name="email" value={authData.email} onChange={handleAuthData} />
 
-                    <div className={classes.passwordField}>
+                    <div className="flex items-center relative [&_img]:absolute [&_img]:top-[.8rem] [&_img]:right-[3rem] [&_img]:w-[2rem] [&_img]:cursor-pointer max-[768px]:[&_img]:w-[2rem]">
                       <InputField
                         label="Password"
                         type={passwordValue ? "text" : "password"}
@@ -339,7 +337,7 @@ const SignUpModal = (props) => {
                         value={authData.password}
                         onChange={handleAuthData}
                       />
-                      <img src={lockIcon} alt="Show or hide password" onClick={handleShowHidePassword} width="20px" height="23px" />
+                      <img src={lockIcon.src} alt="Show or hide password" onClick={handleShowHidePassword} width="20px" height="23px" />
                     </div>
 
                     <CustomBtn text="Sign Up" disabledBtn={!authData.userName || !authData.email || !authData.password} />
@@ -348,12 +346,12 @@ const SignUpModal = (props) => {
                   <Spacing space={{ height: "0.5rem" }} />
 
                   <FormControlLabel
-                    className={classes.checkboxLabel}
-                    control={<Checkbox name="receiveNewsLetter" size="medium" className={classes.checkbox} />}
+                    className="[&_.pk-form-label]:text-[13px] [&_.pk-form-label]:mb-[-14px] max-[768.95px]:hidden"
+                    control={<Checkbox name="receiveNewsLetter" size="medium" className="[&_svg]:text-[2.5rem]" />}
                     label="I do not wish to receive news and promotions from Piktask LLC by email."
                   />
 
-                  <div onClick={handleChangeTab} className={classes.authText}>
+                  <div onClick={handleChangeTab} className="text-[17px] text-[#0088f2] text-center cursor-pointer mt-[1rem] max-[768.95px]:mt-[12.5%]">
                     Already registered? Log in
                   </div>
                 </TabPanel>

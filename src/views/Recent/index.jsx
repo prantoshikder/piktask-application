@@ -1,6 +1,6 @@
 "use client";
 
-import { Container, Grid } from "@mui/material";
+import { Container, Grid } from "@/components/ui-kit";
 import axios from "axios";
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +14,6 @@ import ProductNotFound from "../../components/ui/ProductNotFound";
 import Product from "../../components/ui/Products/Product";
 import Layout from "../../Layout";
 import { getBaseURL, imageObjSchema } from "./../../helpers/index";
-import useStyles from "./Recent.style";
 
 const HeroSection = lazy(() => import("../../components/ui/Hero"));
 const CallToAction = lazy(() => import("../../components/ui/CallToAction"));
@@ -22,7 +21,6 @@ const Blog = lazy(() => import("../../components/ui/Blog"));
 const Footer = lazy(() => import("../../components/ui/Footer"));
 
 const Recent = () => {
-  const { classes } = useStyles();
   const dispatch = useDispatch();
   const location = useLocation();
   const user = useSelector((state) => state.user);
@@ -97,14 +95,14 @@ const Recent = () => {
       <Suspense fallback={<Loader />}>
         <Container>
           <SectionHeading title="Recent Images" large />
-          <Grid classes={{ container: classes.container }} container spacing={2}>
+          <Grid container spacing={2}>
             {isLoading ? (
               <Loader />
             ) : (
               <>
                 {recentProduct?.length ? (
                   recentProduct?.map((photo, index) => (
-                    <Grid size={{ xs: 6, sm: 4, md: 3 }} key={index} className={classes.productItem}>
+                    <Grid size={{ xs: 6, sm: 4, md: 3 }} key={index} className="max-[576px]:max-w-[100%] max-[576px]:basis-[100%]">
                       <Product photo={photo} />
                     </Grid>
                   ))

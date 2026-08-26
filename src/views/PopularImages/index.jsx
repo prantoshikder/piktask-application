@@ -1,6 +1,6 @@
 "use client";
 
-import { Container, Grid } from "@mui/material";
+import { Container, Grid } from "@/components/ui-kit";
 import axios from "axios";
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -13,7 +13,6 @@ import Product from "../../components/ui/Products/Product";
 // import { TopSeller } from "../../components/ui/TopSeller";
 import Layout from "../../Layout";
 import { getBaseURL, imageObjSchema } from "./../../helpers/index";
-import useStyles from "./Popular.style";
 
 const HeroSection = lazy(() => import("../../components/ui/Hero"));
 const CallToAction = lazy(() => import("../../components/ui/CallToAction"));
@@ -21,7 +20,6 @@ const Blog = lazy(() => import("../../components/ui/Blog"));
 const Footer = lazy(() => import("../../components/ui/Footer"));
 
 const PopularImages = () => {
-  const { classes } = useStyles();
   const user = useSelector((state) => state.user);
 
   const [isLoading, setLoading] = useState(true);
@@ -80,14 +78,14 @@ const PopularImages = () => {
 
       <Container>
         <SectionHeading title="Popular Images" large />
-        <Grid classes={{ container: classes.container }} container spacing={2}>
+        <Grid container spacing={2}>
           {isLoading ? (
             <Loader />
           ) : (
             <>
               {popularProducts?.length ? (
                 popularProducts?.map((photo) => (
-                  <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo.image_id} className={classes.productItem}>
+                  <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo.image_id} className="max-[576px]:max-w-[100%] max-[576px]:basis-[100%]">
                     <Product photo={photo} />
                   </Grid>
                 ))
@@ -112,7 +110,7 @@ const PopularImages = () => {
 
       {/* <Container>
         <SectionHeading title="Top Selling Author" large>
-          <Button className={classes.headingButton} component={Link} to="/sellers">
+          <Button className="text-[#1B3F4E] font-[500] font-['Roboto',sans-serif] capitalize text-[1.3rem] rounded-[3rem] opacity-[1] leading-[1.75] p-[0.4rem_1rem] [transition:all_0.3s_linear] hover:bg-[#0088f2] hover:text-[#fff]" component={Link} to="/sellers">
             See More
           </Button>
         </SectionHeading>

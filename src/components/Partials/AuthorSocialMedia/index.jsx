@@ -1,6 +1,6 @@
 "use client";
 
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@/components/ui-kit";
 import React from "react";
 import behanceIcon from "../../../assets/icons/behance.svg";
 import dribbbleIcon from "../../../assets/icons/dribble.svg";

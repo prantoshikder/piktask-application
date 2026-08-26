@@ -3,9 +3,9 @@
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { faCloudUploadAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Card, CardContent, Grid, Typography, useMediaQuery } from "@mui/material";
-import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
-import { Box, LinearProgress } from "@mui/material";
+import { Button, Card, CardContent, Grid, Typography, useMediaQuery } from "@/components/ui-kit";
+import { CheckCircleOutlined as CheckCircleRoundedIcon } from "@ant-design/icons";
+import { Box, LinearProgress } from "@/components/ui-kit";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useSelector } from "react-redux";
@@ -19,7 +19,6 @@ import Sidebar from "../../../../components/ui/dashboard/contributor/Sidebar";
 import Footer from "../../../../components/ui/Footer";
 import { expiredLoginTime } from "../../../../helpers";
 import Layout from "../../../../Layout";
-import useStyles from "./UploadFiles.styles";
 
 function LinearProgressWithLabel(props) {
   return (
@@ -35,7 +34,6 @@ function LinearProgressWithLabel(props) {
 }
 
 const UploadFiles = () => {
-  const { classes } = useStyles();
   const history = useHistory();
   const mobileView = useMediaQuery("(max-width:769px)");
   const user = useSelector((state) => state.user);
@@ -73,9 +71,9 @@ const UploadFiles = () => {
 
   //reject file
   const fileRejectionItems = fileRejections.map(({ file, errors }) => (
-    <div className={classes.rejectFile} key={file.path}>
+    <div className="h-[5.3rem] flex pl-[2rem] rounded-[0.3rem] bg-[#fce4e4e0]" key={file.path}>
       {errors.map((e) => (
-        <div className={classes.rejectFileTitle} key={e.code}>
+        <div className="text-[red] text-[2rem] flex items-center justify-center" key={e.code}>
           {e.message}
         </div>
       ))}
@@ -311,49 +309,49 @@ const UploadFiles = () => {
           file.size > 83886080 ||
           (file.name.match(/\.(eps)$/) && file.size > 83886080) ||
           (file.name.match(/\.(psd)$/) && file.size < 1572864) ? (
-            <div className={classes.thumbError}>
-              <div className={classes.thumbInnerError}>
-                <div className={classes.thumbImg}>
+            <div className="bg-[#fce4e4e0] block w-[100%] mb-[1rem]">
+              <div className="flex justify-start items-center [transition:all_0.2s_linear] pr-[1rem] hover:bg-[#f8b3b363]">
+                <div className="w-[10rem] text-[0rem] [&_img]:h-[100%] [&_img]:w-[100%] [&_img]:object-cover">
                   {file?.name?.match(/\.(ai|eps|psd|svg)$/) ? (
-                    <img src={fileThumbnail} alt="Piktask" className={classes.fileThumbnail} />
+                    <img src={fileThumbnail.src} alt="Piktask" className="[border:1px_solid_#c9c9c9] bg-[#ddd] p-[1rem_3rem]" />
                   ) : (
                     <img src={file.preview} alt="Piktask" />
                   )}
                 </div>
-                <Typography className={classes.imageTitleError}>
+                <Typography className="text-[1.7rem] font-[500] ml-[2rem] text-[red] [&_span]:text-[red] [&_span]:text-[1.3rem]">
                   {file.name} <br /> <span>{(file.size / 1024 / 1024).toFixed(2)} MB</span>
                 </Typography>
 
-                <Box className={classes.progressBar}>
+                <Box className="w-[15%] ml-[auto] [&_p]:text-[1.5rem] [&_span]:h-[0.7rem] [&_span]:rounded-[0.3rem]">
                   <LinearProgressWithLabel value={file.progress || 0} />
                 </Box>
 
-                <button className={classes.deleteBtnError} onClick={(e) => removeFile(file, index)} disabled={disableDeleteBtn}>
-                  <FontAwesomeIcon className={classes.deleteIcon} icon={faTrashAlt} />
+                <button className="p-[1rem] rounded-[0.3rem] [transition:all_0.2s_linear] ml-[2rem] cursor-pointer [&_svg]:text-[red] [&_svg]:text-[1.8rem] hover:text-[red] disabled:text-[#ddd] disabled:cursor-default" onClick={(e) => removeFile(file, index)} disabled={disableDeleteBtn}>
+                  <FontAwesomeIcon icon={faTrashAlt} />
                 </button>
               </div>
             </div>
           ) : (
-            <div className={classes.thumb}>
-              <div className={classes.thumbInner}>
-                <div className={classes.thumbImg}>
+            <div className="block w-[100%] mb-[1rem]">
+              <div className="flex justify-start items-center [transition:all_0.2s_linear] pr-[1rem] hover:bg-[#e3e3e363]">
+                <div className="w-[10rem] text-[0rem] [&_img]:h-[100%] [&_img]:w-[100%] [&_img]:object-cover">
                   {file?.name?.match(/\.(ai|eps|psd|svg)$/) ? (
-                    <img src={fileThumbnail} alt="thumbnail" className={classes.fileThumbnail} />
+                    <img src={fileThumbnail.src} alt="thumbnail" className="[border:1px_solid_#c9c9c9] bg-[#ddd] p-[1rem_3rem]" />
                   ) : (
                     <img src={file.preview} alt="thumbnail" />
                   )}
                 </div>
 
-                <Typography className={classes.imageTitle}>
+                <Typography className="text-[1.7rem] font-[500] ml-[2rem] [&_span]:text-[gray] [&_span]:text-[1.3rem]">
                   {file.name} <br /> <span>{(file.size / 1024 / 1024).toFixed(2)} MB</span>
                 </Typography>
 
-                <Box className={classes.progressBar}>
+                <Box className="w-[15%] ml-[auto] [&_p]:text-[1.5rem] [&_span]:h-[0.7rem] [&_span]:rounded-[0.3rem]">
                   <LinearProgressWithLabel value={file.progress || 0} />
                 </Box>
 
-                <button className={classes.deleteBtn} onClick={(e) => removeFile(file, index)} disabled={disableDeleteBtn}>
-                  <FontAwesomeIcon className={classes.deleteIcon} icon={faTrashAlt} />
+                <button className="p-[1rem] rounded-[0.3rem] [transition:all_0.2s_linear] ml-[2rem] cursor-pointer [border:none] hover:bg-[#d1d1d1] [&_svg]:text-[1.8rem] disabled:text-[#ddd] disabled:cursor-default" onClick={(e) => removeFile(file, index)} disabled={disableDeleteBtn}>
+                  <FontAwesomeIcon icon={faTrashAlt} />
                 </button>
               </div>
             </div>
@@ -367,7 +365,7 @@ const UploadFiles = () => {
     if (Object.keys(imageError)) {
       for (let key in imageError) {
         if (imageError.hasOwnProperty(key)) {
-          return <p className={classes.imageErrorText}>{imageError[key]}</p>;
+          return <p className="text-[red] font-[bold] text-[1.6rem]">{imageError[key]}</p>;
         }
       }
     }
@@ -375,81 +373,81 @@ const UploadFiles = () => {
 
   return (
     <Layout title="Upload">
-      <div className={classes.adminRoot}>
-        {mobileView ? null : <Sidebar className={classes.adminSidebar} />}
+      <div className="">
+        {mobileView ? null : <Sidebar className="mt-[0rem] max-[768.95px]:hidden" />}
 
-        <main className={classes.content}>
+        <main className="p-[0] ml-[28rem] max-[768.95px]:w-[100%] max-[768.95px]:ml-[0rem]">
           <AdminHeader />
-          <div className={classes.uploadContainer}>
-            <Heading className={classes.contentTypeTitle} tag="h2">
+          <div className="mt-[10rem] m-[2rem] max-[768.95px]:p-[0rem_2rem]">
+            <Heading className="m-[0_0_2rem_0rem]" tag="h2">
               What type of content are you going to upload?
             </Heading>
-            <Card className={classes.cardRoot}>
-              <CardContent className={classes.cardContent}>
+            <Card>
+              <CardContent className="p-[1rem_2rem] [border:0.7px_solid_lightgray] [&_h2]:mb-[1.5rem]">
                 <Grid container>
-                  <Grid size={{ xs: 12, sm: 6, md: 4 }} className={classes.imageTypeGrid}>
-                    <div className={classes.checkboxCol}>
+                  <Grid size={{ xs: 12, sm: 6, md: 4 }} className="max-[1270px]:mb-[3rem]">
+                    <div className={"relative pr-[3.5rem] before:content-[\"\"] before:absolute before:w-[.2rem] before:h-[74%] before:bg-[#E6E6E6] before:top-[60%] before:right-[0] before:mr-[2.5rem] before:[transform:translateY(-50%)] max-[960px]:before:bg-[transparent] max-[960px]:before:w-[0] max-[960px]:before:h-[0] max-[960px]:before:[transform:translateY(0)]"}>
                       {/* <Heading tag="h4"></Heading> */}
                       <Typography variant="h2">Vectors</Typography>
-                      <div className={classes.labelItem}>
+                      <div className="flex mb-[1rem] [&_svg]:m-[0.2rem_1rem_0_0]">
                         <CheckCircleRoundedIcon />
                         <Typography>EPS and a JPG preview file (with the same name) up to 80MB</Typography>
                       </div>
-                      <div className={classes.labelItem}>
+                      <div className="flex mb-[1rem] [&_svg]:m-[0.2rem_1rem_0_0]">
                         <CheckCircleRoundedIcon />
                         <Typography>RGB Color</Typography>
                       </div>
-                      <div className={classes.labelItem}>
+                      <div className="flex mb-[1rem] [&_svg]:m-[0.2rem_1rem_0_0]">
                         <CheckCircleRoundedIcon />
                         <Typography>Preview files must be between 800px and 500px on any of the sides.</Typography>
                       </div>
-                      <div className={classes.labelItem}>
+                      <div className="flex mb-[1rem] [&_svg]:m-[0.2rem_1rem_0_0]">
                         <CheckCircleRoundedIcon />
                         <Typography>Titles and tags can be included in preview file. How can I do this?</Typography>
                       </div>
                     </div>
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 6, md: 4 }} className={classes.imageTypeGrid}>
-                    <div className={classes.checkboxCol}>
+                  <Grid size={{ xs: 12, sm: 6, md: 4 }} className="max-[1270px]:mb-[3rem]">
+                    <div className={"relative pr-[3.5rem] before:content-[\"\"] before:absolute before:w-[.2rem] before:h-[74%] before:bg-[#E6E6E6] before:top-[60%] before:right-[0] before:mr-[2.5rem] before:[transform:translateY(-50%)] max-[960px]:before:bg-[transparent] max-[960px]:before:w-[0] max-[960px]:before:h-[0] max-[960px]:before:[transform:translateY(0)]"}>
                       <Heading tag="h2">PSD</Heading>
 
-                      <div className={classes.labelItem}>
+                      <div className="flex mb-[1rem] [&_svg]:m-[0.2rem_1rem_0_0]">
                         <CheckCircleRoundedIcon />
                         <Typography>PSD between 1.5MB and 250MB and a JPG preview file (with the same name)</Typography>
                       </div>
-                      <div className={classes.labelItem}>
+                      <div className="flex mb-[1rem] [&_svg]:m-[0.2rem_1rem_0_0]">
                         <CheckCircleRoundedIcon />
                         <Typography>Color: sRGB, Adobe RGB, Prophoto RGB or P3</Typography>
                       </div>
-                      <div className={classes.labelItem}>
+                      <div className="flex mb-[1rem] [&_svg]:m-[0.2rem_1rem_0_0]">
                         <CheckCircleRoundedIcon />
                         <Typography>Preview files must be between 800px and 500px on any of the sides.</Typography>
                       </div>
-                      <div className={classes.labelItem}>
+                      <div className="flex mb-[1rem] [&_svg]:m-[0.2rem_1rem_0_0]">
                         <CheckCircleRoundedIcon />
                         <Typography>Titles and tags can be included in preview file. How can I do this?</Typography>
                       </div>
                     </div>
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 6, md: 4 }} className={classes.imageTypeGrid}>
+                  <Grid size={{ xs: 12, sm: 6, md: 4 }} className="max-[1270px]:mb-[3rem]">
                     <div>
                       <Heading tag="h2">Photos</Heading>
 
-                      <div className={classes.labelItem}>
+                      <div className="flex mb-[1rem] [&_svg]:m-[0.2rem_1rem_0_0]">
                         <CheckCircleRoundedIcon />
                         <Typography>Only JPG files Over 0.5MB</Typography>
                       </div>
-                      <div className={classes.labelItem}>
+                      <div className="flex mb-[1rem] [&_svg]:m-[0.2rem_1rem_0_0]">
                         <CheckCircleRoundedIcon />
                         <Typography>Color: sRGB, Adobe RGB, Prophoto RGB or P3</Typography>
                       </div>
-                      <div className={classes.labelItem}>
+                      <div className="flex mb-[1rem] [&_svg]:m-[0.2rem_1rem_0_0]">
                         <CheckCircleRoundedIcon />
                         <Typography>Photos must be between 800px and 500px on any of the sides.</Typography>
                       </div>
-                      <div className={classes.labelItem}>
+                      <div className="flex mb-[1rem] [&_svg]:m-[0.2rem_1rem_0_0]">
                         <CheckCircleRoundedIcon />
                         <Typography>Titles and tags can be included in preview file. How can I do this?</Typography>
                       </div>
@@ -463,13 +461,13 @@ const UploadFiles = () => {
 
             <label
               htmlFor="btn-upload"
-              className={classes.fileUploadContainer}
+              className="flex flex-col justify-center items-center min-h-[30rem] [border:2px_dashed] border-[#114960] mb-[2.5rem] mt-[1.5rem] focus:[border:2px_dashed] focus:outline-none"
               {...getRootProps({
                 onClick: (e) => (e.currentTarget.style.border = "2px dashed #26AA10"),
               })}
               style={{ border: isActive }}
             >
-              <div className={classes.uploadIconWrapper}>
+              <div className="flex-col text-[8.5rem] text-[#97A1A8] rounded-[100%] flex items-center justify-center mb-[0.8rem]">
                 <input
                   {...getInputProps({
                     multiple: true,
@@ -477,25 +475,25 @@ const UploadFiles = () => {
                 />
                 <FontAwesomeIcon icon={faCloudUploadAlt} />
 
-                {/* <p className={classes.imageErrorText}> */}
+                {/* <p className="text-[red] font-[bold] text-[1.6rem]"> */}
                 {/* {imageError} */}
                 {displayErrors()}
                 {/* </p> */}
 
-                <Typography className={classes.photoUploadText} variant="body1">
+                <Typography className="text-[2.5rem] text-[#97A1A8] max-[479.95px]:p-[1rem] max-[479.95px]:text-center" variant="body1">
                   Drag and drop or click to upload an photo
                 </Typography>
 
                 {isImageDimensionOkay ? (
                   <Typography
-                    className={classes.subtitle}
+                    className="text-[1.8rem] text-[#97A1A8]"
                     variant="body1"
                     // style={{ color: "red" }}
                   >
                     Your image dimension exceeds the limit. Preview files must be between 820px and 510px on any of the sides.
                   </Typography>
                 ) : (
-                  <Typography className={classes.subtitle} variant="body1">
+                  <Typography className="text-[1.8rem] text-[#97A1A8]" variant="body1">
                     Preview files must be between 800px and 500px on any of the sides.
                   </Typography>
                 )}
@@ -506,11 +504,11 @@ const UploadFiles = () => {
 
             {getUploadFiles()}
 
-            <div className={classes.singleBorder}></div>
-            <div className={classes.uploadBtnRoot}>
-              <div className={classes.rejectFileWrapper}>{fileRejectionItems}</div>
-              <Button variant="contained" className={classes.uploadBtn} type="submit" disabled={disableDeleteBtn || isUploadBtnDisabled} onClick={handleUpload}>
-                <FontAwesomeIcon icon={faCloudUploadAlt} className={classes.uploadIcon} />
+            <div className="m-[2.5rem_0_2rem_0] [border-bottom:0.7px_solid_lightgray]"></div>
+            <div className="flex justify-between">
+              <div className="w-[86%]">{fileRejectionItems}</div>
+              <Button variant="contained" className="h-[5.3rem] p-[1rem_3rem] [border:none] rounded-[3px] text-[18px] cursor-pointer bg-[#0088f2] text-[white] [transition:all_0.3s_linear] hover:bg-[#0773c5] max-[479.95px]:w-[100%] max-[479.95px]:ml-[0%] max-[479.95px]:text-[14px] max-[479.95px]:p-[1rem_0.9rem] max-[479.95px]:[transform:translateX(0%)]" type="submit" disabled={disableDeleteBtn || isUploadBtnDisabled} onClick={handleUpload}>
+                <FontAwesomeIcon icon={faCloudUploadAlt} className="mr-[7px]" />
                 {disableDeleteBtn ? "Uploading..." : "Upload"}
               </Button>
             </div>

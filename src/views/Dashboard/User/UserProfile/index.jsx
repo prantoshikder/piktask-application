@@ -1,7 +1,7 @@
 "use client";
 
-import { Button, Container, FormControl, FormControlLabel, Grid, TextField, Typography } from "@mui/material";
-import Switch from "@mui/material/Switch";
+import { Button, Container, FormControl, FormControlLabel, Grid, TextField, Typography } from "@/components/ui-kit";
+import { Switch } from "@/components/ui-kit";
 import axios from "axios";
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -20,13 +20,11 @@ import Header from "../../../../components/ui/Header";
 import Loader from "../../../../components/ui/Loader";
 import { expiredLoginTime, imageObjSchema } from "../../../../helpers";
 import Layout from "../../../../Layout";
-import useStyles from "./UserProfile.style";
 
 const UserSideBar = lazy(() => import("../../../../components/ui/dashboard/user/UserSideBar"));
 const Footer = lazy(() => import("../../../../components/ui/Footer"));
 
 const UserProfile = () => {
-  const { classes } = useStyles();
   const user = useSelector((state) => state.user);
   const userProfile = useSelector((state) => state.userProfile);
 
@@ -188,39 +186,39 @@ const UserProfile = () => {
       <Container>
         <Grid container spacing={2}>
           <Suspense fallback={<Loader />}>
-            <Grid size={{ xs: 12, sm: 3, md: 3 }} className={classes.cardItem}>
+            <Grid size={{ xs: 12, sm: 3, md: 3 }} className="max-[576px]:max-w-[100%] max-[576px]:basis-[100%]">
               <UserSideBar />
             </Grid>
           </Suspense>
 
           <Suspense fallback={<Loader />}>
-            <Grid size={{ xs: 12, sm: 9, md: 9 }} className={classes.cardItem}>
-              <div className={classes.userProfileRoot}>
-                <div className={classes.headingWrapper}>
+            <Grid size={{ xs: 12, sm: 9, md: 9 }} className="max-[576px]:max-w-[100%] max-[576px]:basis-[100%]">
+              <div className="bg-[white]">
+                <div className="flex mb-[2.5rem] justify-between max-[425.95px]:block">
                   <div>
-                    <Typography className={classes.settingsFormTitle} variant="h4">
+                    <Typography className="text-[#114960] font-[700] p-[3rem] max-[425.95px]:p-[1.5rem_2.5rem]" variant="h4">
                       {/* Connect */}
                       Profile Settings
                     </Typography>
                   </div>
                 </div>
 
-                <hr className={classes.separator} />
+                <hr className="border-[0] ml-[3%] w-[94%] h-[.1rem] bg-[rgb(112_112_112_/_38%)]" />
 
-                <form onSubmit={handleSubmit} className={classes.selectPeriodFrom}>
-                  <div className={classes.cardRoot}>
-                    <Grid className={classes.profileInfoField} container spacing={0}>
+                <form onSubmit={handleSubmit}>
+                  <div className="pb-[1rem] shadow-[0_1px_2px_0_rgb(0_0_0_/_10%)]">
+                    <Grid className="p-[2rem] max-[425.95px]:p-[1.5rem]" container spacing={0}>
                       <Grid size={{ xs: 12, sm: 6, md: 6 }}>
-                        <Typography className={classes.personalInfoTitle} variant="h4">
+                        <Typography className="text-[#114960] font-[700] p-[0_0_2rem_1rem]" variant="h4">
                           Personal data
                         </Typography>
 
-                        <div className={classes.personalDataField}>
+                        <div className="p-[1rem]">
                           <TextField
                             fullWidth
                             variant="outlined"
                             label="Real Name"
-                            className={classes.formControl}
+                            className="mb-[1rem]"
                             name="name"
                             value={userProfileInfo.name}
                             onChange={(e) => setUserProfileInfo({ ...userProfileInfo, name: e.target.value })}
@@ -230,7 +228,7 @@ const UserProfile = () => {
                             fullWidth
                             variant="outlined"
                             label="Location"
-                            className={classes.formControl}
+                            className="mb-[1rem]"
                             name="location"
                             value={userProfileInfo.location}
                             onChange={(e) => setUserProfileInfo({ ...userProfileInfo, location: e.target.value })}
@@ -240,7 +238,7 @@ const UserProfile = () => {
                             fullWidth
                             variant="outlined"
                             label="Job Position"
-                            className={classes.formControl}
+                            className="mb-[1rem]"
                             name="job_position"
                             value={userProfileInfo.job_position}
                             onChange={(e) => setUserProfileInfo({ ...userProfileInfo, job_position: e.target.value })}
@@ -250,7 +248,7 @@ const UserProfile = () => {
                             fullWidth
                             variant="outlined"
                             label="Telephone Number"
-                            className={classes.formControl}
+                            className="mb-[1rem]"
                             name="phone"
                             type="number"
                             inputProps={{
@@ -264,17 +262,17 @@ const UserProfile = () => {
                       </Grid>
 
                       <Grid size={{ xs: 12, sm: 6, md: 6 }}>
-                        <Typography className={classes.accountInfoTitle} variant="h4">
+                        <Typography className="text-[#114960] font-[700] p-[0_0_2rem_1rem]" variant="h4">
                           Account Information
                         </Typography>
 
-                        <div className={classes.personalDataField}>
+                        <div className="p-[1rem]">
                           <TextField
                             fullWidth
                             variant="outlined"
                             label="User Name"
                             disabled
-                            className={classes.formControl}
+                            className="mb-[1rem]"
                             name="username"
                             value={userProfileInfo.username}
                           />
@@ -284,7 +282,7 @@ const UserProfile = () => {
                             disabled
                             variant="outlined"
                             label="Email"
-                            className={classes.formControl}
+                            className="mb-[1rem]"
                             name="email"
                             value={userProfileInfo.email}
                           />
@@ -295,17 +293,17 @@ const UserProfile = () => {
                             fullWidth
                             variant="outlined"
                             label="Website"
-                            className={classes.formControl}
+                            className="mb-[1rem]"
                             name="website"
                             value={userProfileInfo.website}
                             onChange={(e) => setUserProfileInfo({ ...userProfileInfo, website: e.target.value })}
                           />
 
-                          <div className={classes.dataChangeBtn}>
-                            <Link to="/reset-password" className={classes.passwordResetLink}>
+                          <div className="flex items-center justify-between max-[425.95px]:flex-col">
+                            <Link to="/reset-password" className="text-[17px] text-[#959595] text-center block no-underline [transition:all_0.3s_linear] hover:text-[#0088f2] hover:underline hover:[transition:all_0.3s_linear] max-[768px]:top-[-.6rem] max-[425.95px]:pb-[1rem]">
                               Change Password
                             </Link>
-                            <Button type="submit" className={classes.profileInfoSaveBtn}>
+                            <Button type="submit" className="h-[5.5rem] w-[24rem] text-[#fff] [border:0.5px_solid_#0088f2] bg-[#0088f2] [transition:all_0.3s_linear] hover:bg-[#0773c5]">
                               Save Changes
                             </Button>
                           </div>
@@ -314,19 +312,19 @@ const UserProfile = () => {
                     </Grid>
 
                     {/* Professional Portfolio section start  */}
-                    <div className={classes.portfolioHeadingWrapper}>
-                      <Typography className={classes.settingsFormTitle} variant="h4">
+                    <div className="mb-[2.5rem] justify-between">
+                      <Typography className="text-[#114960] font-[700] p-[3rem] max-[425.95px]:p-[1.5rem_2.5rem]" variant="h4">
                         Professional Portfolio
                       </Typography>
 
-                      <hr className={classes.separator} />
+                      <hr className="border-[0] ml-[3%] w-[94%] h-[.1rem] bg-[rgb(112_112_112_/_38%)]" />
                     </div>
 
-                    <div className={classes.cardWrapper}>
-                      <div className={`${classes.fieldsGroup} ${classes.linkField}`}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.portfolioLink}>
-                          <label htmlFor="shutterstock" className={classes.portfolioIconWrapper}>
-                            <img src={shutterstockLogo} alt="Shutterstock Icon" width="25px" height="57px" />
+                    <div className="p-[.6rem_2rem_0rem]">
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[2rem] max-[960px]:mb-[inherit] max-[960px]:last:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mb-[1rem] mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem] max-[960px]:last:mb-[0]" }} className="relative pl-[8rem] [&_fieldset]:rounded-tl-[0] [&_fieldset]:rounded-bl-[0] [&_fieldset]:[border-left-color:transparent] max-[768.95px]:pb-[1.7rem]">
+                          <label htmlFor="shutterstock" className="absolute left-[0] top-[-.5rem] w-[8rem] h-[5.85rem] flex justify-center [border:1px_solid_rgba(0,0,0,0.23)] [&_img]:w-[2.5rem] [&_img]:h-[auto]">
+                            <img src={shutterstockLogo.src} alt="Shutterstock Icon" width="25px" height="57px" />
                           </label>
                           <TextField
                             id="shutterstock"
@@ -334,7 +332,7 @@ const UserProfile = () => {
                             helperText={errors.shutterstock}
                             label="Your Shutterstock Account"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#B5B5B5] [&_label]:text-[1.6rem]"
                             placeholder="Your Shutterstock Account"
                             name="shutterstock"
                             value={userProfileInfo.shutterstock}
@@ -343,10 +341,10 @@ const UserProfile = () => {
                         </FormControl>
                       </div>
 
-                      <div className={`${classes.fieldsGroup} ${classes.linkField}`}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.portfolioLink}>
-                          <label htmlFor="pinterest" className={classes.portfolioIconWrapper}>
-                            <img src={pinterestIcon} alt="Pinterest Icon" width="25px" height="57px" />
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[2rem] max-[960px]:mb-[inherit] max-[960px]:last:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mb-[1rem] mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem] max-[960px]:last:mb-[0]" }} className="relative pl-[8rem] [&_fieldset]:rounded-tl-[0] [&_fieldset]:rounded-bl-[0] [&_fieldset]:[border-left-color:transparent] max-[768.95px]:pb-[1.7rem]">
+                          <label htmlFor="pinterest" className="absolute left-[0] top-[-.5rem] w-[8rem] h-[5.85rem] flex justify-center [border:1px_solid_rgba(0,0,0,0.23)] [&_img]:w-[2.5rem] [&_img]:h-[auto]">
+                            <img src={pinterestIcon.src} alt="Pinterest Icon" width="25px" height="57px" />
                           </label>
                           <TextField
                             id="pinterest"
@@ -354,7 +352,7 @@ const UserProfile = () => {
                             helperText={errors.pinterest}
                             label="Your Pinterest Account"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#B5B5B5] [&_label]:text-[1.6rem]"
                             placeholder="Your Pinterest Account"
                             name="pinterest"
                             value={userProfileInfo.pinterest}
@@ -363,10 +361,10 @@ const UserProfile = () => {
                         </FormControl>
                       </div>
 
-                      <div className={`${classes.fieldsGroup} ${classes.linkField}`}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.portfolioLink}>
-                          <label htmlFor="behance" className={classes.portfolioIconWrapper}>
-                            <img src={behanceIcon} alt="Behance Icon" width="25px" height="57px" />
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[2rem] max-[960px]:mb-[inherit] max-[960px]:last:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mb-[1rem] mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem] max-[960px]:last:mb-[0]" }} className="relative pl-[8rem] [&_fieldset]:rounded-tl-[0] [&_fieldset]:rounded-bl-[0] [&_fieldset]:[border-left-color:transparent] max-[768.95px]:pb-[1.7rem]">
+                          <label htmlFor="behance" className="absolute left-[0] top-[-.5rem] w-[8rem] h-[5.85rem] flex justify-center [border:1px_solid_rgba(0,0,0,0.23)] [&_img]:w-[2.5rem] [&_img]:h-[auto]">
+                            <img src={behanceIcon.src} alt="Behance Icon" width="25px" height="57px" />
                           </label>
                           <TextField
                             id="behance"
@@ -374,7 +372,7 @@ const UserProfile = () => {
                             helperText={errors.behance}
                             label="Your Behance Account"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#B5B5B5] [&_label]:text-[1.6rem]"
                             placeholder="Your Behance Account"
                             name="behance"
                             value={userProfileInfo.behance}
@@ -383,10 +381,10 @@ const UserProfile = () => {
                         </FormControl>
                       </div>
 
-                      <div className={`${classes.fieldsGroup} ${classes.linkField}`}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.portfolioLink}>
-                          <label htmlFor="dribbble" className={classes.portfolioIconWrapper}>
-                            <img src={dribbbleIcon} alt="Dribbble Icon" width="25px" height="57px" />
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[2rem] max-[960px]:mb-[inherit] max-[960px]:last:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mb-[1rem] mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem] max-[960px]:last:mb-[0]" }} className="relative pl-[8rem] [&_fieldset]:rounded-tl-[0] [&_fieldset]:rounded-bl-[0] [&_fieldset]:[border-left-color:transparent] max-[768.95px]:pb-[1.7rem]">
+                          <label htmlFor="dribbble" className="absolute left-[0] top-[-.5rem] w-[8rem] h-[5.85rem] flex justify-center [border:1px_solid_rgba(0,0,0,0.23)] [&_img]:w-[2.5rem] [&_img]:h-[auto]">
+                            <img src={dribbbleIcon.src} alt="Dribbble Icon" width="25px" height="57px" />
                           </label>
                           <TextField
                             id="dribbble"
@@ -394,7 +392,7 @@ const UserProfile = () => {
                             helperText={errors.dribbble}
                             label="Your Dribbble Account"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#B5B5B5] [&_label]:text-[1.6rem]"
                             placeholder="Your Dribbble Account"
                             name="dribbble"
                             value={userProfileInfo.dribbble}
@@ -404,18 +402,18 @@ const UserProfile = () => {
                       </div>
                     </div>
 
-                    <div className={classes.socialHeadingWrapper}>
-                      <Typography className={classes.settingsFormTitle} variant="h4">
+                    <div className="mb-[2.5rem] justify-between">
+                      <Typography className="text-[#114960] font-[700] p-[3rem] max-[425.95px]:p-[1.5rem_2.5rem]" variant="h4">
                         Social Link
                       </Typography>
 
-                      <hr className={classes.separator} />
+                      <hr className="border-[0] ml-[3%] w-[94%] h-[.1rem] bg-[rgb(112_112_112_/_38%)]" />
                     </div>
-                    <div className={classes.cardWrapper}>
-                      <div className={`${classes.fieldsGroup} ${classes.linkField}`}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.portfolioLink}>
-                          <label htmlFor="facebook" className={classes.portfolioIconWrapper}>
-                            <img src={facebookLogo} className={classes.facebookIcon} alt="Facebook Icon" width="25px" height="57px" />
+                    <div className="p-[.6rem_2rem_0rem]">
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[2rem] max-[960px]:mb-[inherit] max-[960px]:last:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mb-[1rem] mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem] max-[960px]:last:mb-[0]" }} className="relative pl-[8rem] [&_fieldset]:rounded-tl-[0] [&_fieldset]:rounded-bl-[0] [&_fieldset]:[border-left-color:transparent] max-[768.95px]:pb-[1.7rem]">
+                          <label htmlFor="facebook" className="absolute left-[0] top-[-.5rem] w-[8rem] h-[5.85rem] flex justify-center [border:1px_solid_rgba(0,0,0,0.23)] [&_img]:w-[2.5rem] [&_img]:h-[auto]">
+                            <img src={facebookLogo.src} alt="Facebook Icon" width="25px" height="57px" />
                           </label>
                           <TextField
                             id="facebook"
@@ -423,7 +421,7 @@ const UserProfile = () => {
                             helperText={errors.facebook}
                             label="Your Facebook Account"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#B5B5B5] [&_label]:text-[1.6rem]"
                             placeholder="Your Facebook Account"
                             name="facebook"
                             value={userProfileInfo.facebook}
@@ -432,10 +430,10 @@ const UserProfile = () => {
                         </FormControl>
                       </div>
 
-                      <div className={`${classes.fieldsGroup} ${classes.linkField}`}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.portfolioLink}>
-                          <label htmlFor="twitter" className={classes.portfolioIconWrapper}>
-                            <img src={twitterLogo} alt="Twitter Icon" width="25px" height="57px" />
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[2rem] max-[960px]:mb-[inherit] max-[960px]:last:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mb-[1rem] mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem] max-[960px]:last:mb-[0]" }} className="relative pl-[8rem] [&_fieldset]:rounded-tl-[0] [&_fieldset]:rounded-bl-[0] [&_fieldset]:[border-left-color:transparent] max-[768.95px]:pb-[1.7rem]">
+                          <label htmlFor="twitter" className="absolute left-[0] top-[-.5rem] w-[8rem] h-[5.85rem] flex justify-center [border:1px_solid_rgba(0,0,0,0.23)] [&_img]:w-[2.5rem] [&_img]:h-[auto]">
+                            <img src={twitterLogo.src} alt="Twitter Icon" width="25px" height="57px" />
                           </label>
                           <TextField
                             id="twitter"
@@ -443,7 +441,7 @@ const UserProfile = () => {
                             helperText={errors.twitter}
                             label="Your Twitter Account"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#B5B5B5] [&_label]:text-[1.6rem]"
                             placeholder="Your Twitter Account"
                             name="twitter"
                             value={userProfileInfo.twitter}
@@ -452,10 +450,10 @@ const UserProfile = () => {
                         </FormControl>
                       </div>
 
-                      <div className={`${classes.fieldsGroup} ${classes.linkField}`}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.portfolioLink}>
-                          <label htmlFor="linkedin" className={classes.portfolioIconWrapper}>
-                            <img src={linkedinLogo} alt="Linkedin Icon" width="25px" height="57px" />
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[2rem] max-[960px]:mb-[inherit] max-[960px]:last:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mb-[1rem] mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem] max-[960px]:last:mb-[0]" }} className="relative pl-[8rem] [&_fieldset]:rounded-tl-[0] [&_fieldset]:rounded-bl-[0] [&_fieldset]:[border-left-color:transparent] max-[768.95px]:pb-[1.7rem]">
+                          <label htmlFor="linkedin" className="absolute left-[0] top-[-.5rem] w-[8rem] h-[5.85rem] flex justify-center [border:1px_solid_rgba(0,0,0,0.23)] [&_img]:w-[2.5rem] [&_img]:h-[auto]">
+                            <img src={linkedinLogo.src} alt="Linkedin Icon" width="25px" height="57px" />
                           </label>
                           <TextField
                             id="linkedin"
@@ -463,7 +461,7 @@ const UserProfile = () => {
                             helperText={errors.linkedin}
                             label="Your Linkedin Account"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#B5B5B5] [&_label]:text-[1.6rem]"
                             placeholder="Your Linkedin Account"
                             name="linkedin"
                             value={userProfileInfo.linkedin}
@@ -472,10 +470,10 @@ const UserProfile = () => {
                         </FormControl>
                       </div>
 
-                      <div className={`${classes.fieldsGroup} ${classes.linkField}`}>
-                        <FormControl fullWidth classes={{ fullWidth: classes.fullWidth }} className={classes.portfolioLink}>
-                          <label htmlFor="instagram" className={classes.portfolioIconWrapper}>
-                            <img src={instagramLogo} alt="Instagram Icon" width="25px" height="57px" />
+                      <div className="flex items-center justify-center mb-[2rem] [&_legend]:hidden [&_legend]:w-[0] [&_legend]:h-[0] max-[960px]:w-[100%] max-[960px]:flex-col max-[960px]:mb-[2rem] max-[960px]:mb-[inherit] max-[960px]:last:mb-[0]">
+                        <FormControl fullWidth classes={{ fullWidth: "mb-[1rem] mr-[1rem] ml-[1rem] max-[960px]:mb-[2rem] max-[960px]:last:mb-[0]" }} className="relative pl-[8rem] [&_fieldset]:rounded-tl-[0] [&_fieldset]:rounded-bl-[0] [&_fieldset]:[border-left-color:transparent] max-[768.95px]:pb-[1.7rem]">
+                          <label htmlFor="instagram" className="absolute left-[0] top-[-.5rem] w-[8rem] h-[5.85rem] flex justify-center [border:1px_solid_rgba(0,0,0,0.23)] [&_img]:w-[2.5rem] [&_img]:h-[auto]">
+                            <img src={instagramLogo.src} alt="Instagram Icon" width="25px" height="57px" />
                           </label>
                           <TextField
                             id="instagram"
@@ -483,7 +481,7 @@ const UserProfile = () => {
                             helperText={errors.instagram}
                             label="Your Instagram Account"
                             variant="outlined"
-                            className={`${classes.inputField}`}
+                            className="[&_label]:text-[#B5B5B5] [&_label]:text-[1.6rem]"
                             placeholder="Your Instagram Account"
                             name="instagram"
                             value={userProfileInfo.instagram}
@@ -493,31 +491,31 @@ const UserProfile = () => {
                       </div>
                     </div>
 
-                    <div className={classes.buttonGroup}>
-                      <Button className={`${classes.settingsBtn} ${classes.restoreBtn}`}>Cancel</Button>
+                    <div className="flex justify-end p-[0_3rem_2rem_0]">
+                      <Button className="p-[1rem_2rem] text-[#fff] text-[1.4rem] rounded-[.5rem] bg-[#ACB0C8] mr-[2rem] hover:bg-[rgb(149_154_185)]">Cancel</Button>
 
-                      <Button type="submit" className={`${classes.settingsBtn} ${classes.saveBtn}`}>
+                      <Button type="submit" className="p-[1rem_2rem] text-[#fff] text-[1.4rem] rounded-[.5rem] bg-[#0088f2] [transition:all_0.3s_linear] hover:bg-[#0773c5]">
                         Save Changes
                       </Button>
                     </div>
 
-                    <Typography className={classes.notification} variant="h4">
+                    <Typography className="p-[0_0_0_3rem] text-[#114960] font-[700] max-[425.95px]:p-[1.5rem]" variant="h4">
                       Notifications
                     </Typography>
 
-                    <div className={classes.getNews}>
-                      <Typography className={classes.getNewsTitle}>I wish to receive newsletters,promotions and news from Piktask LLC</Typography>
+                    <div className="flex m-[3rem] p-[2rem_3rem] items-center justify-between [border:0.5px_solid_rgb(0_0_0_/_23%)]">
+                      <Typography className="font-[500]">I wish to receive newsletters,promotions and news from Piktask LLC</Typography>
                       <FormControlLabel
                         control={<Switch checked={checked} onChange={handleChange} inputProps={{ "aria-label": "controlled" }} />}
                         label="Primary"
                       />
                     </div>
 
-                    <div className={classes.basicInfo}>
+                    <div className="bg-[#d7d7d76e] m-[3rem] p-[2rem] rounded-[4px] leading-[26px] text-justify">
                       <Typography>
                         Basic information on Data Protection: Piktask LLC stores your data to improve the service and, with your consent, offers news,
                         promotions and raffles, as well as projects and releases from Piktask LLC.
-                        <Link to="#" className={classes.moreInfo}>
+                        <Link to="#" className="ml-[0.5rem] text-[1.5rem] font-[700] text-[#5b5bf1] no-underline">
                           More information
                         </Link>
                       </Typography>

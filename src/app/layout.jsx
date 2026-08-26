@@ -1,16 +1,16 @@
+import { imageBaseUrls } from "@/server/unsplash";
 import { Roboto } from "next/font/google";
 import { Suspense } from "react";
 import "react-toastify/dist/ReactToastify.css";
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import { setBaseURL } from "../helpers";
 import AppBootstrap from "./AppBootstrap";
 import AppToaster from "./AppToaster";
 import BaseUrlScript from "./BaseUrlScript";
-import GlobalStyleProvider from "./GlobalStyleProvider";
+import "./globals.css";
 import StoreProvider from "./StoreProvider";
-import StyledComponentsRegistry from "./StyledComponentsRegistry";
 import ThemeRegistry from "./ThemeRegistry";
-import { setBaseURL } from "../helpers";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -99,50 +99,41 @@ const websiteSchema = {
 };
 
 /**
- * The image bucket URLs the whole app builds src attributes from. CRA fetched
- * these in the browser and blocked the entire UI behind a progress bar until
- * they arrived; fetching them here means the server-rendered HTML already has
- * correct image URLs.
+ * Base URLs the app prefixes onto image paths.
+ *
+ * Images now come from Unsplash, which returns absolute URLs, so every base is
+ * an empty string and the concatenations in the components are a no-op. This is
+ * read directly rather than fetched: NEXT_PUBLIC_API_URL is the relative "/api",
+ * which a server-side fetch cannot resolve.
  */
-async function fetchImageBaseUrls() {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/client/urls`, {
-      next: { revalidate: 3600 },
-    });
-
-    if (!res.ok) return null;
-
-    const data = await res.json();
-    return data?.status ? data.urls : null;
-  } catch {
-    return null;
-  }
+function fetchImageBaseUrls() {
+  return imageBaseUrls();
 }
 
-export default async function RootLayout({ children }) {
-  const urls = await fetchImageBaseUrls();
+export default function RootLayout({ children }) {
+  const urls = fetchImageBaseUrls();
 
   // Make the URLs resolvable by getBaseURL() during this server render.
   if (urls) setBaseURL(urls);
 
   return (
     <html lang="en" className={roboto.variable}>
-      <body>
-        <StyledComponentsRegistry>
-          <ThemeRegistry>
-            <GlobalStyleProvider />
-            <StoreProvider>
-              <BaseUrlScript urls={urls} />
-              <AppBootstrap />
-              <AppToaster />
-              {/* useSearchParams() (via the react-router compatibility layer)
-                  requires a suspense boundary above every consumer. */}
-              <Suspense fallback={null}>
-                <div className="main-content">{children}</div>
-              </Suspense>
-            </StoreProvider>
-          </ThemeRegistry>
-        </StyledComponentsRegistry>
+      {/* Browser extensions (password managers, colour pickers) commonly add
+          attributes to <body> before React hydrates, which otherwise reports a
+          hydration mismatch that no application change can fix. */}
+      <body suppressHydrationWarning suppressContentEditableWarning>
+        <ThemeRegistry>
+          <StoreProvider>
+            <BaseUrlScript urls={urls} />
+            <AppBootstrap />
+            <AppToaster />
+            {/* useSearchParams() (via the react-router compatibility layer)
+                requires a suspense boundary above every consumer. */}
+            <Suspense fallback={null}>
+              <div className="main-content">{children}</div>
+            </Suspense>
+          </StoreProvider>
+        </ThemeRegistry>
 
         <script
           type="application/ld+json"

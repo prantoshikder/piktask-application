@@ -1,19 +1,17 @@
 "use client";
 
-import { Card, CardContent, List, ListItem } from "@mui/material";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import GetAppIcon from "@mui/icons-material/GetApp";
-import PeopleOutlineIcon from "@mui/icons-material/PeopleOutlined";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutlined";
-import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import { Card, CardContent, List, ListItem } from "@/components/ui-kit";
+import { HeartOutlined as FavoriteBorderIcon } from "@ant-design/icons";
+import { DownloadOutlined as GetAppIcon } from "@ant-design/icons";
+import { TeamOutlined as PeopleOutlineIcon } from "@ant-design/icons";
+import { UserOutlined as PersonOutlineIcon } from "@ant-design/icons";
+import { PoweroffOutlined as PowerSettingsNewIcon } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "@/lib/router";
 import { Link } from "@/lib/router";
-import useStyles from "./UserSidebarMenu.style";
 
 const UserSidebarMenu = () => {
-  const { classes } = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -54,32 +52,32 @@ const UserSidebarMenu = () => {
   };
 
   return (
-    <Card className={classes.userMenuList}>
+    <Card className="shadow-[0_1px_2px_0_rgb(0_0_0_/_10%)]">
       <CardContent>
         <List component="nav" aria-labelledby="nested-sidebar-nav">
-          <ListItem className={classes.userMenuItem} classes={{ selected: classes.selectedItem }} component={Link} to="/user/profile" selected={value === 0}>
+          <ListItem className="p-[1rem_1rem] text-[#676767] rounded-[1rem] mb-[1.2rem] cursor-pointer [transition:all_0.3s_linear] hover:bg-[#F4F7FF] hover:text-[#4A7AFF] [&_svg]:text-[2.2rem] [&_span]:text-[1.5rem] [&_span]:ml-[1.5rem]" classes={{ selected: "bg-[#F4F7FF]! text-[#4A7AFF]" }} component={Link} to="/user/profile" selected={value === 0}>
             <PersonOutlineIcon />
             <span>Edit Profile</span>
           </ListItem>
 
-          <ListItem className={classes.userMenuItem} classes={{ selected: classes.selectedItem }} component={Link} to="/user/favorites" selected={value === 1}>
+          <ListItem className="p-[1rem_1rem] text-[#676767] rounded-[1rem] mb-[1.2rem] cursor-pointer [transition:all_0.3s_linear] hover:bg-[#F4F7FF] hover:text-[#4A7AFF] [&_svg]:text-[2.2rem] [&_span]:text-[1.5rem] [&_span]:ml-[1.5rem]" classes={{ selected: "bg-[#F4F7FF]! text-[#4A7AFF]" }} component={Link} to="/user/favorites" selected={value === 1}>
             <FavoriteBorderIcon />
             <span>Favourite</span>
           </ListItem>
 
-          <ListItem className={classes.userMenuItem} classes={{ selected: classes.selectedItem }} component={Link} to="/user/downloads" selected={value === 2}>
+          <ListItem className="p-[1rem_1rem] text-[#676767] rounded-[1rem] mb-[1.2rem] cursor-pointer [transition:all_0.3s_linear] hover:bg-[#F4F7FF] hover:text-[#4A7AFF] [&_svg]:text-[2.2rem] [&_span]:text-[1.5rem] [&_span]:ml-[1.5rem]" classes={{ selected: "bg-[#F4F7FF]! text-[#4A7AFF]" }} component={Link} to="/user/downloads" selected={value === 2}>
             <GetAppIcon />
             <span>Downloads</span>
           </ListItem>
 
-          <ListItem className={classes.userMenuItem} classes={{ selected: classes.selectedItem }} component={Link} to="/user/following" selected={value === 3}>
+          <ListItem className="p-[1rem_1rem] text-[#676767] rounded-[1rem] mb-[1.2rem] cursor-pointer [transition:all_0.3s_linear] hover:bg-[#F4F7FF] hover:text-[#4A7AFF] [&_svg]:text-[2.2rem] [&_span]:text-[1.5rem] [&_span]:ml-[1.5rem]" classes={{ selected: "bg-[#F4F7FF]! text-[#4A7AFF]" }} component={Link} to="/user/following" selected={value === 3}>
             <PeopleOutlineIcon />
             <span>Following</span>
           </ListItem>
 
           {/* <ListItem
-                      className={classes.userMenuItem}
-                      classes={{ selected: classes.selectedItem }}
+                      className="p-[1rem_1rem] text-[#676767] rounded-[1rem] mb-[1.2rem] cursor-pointer [transition:all_0.3s_linear] hover:bg-[#F4F7FF] hover:text-[#4A7AFF] [&_svg]:text-[2.2rem] [&_span]:text-[1.5rem] [&_span]:ml-[1.5rem]"
+                      classes={{ selected: "bg-[#F4F7FF]! text-[#4A7AFF]" }}
                       component={Link}
                       to="/user/devices"
                       selected={value === 4}
@@ -89,8 +87,8 @@ const UserSidebarMenu = () => {
                     </ListItem>
 
                     <ListItem
-                      className={classes.userMenuItem}
-                      classes={{ selected: classes.selectedItem }}
+                      className="p-[1rem_1rem] text-[#676767] rounded-[1rem] mb-[1.2rem] cursor-pointer [transition:all_0.3s_linear] hover:bg-[#F4F7FF] hover:text-[#4A7AFF] [&_svg]:text-[2.2rem] [&_span]:text-[1.5rem] [&_span]:ml-[1.5rem]"
+                      classes={{ selected: "bg-[#F4F7FF]! text-[#4A7AFF]" }}
                       component={Link}
                       to="/user/subscription"
                       selected={value === 5}
@@ -98,7 +96,7 @@ const UserSidebarMenu = () => {
                       <span>My Subscription</span>
                     </ListItem> */}
 
-          <ListItem className={classes.userMenuItem} onClick={handleSignout}>
+          <ListItem className="p-[1rem_1rem] text-[#676767] rounded-[1rem] mb-[1.2rem] cursor-pointer [transition:all_0.3s_linear] hover:bg-[#F4F7FF] hover:text-[#4A7AFF] [&_svg]:text-[2.2rem] [&_span]:text-[1.5rem] [&_span]:ml-[1.5rem]" onClick={handleSignout}>
             <PowerSettingsNewIcon />
             <span>Logout</span>
           </ListItem>

@@ -4,12 +4,11 @@ import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FacebookLogin from "@greatsumini/react-facebook-login";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
-import { Button } from "@mui/material";
+import { Button } from "@/components/ui-kit";
 import { jwtDecode as jwt_decode } from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "@/lib/router";
 import Spacing from "./../../Spacing/index";
-import useStyles from "./SocialLogin.style";
 
 /**
  * react-google-login and react-facebook-login are both unmaintained and do not
@@ -26,7 +25,6 @@ const clientId =
 const fbAppId = process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "2594350707375312";
 
 const SocialLogin = (props) => {
-  const { classes } = useStyles();
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -88,7 +86,7 @@ const SocialLogin = (props) => {
   };
 
   return (
-    <div className={classes.socialsButtons}>
+    <div className="flex justify-between items-center mb-[1.5rem]">
       {/* Google's identity flow renders its own branded button; unlike the old
           library it cannot be swapped for a custom MUI button and still return
           an ID token. */}
@@ -104,8 +102,8 @@ const SocialLogin = (props) => {
         onFail={() => {}}
         fields="name,email,picture"
         render={({ onClick }) => (
-          <Button className={classes.facebookBtn} onClick={onClick}>
-            <FontAwesomeIcon className={classes.facebookIconBtn} icon={faFacebookF} />
+          <Button className="flex items-center p-[0.8rem_5rem] [border:1px_solid_#425993] rounded-[4px] text-[white] bg-[#425993] [transition:all_0.3s_linear] [&_span]:text-[1.8rem] [&_span]:text-[#fff] hover:bg-[#213567] max-[479.95px]:p-[0.6rem_5rem] max-[479.95px]:[&_span]:text-[1.5rem]" onClick={onClick}>
+            <FontAwesomeIcon className="text-[white] text-[1.6rem] mr-[0.8rem]!" icon={faFacebookF} />
             <span>Facebook</span>
           </Button>
         )}

@@ -1,7 +1,6 @@
 "use client";
 
-import { makeStyles } from "tss-react/mui";
-import { CircularProgress, Grid } from "@mui/material";
+import { CircularProgress, Grid } from "@/components/ui-kit";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -9,17 +8,9 @@ import { getBaseURL, imageObjSchema } from "../../../helpers";
 import ProductImage from "./ProductImage";
 import ProductInfo from "./ProductInfo";
 
-const useStyles = makeStyles()((theme) => ({
-  productColumn: {
-    [theme.breakpoints.down("sm")]: {
-      maxWidth: "100%",
-      flexBasis: "100%",
-    },
-  },
-}));
+
 
 const ProductDetails = (props) => {
-  const { classes } = useStyles();
   const { imageID, setAllTags, location, shareUrl, setProductTitle, setThumbnail } = props;
   const user = useSelector((state) => state.user);
 
@@ -123,12 +114,12 @@ const ProductDetails = (props) => {
       <CircularProgress color="primary" />
     </div>
   ) : (
-    <Grid container spacing={4} classes={{ container: classes.itemDetailsContainer }}>
-      <Grid size={{ xs: 12, sm: 6, md: 7 }} className={classes.productColumn}>
+    <Grid container spacing={4}>
+      <Grid size={{ xs: 12, sm: 6, md: 7 }} className="max-[959.95px]:max-w-[100%] max-[959.95px]:basis-[100%]">
         <ProductImage setThumbnail={setThumbnail} imageDetails={imageDetails} />
       </Grid>
 
-      <Grid size={{ xs: 12, sm: 6, md: 5 }} className={classes.productColumn}>
+      <Grid size={{ xs: 12, sm: 6, md: 5 }} className="max-[959.95px]:max-w-[100%] max-[959.95px]:basis-[100%]">
         <ProductInfo
           productDetails={{
             isFollowing,

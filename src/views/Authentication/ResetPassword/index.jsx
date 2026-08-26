@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Container, Grid, Typography } from "@mui/material";
+import { Button, Container, Grid, Typography } from "@/components/ui-kit";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -13,10 +13,8 @@ import Header from "../../../components/ui/Header";
 import HeroSection from "../../../components/ui/Hero";
 import { imageObjSchema } from "../../../helpers";
 import Layout from "../../../Layout";
-import useStyles from "./ResetPassword.styles";
 
 const ResetPassword = () => {
-  const { classes } = useStyles();
   const history = useHistory();
   const location = useLocation();
   const user = useSelector((state) => state.user);
@@ -172,22 +170,22 @@ const ResetPassword = () => {
       <Container>
         <Grid container spacing={0} justifyContent="center">
           <Grid>
-            <div className={classes.cardWrapper} style={{ padding: "2.5rem" }}>
-              <div className={classes.cardHeadingWrapper}>
-                <Typography className={classes.cardHeading} variant="h2">
+            <div className="bg-[#fff] rounded-[4px] basis-[40%] max-[479.95px]:w-[30rem]" style={{ padding: "2.5rem" }}>
+              <div className="text-center">
+                <Typography className="text-[3rem] text-[#13303C]" variant="h2">
                   Reset Password
                 </Typography>
 
                 <Spacing space={{ height: "1.5rem" }} />
 
                 {!passwordChange && (
-                  <Typography className={classes.cardSubtitle}>
+                  <Typography className="text-[#13303C] w-[70%] m-[auto]">
                     Enter your email address below and we’ll send a special reset password link to your inbox.
                   </Typography>
                 )}
 
                 {passwordChange && (
-                  <Typography className={classes.cardSubtitle}>
+                  <Typography className="text-[#13303C] w-[70%] m-[auto]">
                     Enter your Token, New Password and Confirm Password <br /> to reset your password.
                   </Typography>
                 )}
@@ -209,11 +207,11 @@ const ResetPassword = () => {
                 )}
               </form>
 
-              <div className={classes.formButtonGroups}>
-                <Button component={Link} to="/login" className={classes.formLink} disableRipple>
+              <div className="flex justify-between mt-[1rem]">
+                <Button component={Link} to="/login" className="text-[#117A00] text-[1.7rem] [text-transform:inherit] p-[0] hover:bg-[transparent]" disableRipple>
                   Login
                 </Button>
-                <Button component={Link} to="/registration" className={classes.formLink} disableRipple>
+                <Button component={Link} to="/registration" className="text-[#117A00] text-[1.7rem] [text-transform:inherit] p-[0] hover:bg-[transparent]" disableRipple>
                   Not a member? Sign up
                 </Button>
               </div>

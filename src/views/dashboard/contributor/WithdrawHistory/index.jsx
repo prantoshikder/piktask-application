@@ -1,6 +1,7 @@
 "use client";
 
-import { useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@/components/ui-kit";
+import { usePathname } from "next/navigation";
 import axios from "axios";
 import moment from "moment";
 import React, { lazy, Suspense, useEffect, useState } from "react";
@@ -14,14 +15,12 @@ import Pagination from "../../../../components/ui/Pagination/index";
 import { expiredLoginTime } from "../../../../helpers";
 import Layout from "../../../../Layout";
 import HistoryTable from "./HistoryTable";
-import useStyles from "./WithdrawHistory.style";
 
 const TotalCountHistory = lazy(() => import("../../../../components/ui/dashboard/contributor/TotalCountHistory"));
 const Footer = lazy(() => import("../../../../components/ui/Footer"));
 
 const WithdrawHistory = () => {
-  const { classes } = useStyles();
-  const locationPath = document.location.pathname;
+  const locationPath = usePathname();
   const user = useSelector((state) => state.user);
   const mobileView = useMediaQuery("(max-width:769px)");
 
@@ -76,13 +75,13 @@ const WithdrawHistory = () => {
 
   return (
     <Layout title="Withdraw History">
-      <div className={classes.adminRoot}>
-        {mobileView ? null : <Sidebar className={classes.adminSidebar} />}
+      <div className="">
+        {mobileView ? null : <Sidebar />}
 
-        <main className={classes.content}>
+        <main className="p-[0] ml-[28rem] max-[768.95px]:w-[100%] max-[768.95px]:ml-[0rem]">
           <AdminHeader />
-          <div className={classes.withdrawHistoryWrapper}>
-            <div className={classes.headingWrapper}>
+          <div className="mt-[10rem] m-[2rem]">
+            <div className="flex justify-between">
               <Heading tag="h2">Withdraw History</Heading>
             </div>
 
@@ -90,7 +89,7 @@ const WithdrawHistory = () => {
               <TotalCountHistory />
             </Suspense>
 
-            <div className={classes.headingWrapper}>
+            <div className="flex justify-between">
               <Heading tag="h2">Records</Heading>
             </div>
 

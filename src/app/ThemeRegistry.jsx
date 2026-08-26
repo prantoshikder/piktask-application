@@ -1,32 +1,29 @@
 "use client";
 
-import { CacheProvider } from "@emotion/react";
-import { CssBaseline } from "@mui/material";
-import { ThemeProvider } from "@mui/material/styles";
-import { TssCacheProvider } from "tss-react";
-import { NextAppDirEmotionCacheProvider } from "tss-react/next/appDir";
+import { StyleProvider } from "@ant-design/cssinjs";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { ConfigProvider } from "antd";
 import theme from "../components/ui/Theme";
 
 /**
- * Emotion/tss SSR plumbing for the App Router.
+ * Ant Design setup.
  *
- * Two separate caches are registered so that styles rendered on the server are
- * flushed into the streamed HTML instead of only being applied after hydration:
- *   - "mui" -> the emotion cache MUI's own components render through
- *   - "tss" -> the cache tss-react's makeStyles() rules render through
+ * - AntdRegistry flushes Ant's server-rendered styles into the streamed HTML.
+ * - StyleProvider `layer` wraps everything Ant generates in `@layer antd`, which
+ *   globals.css declares before Tailwind's layers. Layered CSS always loses to
+ *   unlayered/later-layer CSS, so the Tailwind classes on each call site keep
+ *   winning over Ant's component styles regardless of selector specificity.
  *
- * Without the second provider every makeStyles rule in the app would flash
- * unstyled on first paint.
+ * Ant's `reset.css` is deliberately not imported: Tailwind's preflight plus the
+ * base rules in globals.css already own the element reset, and loading both
+ * would fight over the existing design.
  */
 export default function ThemeRegistry({ children }) {
   return (
-    <NextAppDirEmotionCacheProvider options={{ key: "mui" }} CacheProvider={CacheProvider}>
-      <NextAppDirEmotionCacheProvider options={{ key: "tss" }} CacheProvider={TssCacheProvider}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          {children}
-        </ThemeProvider>
-      </NextAppDirEmotionCacheProvider>
-    </NextAppDirEmotionCacheProvider>
+    <AntdRegistry>
+      <StyleProvider layer>
+        <ConfigProvider theme={theme}>{children}</ConfigProvider>
+      </StyleProvider>
+    </AntdRegistry>
   );
 }

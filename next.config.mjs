@@ -5,8 +5,6 @@ const nextConfig = {
   // from nginx the way the CRA build was. `standalone` emits a self-contained
   // Node server at .next/standalone/server.js.
   output: "standalone",
-  // MUI + tss-react need transpiling of ESM-only deps that ship untranspiled JSX/ESM.
-  transpilePackages: ["tss-react"],
   images: {
     // Product/profile images are served from the API bucket, whose host comes
     // from /client/urls at runtime. Allow any https host so <Image> can be

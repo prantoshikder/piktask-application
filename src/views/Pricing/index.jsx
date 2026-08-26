@@ -1,7 +1,6 @@
 "use client";
 
-import { CircularProgress, Container, Grid } from "@mui/material";
-import { makeStyles } from "tss-react/mui";
+import { CircularProgress, Container, Grid } from "@/components/ui-kit";
 import React from "react";
 import pricingImage2 from "../../assets/Pricing/expert.svg";
 import pricingImage3 from "../../assets/Pricing/pro.svg";
@@ -11,36 +10,27 @@ import Footer from "../../components/ui/Footer";
 import Header from "../../components/ui/Header";
 import PricingCard from "./PricingCard";
 
-const useStyles = makeStyles()((theme) => ({
-  productItem: {
-    "@media (max-width: 576px)": {
-      maxWidth: "100%",
-      flexBasis: "100%",
-    },
-  },
-}));
+
 
 const Pricing = () => {
-  const { classes } = useStyles();
-
   const pricePlanData = [
     {
       id: 1,
       title: "Piktask",
       price: 30,
-      image: `${pricingImage1}`,
+      image: `${pricingImage1.src}`,
     },
     {
       id: 2,
       title: "Piktask LTD",
       price: 300,
-      image: `${pricingImage2}`,
+      image: `${pricingImage2.src}`,
     },
     {
       id: 3,
       title: "Piktask LLC",
       price: 3000,
-      image: `${pricingImage3}`,
+      image: `${pricingImage3.src}`,
     },
   ];
 
@@ -70,7 +60,7 @@ const Pricing = () => {
             <>
               {pricePlanData?.length > 0 &&
                 pricePlanData?.map((pricePlan) => (
-                  <Grid size={{ xs: 6, sm: 4, md: 4 }} key={pricePlan?.id} className={classes.productItem}>
+                  <Grid size={{ xs: 6, sm: 4, md: 4 }} key={pricePlan?.id} className="max-[576px]:max-w-[100%] max-[576px]:basis-[100%]">
                     <PricingCard key={pricePlan?.id} pricePlan={pricePlan} />
                   </Grid>
                 ))}

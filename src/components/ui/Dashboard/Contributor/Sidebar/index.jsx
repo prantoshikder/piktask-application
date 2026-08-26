@@ -1,21 +1,19 @@
 "use client";
 
-import { Button, Collapse, List, ListItem, ListItemText } from "@mui/material";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import CardMembershipIcon from "@mui/icons-material/CardMembership";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import EuroIcon from "@mui/icons-material/Euro";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutlined";
+import { Button, Collapse, List, ListItem, ListItemText } from "@/components/ui-kit";
+import { UpOutlined as ExpandLess, DownOutlined as ExpandMore } from "@ant-design/icons";
+import { UserOutlined as AccountCircleIcon } from "@ant-design/icons";
+import { IdcardOutlined as CardMembershipIcon } from "@ant-design/icons";
+import { CloudUploadOutlined as CloudUploadIcon } from "@ant-design/icons";
+import { DashboardOutlined as DashboardIcon } from "@ant-design/icons";
+import { EuroOutlined as EuroIcon } from "@ant-design/icons";
+import { QuestionCircleOutlined as HelpOutlineIcon } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "@/lib/router";
 import logo from "../../../../../assets/Logo/piktask.png";
-import useStyles from "./Sidebar.styles";
 
 const Sidebar = () => {
-  const { classes } = useStyles();
   const [value, setValue] = useState("");
   const [open, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
@@ -60,18 +58,18 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className={classes.sidebarWrapper}>
-      <div className={classes.logoWrapper}>
+    <aside className="bg-[#012036] w-[28rem] h-[100%] fixed z-[9999] top-[0]">
+      <div className="w-[160px] p-[0] hover:bg-[transparent] max-[1024px]:w-[12rem] max-[1024px]:[&_img]:w-[100%]">
         <Button component={Link} to="/" disableRipple>
-          <img src={logo} className={classes.sidebarLogo} alt="Piktask" />
+          <img src={logo.src} className="ml-[5.5rem] mt-[1rem] w-[100%] block" alt="Piktask" />
         </Button>
       </div>
 
       <List component="nav" aria-labelledby="nested-sidebar-nav">
         <ListItem
           classes={{
-            gutters: classes.gutters,
-            selected: classes.selectedItem,
+            gutters: "pl-[3.6rem] text-[#fff] [&_div_span]:text-[#fff] [&_svg]:text-[#fff] [&_svg]:mr-[1rem]",
+            selected: "bg-[#0088f2]! [&_span]:text-[#fff] [&_svg]:text-[#fff]! [&_a]:text-[#fff]",
           }}
           component={Link}
           to="/contributor/dashboard"
@@ -83,10 +81,10 @@ const Sidebar = () => {
 
         <ListItem
           classes={{
-            gutters: classes.gutters,
-            selected: classes.selectedItem,
+            gutters: "pl-[3.6rem] text-[#fff] [&_div_span]:text-[#fff] [&_svg]:text-[#fff] [&_svg]:mr-[1rem]",
+            selected: "bg-[#0088f2]! [&_span]:text-[#fff] [&_svg]:text-[#fff]! [&_a]:text-[#fff]",
           }}
-          className={classes.dropdownMenu}
+          className="[&_svg]:text-[#91999D]"
           onClick={() => handleClick()}
           component={Link}
           to="/contributor/upload"
@@ -98,17 +96,17 @@ const Sidebar = () => {
         </ListItem>
 
         <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding className={classes.submenuContainer}>
-            <ListItem component={Link} to="/contributor/pending" className={classes.nested} selected={value === 1 && selectedItem === 2}>
+          <List component="div" disablePadding className="bg-[#023458] [&_a]:pl-[6rem] [&_a]:[&_span]:text-[#fff]">
+            <ListItem component={Link} to="/contributor/pending" selected={value === 1 && selectedItem === 2}>
               <ListItemText primary={`Not yet submitted(${totalProductCount?.notSubmit})`} />
             </ListItem>
-            <ListItem component={Link} to="/contributor/revision" className={classes.nested} selected={value === 1 && selectedItem === 3}>
+            <ListItem component={Link} to="/contributor/revision" selected={value === 1 && selectedItem === 3}>
               <ListItemText primary={`Under Revision(${totalProductCount?.pendingCount})`} />
             </ListItem>
-            <ListItem component={Link} to="/contributor/reject" className={classes.nested} selected={value === 1 && selectedItem === 4}>
+            <ListItem component={Link} to="/contributor/reject" selected={value === 1 && selectedItem === 4}>
               <ListItemText primary={`Rejections(${totalProductCount?.rejectCount})`} />
             </ListItem>
-            <ListItem component={Link} to="/contributor/publish" className={classes.nested} selected={value === 1 && selectedItem === 5}>
+            <ListItem component={Link} to="/contributor/publish" selected={value === 1 && selectedItem === 5}>
               <ListItemText primary={`Published(${totalProductCount?.publishCount})`} />
             </ListItem>
           </List>
@@ -116,8 +114,8 @@ const Sidebar = () => {
 
         <ListItem
           classes={{
-            gutters: classes.gutters,
-            selected: classes.selectedItem,
+            gutters: "pl-[3.6rem] text-[#fff] [&_div_span]:text-[#fff] [&_svg]:text-[#fff] [&_svg]:mr-[1rem]",
+            selected: "bg-[#0088f2]! [&_span]:text-[#fff] [&_svg]:text-[#fff]! [&_a]:text-[#fff]",
           }}
           component={Link}
           to="/contributor/earnings"
@@ -128,8 +126,8 @@ const Sidebar = () => {
         </ListItem>
         <ListItem
           classes={{
-            gutters: classes.gutters,
-            selected: classes.selectedItem,
+            gutters: "pl-[3.6rem] text-[#fff] [&_div_span]:text-[#fff] [&_svg]:text-[#fff] [&_svg]:mr-[1rem]",
+            selected: "bg-[#0088f2]! [&_span]:text-[#fff] [&_svg]:text-[#fff]! [&_a]:text-[#fff]",
           }}
           component={Link}
           to="/contributor/contributor-price-plan"
@@ -140,8 +138,8 @@ const Sidebar = () => {
         </ListItem>
         <ListItem
           classes={{
-            gutters: classes.gutters,
-            selected: classes.selectedItem,
+            gutters: "pl-[3.6rem] text-[#fff] [&_div_span]:text-[#fff] [&_svg]:text-[#fff] [&_svg]:mr-[1rem]",
+            selected: "bg-[#0088f2]! [&_span]:text-[#fff] [&_svg]:text-[#fff]! [&_a]:text-[#fff]",
           }}
           component={Link}
           to="/contributor/guidLine"
@@ -152,8 +150,8 @@ const Sidebar = () => {
         </ListItem>
         <ListItem
           classes={{
-            gutters: classes.gutters,
-            selected: classes.selectedItem,
+            gutters: "pl-[3.6rem] text-[#fff] [&_div_span]:text-[#fff] [&_svg]:text-[#fff] [&_svg]:mr-[1rem]",
+            selected: "bg-[#0088f2]! [&_span]:text-[#fff] [&_svg]:text-[#fff]! [&_a]:text-[#fff]",
           }}
           component={Link}
           to="/contributor/settings"

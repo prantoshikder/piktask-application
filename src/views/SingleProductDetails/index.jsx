@@ -1,6 +1,6 @@
 "use client";
 
-import { Container } from "@mui/material";
+import { Container } from "@/components/ui-kit";
 import { useState } from "react";
 import { useLocation } from "@/lib/router";
 import ProductDetails from "../../components/Partials/ProductDetails";
@@ -13,10 +13,8 @@ import RelatedImage from "../../components/ui/RelatedImage";
 import TagButtons from "../../components/ui/TagButtons";
 import { useCurrentUrl } from "@/lib/browser";
 import Layout from "../../Layout";
-import useStyles from "./SingleProductDetails.styles";
 
 const SingleProductDetails = () => {
-  const { classes } = useStyles();
   const location = useLocation();
   const shareUrl = useCurrentUrl();
   const imageID = location.pathname.split("=").pop();
@@ -31,7 +29,7 @@ const SingleProductDetails = () => {
 
       <HeroSection size="medium" heroTitle title="Graphic Resources for Free Download" />
 
-      <Container className={classes.containerWrapper}>
+      <Container className="mt-[4.5rem]">
         <ProductDetails
           location={location}
           setAllTags={setAllTags}

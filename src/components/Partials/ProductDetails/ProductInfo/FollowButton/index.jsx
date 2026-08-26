@@ -1,41 +1,15 @@
 "use client";
 
-import { makeStyles } from "tss-react/mui";
-import { Button } from "@mui/material";
+import { Button } from "@/components/ui-kit";
 import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import SignUpModal from "../../../../../views/Authentication/SignUpModal";
 
-const useStyles = makeStyles()((theme) => ({
-  authorBtn: {
-    ...theme.typography.button,
-    marginRight: "2rem",
-    padding: "0.5rem 2.5rem",
-    fontSize: "1.5rem",
 
-    [theme.breakpoints.down("sm")]: {
-      padding: "0.7rem 5rem",
-      marginBottom: "2rem",
-    },
-    [theme.breakpoints.down(480)]: {
-      padding: ".4rem 1.8rem",
-      fontSize: "1.4rem",
-      marginBottom: "2rem",
-      marginRight: "0rem",
-    },
-  },
-  followBtn: {
-    backgroundColor: theme.palette.primary.main,
-    "&:hover": {
-      backgroundColor: theme.palette.secondary.main,
-    },
-  },
-}));
 
 const FollowButton = ({ productDetails }) => {
-  const { classes } = useStyles();
   const user = useSelector((state) => state.user);
 
   const [role, setRole] = useState("");
@@ -73,7 +47,7 @@ const FollowButton = ({ productDetails }) => {
   return (
     <>
       {user?.id !== productDetails?.imageDetails?.user_id && (
-        <Button className={`${classes.authorBtn} ${classes.followBtn}`} onClick={handleFollower} value="user">
+        <Button className="text-[#fff] font-[400] font-['Roboto',sans-serif] capitalize text-[1.5rem] rounded-[3rem] opacity-[1] leading-[1.75] mr-[2rem] p-[0.5rem_2.5rem] max-[959.95px]:p-[0.7rem_5rem] max-[959.95px]:mb-[2rem] max-[479.95px]:p-[.4rem_1.8rem] max-[479.95px]:text-[1.4rem] max-[479.95px]:mb-[2rem] max-[479.95px]:mr-[0rem] bg-[#143340] hover:bg-[#0088f2]" onClick={handleFollower} value="user">
           {!productDetails?.isFollowing ? <>Follow</> : <>Following</>}
         </Button>
       )}

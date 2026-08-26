@@ -1,16 +1,14 @@
 "use client";
 
-import { Button } from "@mui/material";
+import { Button } from "@/components/ui-kit";
 import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import downArrowIconWhite from "../../../../../assets/icons/downArrowIconWhite.svg";
 import SignUpModal from "../../../../../views/Authentication/SignUpModal";
-import useStyles from "./DownloadButton.styles";
 
 const DownloadButton = ({ productDetails }) => {
-  const { classes } = useStyles();
   const user = useSelector((state) => state.user);
 
   const [role, setRole] = useState("");
@@ -82,19 +80,19 @@ const DownloadButton = ({ productDetails }) => {
 
   return (
     <>
-      <div className={classes.downloadWrapper}>
+      <div className="relative max-[479.95px]:flex-[1]">
         <Button
-          className={buttonLoading ? classes.downloadingBtn : classes.downloadBtn}
+          className={buttonLoading ? "text-[#fff] text-[17px] p-[1rem_10rem] mr-[4rem] bg-[#143340] hover:bg-[#143340] [&_img]:mr-[1.5rem] [&_img]:w-[1.2rem] [&:disabled]:text-[#fff] max-[768px]:text-[16px] max-[768px]:p-[0.8rem_9rem] max-[768px]:mr-[2.5rem] max-[479.95px]:text-[16px] max-[479.95px]:p-[0.4rem_5.1rem] max-[479.95px]:mr-[2.5rem]" : "text-[#fff] text-[17px] p-[1rem_10rem] mr-[4rem] bg-[#0088f2] hover:bg-[#143340] [&_img]:mr-[1.5rem] [&_img]:w-[1.2rem] max-[768px]:text-[16px] max-[768px]:p-[0.8rem_9rem] max-[768px]:mr-[2.5rem] max-[479.95px]:w-[100%] max-[479.95px]:text-[16px] max-[479.95px]:p-[0.4rem_6rem] max-[479.95px]:mr-[1.5rem]"}
           onClick={handleDownload}
           value="user"
           disableElevation
           disabled={buttonLoading}
         >
-          <img src={downArrowIconWhite} alt="Download" width="12px" height="18px" />
+          <img src={downArrowIconWhite.src} alt="Download" width="12px" height="18px" />
           {buttonLoading ? "Downloading..." : "Download"}
         </Button>
 
-        <div className={classes.downloadedImage}>
+        <div className="absolute top-[-15px] right-[25px] text-[#0088f2] text-[1.2rem] p-[.3rem_1.2rem] rounded-[3rem] bg-[#fff] [border:2px_solid_#0088f2] max-[768px]:right-[12px] max-[479.95px]:p-[.2rem_1rem] max-[479.95px]:right-[0]">
           {downloadCount ? intToString(downloadCount) : intToString(productDetails?.imageDetails?.user?.images?.total_downloads)}
         </div>
       </div>

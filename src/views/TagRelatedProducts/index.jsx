@@ -1,6 +1,6 @@
 "use client";
 
-import { CircularProgress, Container, Grid, Typography } from "@mui/material";
+import { CircularProgress, Container, Grid, Typography } from "@/components/ui-kit";
 import axios from "axios";
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { useLocation, useParams } from "@/lib/router";
@@ -11,14 +11,12 @@ import Product from "../../components/ui/Products/Product";
 import Layout from "../../Layout";
 import Loader from "./../../components/ui/Loader/index";
 import { getBaseURL, imageObjSchema } from "./../../helpers/index";
-import useStyles from "./TagRelatedProducts.style";
 
 const HeroSection = lazy(() => import("../../components/ui/Hero"));
 const CallToAction = lazy(() => import("../../components/ui/CallToAction"));
 const Footer = lazy(() => import("../../components/ui/Footer"));
 
 const TagTemplate = () => {
-  const { classes } = useStyles();
   const { tagName } = useParams();
   const location = useLocation();
   const keywords = location.pathname.split("/tag/").pop().replace(/-/g, " ");
@@ -68,12 +66,12 @@ const TagTemplate = () => {
       <Suspense fallback={<Loader />}>
         <Container>
           {tagRelatedProducts?.length > 0 && (
-            <Typography className={classes.totalResources} variant="h4">
+            <Typography className="text-[2.2rem] p-[3.5rem_0_3.5rem] font-[500] max-[425.95px]:p-[2.5rem_0_3rem]" variant="h4">
               {`${tagRelatedProducts?.length} Resources for "${tagName.replace(/-/g, " ")}"`}
             </Typography>
           )}
 
-          <Grid classes={{ container: classes.container }} container spacing={2}>
+          <Grid container spacing={2}>
             {tagRelatedProducts === null ? (
               <div
                 style={{
@@ -90,7 +88,7 @@ const TagTemplate = () => {
               <>
                 {tagRelatedProducts?.length ? (
                   tagRelatedProducts?.map((photo) => (
-                    <Grid size={{ xs: 12, sm: 4, md: 3 }} key={photo.image_id} className={classes.productItem}>
+                    <Grid size={{ xs: 12, sm: 4, md: 3 }} key={photo.image_id}>
                       <Product photo={photo} />
                     </Grid>
                   ))

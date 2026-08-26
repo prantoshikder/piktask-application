@@ -1,6 +1,6 @@
 "use client";
 
-import { Container, Grid } from "@mui/material";
+import { Container, Grid } from "@/components/ui-kit";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Spacing from "../../components/Spacing";
@@ -9,10 +9,8 @@ import Header from "../../components/ui/Header";
 import HeroSection from "../../components/ui/Hero";
 import SellerInfo from "../../components/ui/TopSeller/SellerInfo";
 import Layout from "../../Layout";
-import useStyles from "./Sellers.style";
 
 const Sellers = () => {
-  const { classes } = useStyles();
   const [topSeller, setTopSeller] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -37,13 +35,13 @@ const Sellers = () => {
       <HeroSection />
       <Spacing space={{ height: "3rem" }} />
       <Container>
-        <Grid classes={{ container: classes.container }} container spacing={2}>
+        <Grid container spacing={2}>
           {isLoading ? (
             <h2>Loading now......</h2>
           ) : (
             <>
               {topSeller?.map((photo) => (
-                <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo.id} className={classes.productItem}>
+                <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo.id} className="max-[576px]:max-w-[100%] max-[576px]:basis-[100%]">
                   <SellerInfo photo={photo} />
                 </Grid>
               ))}

@@ -1,9 +1,9 @@
 "use client";
 
-import { Button, Card, Drawer, Grid, Typography, useMediaQuery } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import DeleteIcon from "@mui/icons-material/Delete";
-import CircularProgress from "@mui/material/CircularProgress";
+import { Button, Card, Drawer, Grid, Typography, useMediaQuery } from "@/components/ui-kit";
+import { CloseOutlined as CloseIcon } from "@ant-design/icons";
+import { DeleteOutlined as DeleteIcon } from "@ant-design/icons";
+import { CircularProgress } from "@/components/ui-kit";
 import axios from "axios";
 import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
@@ -19,12 +19,10 @@ import ProductNotFound from "../../../../components/ui/ProductNotFound";
 import { expiredLoginTime, getBaseURL } from "../../../../helpers";
 import Layout from "../../../../Layout";
 import EditItem from "./EditItem";
-import useStyles from "./PendingFiles.styles";
 
 const Footer = lazy(() => import("../../../../components/ui/Footer"));
 
 const PendingFiles = () => {
-  const { classes } = useStyles();
   const cardRef = useRef();
   const location = useLocation();
   const locationPath = location.pathname;
@@ -197,16 +195,16 @@ const PendingFiles = () => {
 
   return (
     <Layout title="Pending">
-      <div className={classes.adminRoot}>
-        {mobileView ? null : <Sidebar className={classes.adminSidebar} />}
+      <div>
+        {mobileView ? null : <Sidebar className="mt-[0rem] max-[768.95px]:hidden" />}
 
-        <main className={classes.content}>
+        <main className="p-[0] ml-[28rem] max-[768.95px]:w-[100%] max-[768.95px]:ml-[0rem]">
           <AdminHeader />
 
           <Suspense fallback={<Loader />}>
-            <div className={classes.dashboardGridContainer}>
-              <div className={classes.headingWrapper}>
-                <div className={classes.contentWrapper}>
+            <div className="mt-[6rem] p-[2rem] min-h-[60vh]">
+              <div className="flex justify-between mt-[2rem] mb-[3rem] max-[990px]:flex-col max-[990px]:items-start max-[990px]:[&_h2]:mb-[1.5rem]">
+                <div className="[&_h3]:text-[1.5rem] [&_h3]:font-[500] [&_h3]:m-[1rem_0] [&_h3]:text-[#143340] [&_p]:text-[1.4rem]">
                   <Heading tag="h2">Not yet submitted</Heading>
                   <Typography variant="h3">This is your first upload!</Typography>
                   <Typography>
@@ -215,17 +213,17 @@ const PendingFiles = () => {
                   </Typography>
                 </div>
                 <div>
-                  {/* <Button onClick={() => deleteSelectionProduct()} className={`${classes.actionBtn} ${classes.deleteBtn}`}>
+                  {/* <Button onClick={() => deleteSelectionProduct()} className="text-[#fff] font-[500] font-['Roboto',sans-serif] capitalize text-[1.6rem] rounded-[3rem] opacity-[1] leading-[1.75] p-[.2rem_2rem] bg-[#143340] ml-[1rem] [border:.2rem_solid] border-[transparent] max-[990px]:mb-[1.5rem] max-[990px]:p-[.4rem_2rem] max-[990px]:text-[1.4rem] bg-[#FB5252] [transition:all_0.3s_linear] hover:border-[#FB5252] hover:text-[#FB5252] max-[990px]:ml-[0]">
                   Delete File
                 </Button> */}
                   {pendingProducts?.length > 0 && (
-                    <Button className={`${classes.actionBtn} ${classes.addFileBtn}`} onClick={() => handleSubmit()}>
+                    <Button className="text-[#fff] font-[500] font-['Roboto',sans-serif] capitalize text-[1.6rem] rounded-[3rem] opacity-[1] leading-[1.75] p-[.2rem_2rem] bg-[#143340] ml-[1rem] [border:.2rem_solid] border-[transparent] max-[990px]:mb-[1.5rem] max-[990px]:p-[.4rem_2rem] max-[990px]:text-[1.4rem] bg-[#0088f2] [transition:all_0.3s_linear] hover:border-[#0088f2] hover:text-[#0088f2]" onClick={() => handleSubmit()}>
                       Submit
                     </Button>
                   )}
 
                   {pendingProducts?.length > 0 && (
-                    <Button className={`${classes.actionBtn} ${classes.workInfoBtn}`} onClick={() => handleWorkInfo()}>
+                    <Button className="text-[#fff] font-[500] font-['Roboto',sans-serif] capitalize text-[1.6rem] rounded-[3rem] opacity-[1] leading-[1.75] p-[.2rem_2rem] bg-[#143340] ml-[1rem] [border:.2rem_solid] border-[transparent] max-[990px]:mb-[1.5rem] max-[990px]:p-[.4rem_2rem] max-[990px]:text-[1.4rem] bg-[#EF9D38] [transition:all_0.3s_linear] hover:border-[#EF9D38] hover:text-[#EF9D38]" onClick={() => handleWorkInfo()}>
                       Add Work Information
                     </Button>
                   )}
@@ -248,23 +246,22 @@ const PendingFiles = () => {
                 <Grid container spacing={2}>
                   {pendingProducts?.length > 0 ? (
                     pendingProducts?.map((product) => (
-                      <Grid size={{ xs: 4, sm: 3, md: 2 }} key={product?.id} className={classes.productItem}>
-                        <div className={classes.btnWrapper}>
-                          <DeleteIcon onClick={() => handleDelete(product?.token_id)} className={classes.deleteIcon} />
+                      <Grid size={{ xs: 4, sm: 3, md: 2 }} key={product?.id} className="relative max-[576px]:max-w-[50%] max-[576px]:basis-[50%]">
+                        <div className="absolute top-[1.5rem] right-[1.5rem] flex justify-center items-center z-[1]">
+                          <DeleteIcon onClick={() => handleDelete(product?.token_id)} className="text-[#DDD] [border:0.1rem_solid] border-[#DDDDDD] p-[0.1rem] text-[2.2rem] cursor-pointer [transition:all_0.3s_linear] hover:border-[#FB5252] hover:text-[#FB5252]" />
                         </div>
 
                         <Card
-                          className={classes.pendingFileCard}
+                          className="relative p-[3.5rem_1rem_0] [border:2px_solid_transparent] h-[100%] [&_img]:w-[100%] [&_img]:h-[10rem] [&_img]:rounded-[4px] [&_img]:object-cover [&_h3]:text-[1.4rem] [&_h3]:mb-[1rem] [&_h3]:[line-break:anywhere] [&_p]:text-[1.2rem]"
                           onClick={(e) => {
                             selectedProduct(e, product);
                           }}
-                          classes={{ root: classes.root }}
                           ref={cardRef}
                           style={{ border: product?.is_save === 1 && "2px solid #008000" }}
                         >
                           <img src={getBaseURL().bucket_base_url + getBaseURL().images + product?.original_file} alt={product?.original_name} />
 
-                          <div className={classes.productInfo}>
+                          <div className="p-[1rem_0]">
                             <Typography variant="h3">{product?.original_name}</Typography>
                             <Typography variant="body2">File Size: {(product.size / 1024 / 1024).toFixed(2)} MB</Typography>
                           </div>
@@ -283,11 +280,11 @@ const PendingFiles = () => {
 
           <Spacing space={{ height: "5rem" }} />
 
-          <Drawer anchor="right" open={openModal} onClose={() => setOpenModal(false)} className={classes.editItemContainer}>
-            <div className={classes.editItemHeader}>
-              <div className={classes.headingContent}>
+          <Drawer anchor="right" open={openModal} onClose={() => setOpenModal(false)} className="w-[45rem] p-[3rem_4.5rem] max-[600px]:w-[100%]">
+            <div className="p-[1rem_2rem_0] [&_hr]:[border:0_solid_transparent] [&_hr]:bg-[#ddd] [&_hr]:h-[0.1rem]">
+              <div className="flex items-center justify-between mb-[1.5rem]">
                 <Heading>Work Details</Heading>
-                <CloseIcon className={classes.closeIcon} onClick={() => setOpenModal(false)} />
+                <CloseIcon className="cursor-pointer text-[3.5rem] text-[#B7B7B7] hover:text-[#FB5252]" onClick={() => setOpenModal(false)} />
               </div>
               <hr />
             </div>

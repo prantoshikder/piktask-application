@@ -1,23 +1,25 @@
-import { ClickAwayListener, Grid, Grow, MenuItem, MenuList, Paper, Popper, Typography } from "@material-ui/core";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import EuroIcon from "@material-ui/icons/Euro";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import GetAppIcon from "@material-ui/icons/GetApp";
-import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
-import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
-import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
+"use client";
+
+import { ClickAwayListener, Grid, Grow, MenuItem, MenuList, Paper, Popper, Typography } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import EuroIcon from "@mui/icons-material/Euro";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import GetAppIcon from "@mui/icons-material/GetApp";
+import PeopleOutlineIcon from "@mui/icons-material/PeopleOutlined";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutlined";
+import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
+import { useHistory } from "@/lib/router";
+import { Link } from "@/lib/router";
 import { getBaseURL } from "../../../helpers";
 // import crownGreenIcon from "../../../assets/icons/crownGreenIcon.svg";
 import useStyles from "./Popper.styles";
 
 const CustomPopper = ({ open, handleToggle, anchorRef, handleClose, handleListKeyDown }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -32,7 +34,7 @@ const CustomPopper = ({ open, handleToggle, anchorRef, handleClose, handleListKe
 
     if (user?.isLoggedIn && user?.role === "user") {
       axios
-        .get(`${process.env.REACT_APP_API_URL}/user/download_count`, {
+        .get(`${process.env.NEXT_PUBLIC_API_URL}/user/download_count`, {
           headers: { Authorization: user?.token },
           cancelToken: source.token,
         })
@@ -82,7 +84,7 @@ const CustomPopper = ({ open, handleToggle, anchorRef, handleClose, handleListKe
             <ClickAwayListener onClickAway={handleClose}>
               <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown} className={classes.dropdownMenuWrapper}>
                 <Grid container className={classes.gridUserInfo}>
-                  <Grid item xs={6} className={classes.userInDropdown}>
+                  <Grid size={{ xs: 6 }} className={classes.userInDropdown}>
                     <div className={classes.avatarCircle}>
                       {user?.isLoggedIn && user?.avatar && user?.avatar !== "null" ? (
                         <>
@@ -111,7 +113,7 @@ const CustomPopper = ({ open, handleToggle, anchorRef, handleClose, handleListKe
                       </Typography>
                     </div>
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid size={{ xs: 6 }}>
                     {/* <Button className={classes.accountStatusBtn}>
                       <img
                         className={classes.accountIcon}
@@ -125,7 +127,7 @@ const CustomPopper = ({ open, handleToggle, anchorRef, handleClose, handleListKe
 
                 {user?.isLoggedIn && user?.role === "user" && (
                   <Grid container className={classes.productDownloadCount}>
-                    <Grid item xs={6} className={classes.productDownloadGrid}>
+                    <Grid size={{ xs: 6 }} className={classes.productDownloadGrid}>
                       <Typography variant="h2" className={classes.totalAmount}>
                         {downloadCount}
                       </Typography>
@@ -133,7 +135,7 @@ const CustomPopper = ({ open, handleToggle, anchorRef, handleClose, handleListKe
                         Daily Downloads
                       </Typography>
                     </Grid>
-                    <Grid item xs={6} className={classes.productDownloadGrid}>
+                    <Grid size={{ xs: 6 }} className={classes.productDownloadGrid}>
                       <Typography variant="h2" className={classes.totalAmount}>
                         {downloadLimit}
                       </Typography>

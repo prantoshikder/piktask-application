@@ -1,12 +1,14 @@
-import { Typography } from "@material-ui/core";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+"use client";
+
+import { Typography } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import coverImage from "../../../../assets/banner/sellerCoverPhoto.jpg";
 import useStyles from "./SellerInfo.styles";
 
 const SellerInfo = ({ photo }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   return (
     <div className={classes.sellerWrapper}>

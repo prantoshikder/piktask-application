@@ -1,13 +1,15 @@
-import { Button, Card, CircularProgress, Typography } from "@material-ui/core";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import GetAppIcon from "@material-ui/icons/GetApp";
-import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
-import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
-import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
+"use client";
+
+import { Button, Card, CircularProgress, Typography } from "@mui/material";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import GetAppIcon from "@mui/icons-material/GetApp";
+import PeopleOutlineIcon from "@mui/icons-material/PeopleOutlined";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutlined";
+import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import { toast } from "react-toastify";
 import authorPhoto from "../../../../../assets/author.png";
 import behanceIcon from "../../../../../assets/icons/behance.svg";
@@ -25,7 +27,7 @@ import UserSidebarMenu from "../UserSidebarMenu/index";
 import useStyles from "./UserSideBar.style";
 
 const UserSideBar = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
@@ -54,7 +56,7 @@ const UserSideBar = () => {
     // get user information
     if (user?.isLoggedIn && user?.role === "user") {
       axios
-        .get(`${process.env.REACT_APP_API_URL}/user/profile`, {
+        .get(`${process.env.NEXT_PUBLIC_API_URL}/user/profile`, {
           headers: { cancelToken: source.token, Authorization: user?.token },
         })
         .then(({ data }) => {
@@ -95,7 +97,7 @@ const UserSideBar = () => {
     const formData = new FormData();
     formData.append("profile_picture", file);
 
-    const url = `${process.env.REACT_APP_API_URL}/profile/profile_picture`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/profile/profile_picture`;
     if (user?.isLoggedIn && user?.role === "user") {
       axios({
         method: "put",

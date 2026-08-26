@@ -1,9 +1,11 @@
-import { makeStyles } from "@material-ui/core";
+"use client";
+
+import { makeStyles } from "tss-react/mui";
 import callToAction from "../../../assets/banner/call-to-action.jpg";
 import mobileCallToAction from "../../../assets/banner/call-to-actionMobile.jpg";
 import tabletCallToAction from "../../../assets/banner/call-to-actionTablet.jpg";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   wrapper: {
     backgroundColor: " #1b3f4e",
     backgroundImage: `url(${callToAction})`,

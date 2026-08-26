@@ -1,10 +1,12 @@
+"use client";
+
 import React from "react";
-import { Box, Grid } from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
+import { Box, Grid } from "@mui/material";
+import { Skeleton } from "@mui/material";
 import useStyles from "./CategoryItemLoader.style";
 
 const CategoryItemLoader = () => {
-    const classes = useStyles();
+    const { classes } = useStyles();
     return (
     <Grid container wrap="nowrap">
       {Array(4).fill()

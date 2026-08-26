@@ -1,19 +1,21 @@
-import { Button, Drawer, MenuItem, MenuList, Toolbar } from "@material-ui/core";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import CloseIcon from "@material-ui/icons/Close";
-import MenuIcon from "@material-ui/icons/Menu";
+"use client";
+
+import { Button, Drawer, MenuItem, MenuList, Toolbar } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import signInIcon from "../../../../assets/icons/signInIcon.svg";
 import logo from "../../../../assets/Logo/piktask.png";
 import { getBaseURL } from "./../../../../helpers/index";
-import SignUpModal from "./../../../../pages/Authentication/SignUpModal/index";
+import SignUpModal from "./../../../../views/Authentication/SignUpModal/index";
 import useStyles from "./MobileMenu.styles";
 
 const MobileMenu = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const anchorRef = useRef(null);
   const user = useSelector((state) => state.user);
   const [openAuthModal, setOpenAuthModal] = useState(false);

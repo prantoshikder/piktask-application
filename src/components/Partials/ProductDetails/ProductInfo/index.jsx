@@ -1,4 +1,6 @@
-import { Button, Grid, Typography } from "@material-ui/core";
+"use client";
+
+import { Button, Grid, Typography } from "@mui/material";
 import moment from "moment";
 import React, { useState } from "react";
 import shareIcon from "../../../../assets/icons/share.svg";
@@ -8,13 +10,14 @@ import AuthorProfileInfo from "./../../AuthorProfileInfo/index";
 import CopyLink from "./../../CopyLink/index";
 import DownloadButton from "./DownloadButton/index";
 import FavouriteButton from "./FavouriteButton/index";
-import FollowButton from "./FollowButton/index,";
+import FollowButton from "./FollowButton/index";
+import { useCurrentUrl } from "@/lib/browser";
 import useStyles from "./ProductInfo.styles";
 import SaveButton from "./SaveButton";
 
 const ProductInfo = ({ productDetails }) => {
-  const classes = useStyles();
-  const location = window.location.href;
+  const { classes } = useStyles();
+  const location = useCurrentUrl();
 
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
@@ -40,7 +43,7 @@ const ProductInfo = ({ productDetails }) => {
         </div>
 
         <Grid container className={classes.detailsContainer}>
-          <Grid item xs={6} className={classes.gridItem}>
+          <Grid size={{ xs: 6 }} className={classes.gridItem}>
             <div className={classes.singleItem}>
               <Typography>
                 <strong>Image ID: </strong>
@@ -62,7 +65,7 @@ const ProductInfo = ({ productDetails }) => {
             </div>
           </Grid>
 
-          <Grid item xs={6} className={classes.gridItem}>
+          <Grid size={{ xs: 6 }} className={classes.gridItem}>
             <div className={classes.singleItem}>
               <Typography>
                 <strong>Created: </strong>
@@ -85,7 +88,7 @@ const ProductInfo = ({ productDetails }) => {
         </Grid>
 
         <Grid container>
-          <Grid item className={classes.authorArea}>
+          <Grid className={classes.authorArea}>
             {/* Author info */}
             <AuthorProfileInfo productDetails={productDetails} />
 

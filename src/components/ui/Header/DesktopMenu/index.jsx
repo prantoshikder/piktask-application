@@ -1,18 +1,20 @@
-import { Button, Tab, Tabs, Toolbar } from "@material-ui/core";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+"use client";
+
+import { Button, Tab, Tabs, Toolbar } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink } from "@/lib/router";
 import signInIcon from "../../../../assets/icons/signInIcon.svg";
 import logo from "../../../../assets/Logo/piktask.png";
 import { getBaseURL } from "../../../../helpers";
-import SignUpModal from "../../../../pages/Authentication/SignUpModal";
+import SignUpModal from "../../../../views/Authentication/SignUpModal";
 import CustomPopper from "../../CustomPopper";
 import useStyles from "./DesktopMenu.styles";
 
 const DesktopMenu = ({ history }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const anchorRef = useRef(null);
   const user = useSelector((state) => state.user);
 

@@ -1,5 +1,7 @@
-import { makeStyles } from "@material-ui/styles";
-const useStyles = makeStyles((theme) => ({
+"use client";
+
+import { makeStyles } from "tss-react/mui";
+const useStyles = makeStyles()((theme) => ({
   socialsButtons: {
     display: "flex",
     justifyContent: "space-between",

@@ -1,9 +1,11 @@
-import { Button, Card, CardContent, CircularProgress, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
-import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+"use client";
+
+import { Button, Card, CardContent, CircularProgress, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import authorBadge from "../../../../assets/badge.png";
 import authorPhoto from "../../../../assets/user/user-man.png";
 import { expiredLoginTime, getBaseURL } from "../../../../helpers";
@@ -12,7 +14,7 @@ import ProductNotFound from "./../../../ui/ProductNotFound/index";
 import useStyles from "./AuthorFiles.styles";
 
 const AuthorFiles = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const user = useSelector((state) => state.user);
 
   const [isLoading, setLoading] = useState(true);
@@ -34,7 +36,7 @@ const AuthorFiles = () => {
     // Author last file API integration
     if (user?.isLoggedIn && user?.role === "contributor") {
       axios
-        .get(`${process.env.REACT_APP_API_URL}/contributor/earning/images?limit=5`, { cancelToken: source.token, headers: { Authorization: user?.token } })
+        .get(`${process.env.NEXT_PUBLIC_API_URL}/contributor/earning/images?limit=5`, { cancelToken: source.token, headers: { Authorization: user?.token } })
         .then(({ data }) => {
           if (data?.status) {
             setAuthorFiles(data?.images);
@@ -53,7 +55,7 @@ const AuthorFiles = () => {
     // Piktask top file API  integration
     if (user?.isLoggedIn && user?.role === "contributor") {
       axios
-        .get(`${process.env.REACT_APP_API_URL}/contributor/dashboard/top_files?limit=5`, { cancelToken: source.token, headers: { Authorization: user?.token } })
+        .get(`${process.env.NEXT_PUBLIC_API_URL}/contributor/dashboard/top_files?limit=5`, { cancelToken: source.token, headers: { Authorization: user?.token } })
         .then(({ data }) => {
           if (data?.status) {
             setTopFiles(data?.images);
@@ -74,7 +76,7 @@ const AuthorFiles = () => {
 
   return (
     <Grid container className={classes.filesGridContainer}>
-      <Grid item xs={12} sm={12} md={6} className={classes.loaderItem}>
+      <Grid size={{ xs: 12, sm: 12, md: 6 }} className={classes.loaderItem}>
         {authorFiles === null ? (
           <div
             style={{
@@ -159,7 +161,7 @@ const AuthorFiles = () => {
         )}
       </Grid>
 
-      <Grid item xs={12} sm={12} md={6} className={classes.loaderItem}>
+      <Grid size={{ xs: 12, sm: 12, md: 6 }} className={classes.loaderItem}>
         {topFiles === null ? (
           <div
             style={{

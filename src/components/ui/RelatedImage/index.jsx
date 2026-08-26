@@ -1,4 +1,6 @@
-import { Grid } from "@material-ui/core";
+"use client";
+
+import { Grid } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -8,7 +10,7 @@ import Product from "../Products/Product";
 import useStyles from "./RelatedImage.style";
 
 const RelatedImage = ({ imageID }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const user = useSelector((state) => state.user);
   const [isLoading, setLoading] = useState(true);
   const [relatedImage, setRelatedImage] = useState([]);
@@ -25,9 +27,9 @@ const RelatedImage = ({ imageID }) => {
     const source = CancelToken.source();
 
     if (user?.isLoggedIn && user?.id && user?.role === "user") {
-      relatedImageURL = `${process.env.REACT_APP_API_URL}/images/${imageID}/related_image?limit=${limit}&page=${pageCount}&user_id=${user?.id}`;
+      relatedImageURL = `${process.env.NEXT_PUBLIC_API_URL}/images/${imageID}/related_image?limit=${limit}&page=${pageCount}&user_id=${user?.id}`;
     } else {
-      relatedImageURL = `${process.env.REACT_APP_API_URL}/images/${imageID}/related_image?limit=${limit}&page=${pageCount}`;
+      relatedImageURL = `${process.env.NEXT_PUBLIC_API_URL}/images/${imageID}/related_image?limit=${limit}&page=${pageCount}`;
     }
     axios
       .get(relatedImageURL, { cancelToken: source.token })
@@ -54,7 +56,7 @@ const RelatedImage = ({ imageID }) => {
         ) : (
           relatedImage?.length > 0 &&
           relatedImage?.map((photo) => (
-            <Grid key={photo?.image_id} item xs={6} sm={4} md={3} className={classes.productItem}>
+            <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo?.image_id} className={classes.productItem}>
               <Product photo={photo} />
             </Grid>
           ))

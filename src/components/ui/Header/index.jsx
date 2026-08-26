@@ -1,9 +1,12 @@
-import { AppBar, Container, makeStyles, useMediaQuery } from "@material-ui/core";
+"use client";
+
+import { makeStyles } from "tss-react/mui";
+import { AppBar, Container, useMediaQuery } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   mainHeader: {
     "& > .MuiAppBar-colorPrimary": {
       background: "#001c30",
@@ -38,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Header = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const mobileMenu = useMediaQuery("(max-width:769px)");
   const [fixedHeaderMenu, setFixedHeaderMenu] = useState(false);
 

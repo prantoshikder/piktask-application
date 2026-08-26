@@ -1,10 +1,12 @@
+"use client";
+
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory } from "@/lib/router";
 import { getBaseURL } from "./../../../../helpers/index";
 import useStyles from "./SearchItem.styles";
 
 const SearchItem = ({ item, selected }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const history = useHistory();
 
   const handleEnterPress = (event) => {

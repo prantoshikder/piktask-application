@@ -1,6 +1,8 @@
-import { makeStyles } from "@material-ui/core";
+"use client";
 
-const useStyles = makeStyles((theme) => ({
+import { makeStyles } from "tss-react/mui";
+
+const useStyles = makeStyles()((theme) => ({
   dashboardGridContainer: {
     padding: "1.5rem 1rem 0rem 1rem",
     marginTop: "8rem",

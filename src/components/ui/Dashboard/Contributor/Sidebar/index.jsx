@@ -1,19 +1,21 @@
-import { Button, Collapse, List, ListItem, ListItemText } from "@material-ui/core";
-import { ExpandLess, ExpandMore } from "@material-ui/icons";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import CardMembershipIcon from "@material-ui/icons/CardMembership";
-import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import EuroIcon from "@material-ui/icons/Euro";
-import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
+"use client";
+
+import { Button, Collapse, List, ListItem, ListItemText } from "@mui/material";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CardMembershipIcon from "@mui/icons-material/CardMembership";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import EuroIcon from "@mui/icons-material/Euro";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutlined";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import logo from "../../../../../assets/Logo/piktask.png";
 import useStyles from "./Sidebar.styles";
 
 const Sidebar = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [value, setValue] = useState("");
   const [open, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");

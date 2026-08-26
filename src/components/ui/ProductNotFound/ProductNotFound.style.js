@@ -1,6 +1,8 @@
-import { makeStyles } from "@material-ui/core";
+"use client";
 
-const useStyles = makeStyles((theme) => ({
+import { makeStyles } from "tss-react/mui";
+
+const useStyles = makeStyles()((theme) => ({
   productNotFround: {
     margin: "0 auto",
     // padding: "2rem 0",

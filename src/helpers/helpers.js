@@ -4,7 +4,7 @@ export const getCategoryNames = () => {
   let categoryItems = [];
 
   axios
-    .get(`${process.env.REACT_APP_API_URL}/categories`)
+    .get(`${process.env.NEXT_PUBLIC_API_URL}/categories`)
     .then(({ data }) => {
       if (data?.status) {
         const sortedData = data?.categories.sort((a, b) => a.id - b.id);

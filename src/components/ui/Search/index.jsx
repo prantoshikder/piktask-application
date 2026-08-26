@@ -1,12 +1,14 @@
-import { ClickAwayListener, Grow, IconButton, Input, MenuItem, Paper, Popper, useMediaQuery } from "@material-ui/core";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
-import CloseIcon from "@material-ui/icons/Close";
+"use client";
+
+import { ClickAwayListener, Grow, IconButton, Input, MenuItem, Paper, Popper, useMediaQuery } from "@mui/material";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import { useClickOutside } from "react-click-outside-hook";
-import { useHistory } from "react-router-dom";
+import { useHistory } from "@/lib/router";
 import { toast } from "react-toastify";
 import searchIcon from "../../../assets/search.svg";
 import { useDebounce } from "../../../lib/hooks/debounceHook";
@@ -29,7 +31,7 @@ const containerTransition = {
 };
 
 const Search = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const history = useHistory();
   const searchRef = useRef("");
   const anchorRef = useRef("");
@@ -93,9 +95,9 @@ const Search = () => {
     let url;
 
     if (searchCategoryID) {
-      url = `${process.env.REACT_APP_API_URL}/client/search/?title=${query}&category_id=${searchCategoryID}&limit=12`;
+      url = `${process.env.NEXT_PUBLIC_API_URL}/client/search/?title=${query}&category_id=${searchCategoryID}&limit=12`;
     } else {
-      url = `${process.env.REACT_APP_API_URL}/client/search/?title=${query}&limit=12`;
+      url = `${process.env.NEXT_PUBLIC_API_URL}/client/search/?title=${query}&limit=12`;
     }
 
     return encodeURI(url);
@@ -137,7 +139,7 @@ const Search = () => {
 
     if (categories?.length === 0) {
       axios
-        .get(`${process.env.REACT_APP_API_URL}/categories?limit=50`, { cancelToken: source.token })
+        .get(`${process.env.NEXT_PUBLIC_API_URL}/categories?limit=50`, { cancelToken: source.token })
         .then(({ data }) => {
           if (data?.status) {
             const sortedData = data?.categories.sort((a, b) => a.id - b.id);

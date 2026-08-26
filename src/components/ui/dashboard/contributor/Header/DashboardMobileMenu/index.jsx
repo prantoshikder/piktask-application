@@ -1,11 +1,13 @@
-import { Button, Container, Drawer, Grid } from "@material-ui/core";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import CloseIcon from "@material-ui/icons/Close";
-import MenuIcon from "@material-ui/icons/Menu";
+"use client";
+
+import { Button, Container, Drawer, Grid } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import logo from "../../../../../../assets/Logo/piktask.png";
 import { getBaseURL } from "../../../../../../helpers/index";
 import CustomPopper from "../../../../CustomPopper/index";
@@ -13,7 +15,7 @@ import MobileSidebarMenu from "../../Sidebar/MobileSidebarMenu/index";
 import useStyles from "./DashboardMobileMenu.styles";
 
 const DashboardMobileMenu = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const anchorRef = useRef(null);
   const user = useSelector((state) => state.user);
 
@@ -46,13 +48,13 @@ const DashboardMobileMenu = () => {
     <>
       <Container classes={{ root: classes.root }}>
         <Grid container spacing={2} classes={{ container: classes.container }}>
-          <Grid item xs={2}>
+          <Grid size={{ xs: 2 }}>
             <Link to="/" className={classes.adminLogoLink}>
               <img className={classes.adminLogo} src={logo} alt="Piktask" width="150px" height="40px" />
             </Link>
           </Grid>
 
-          <Grid item xs={10} classes={{ item: classes.item }}>
+          <Grid size={{ xs: 10 }} classes={{ item: classes.item }}>
             <div className={classes.headerInfo}>
               <div
                 className={classes.userProfile}

@@ -1,14 +1,16 @@
-import { Card, CardContent, CircularProgress, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
-import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+"use client";
+
+import { Card, CardContent, CircularProgress, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import moment from "moment";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import { getBaseURL, getWords } from "./../../../helpers/index";
 import ProductNotFound from "./../../ui/ProductNotFound/index";
 import useStyles from "./PublishProduct.style";
 
 const PublishProduct = (props) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const { isLoading, allPublishProduct } = props;
 
   function pikTaskEncodeURI(data) {
@@ -36,7 +38,7 @@ const PublishProduct = (props) => {
         </div>
       ) : (
         <Grid container className={classes.publishGridContainer}>
-          <Grid item xs={12} sm={12} md={12} className={classes.loaderItem}>
+          <Grid size={{ xs: 12, sm: 12, md: 12 }} className={classes.loaderItem}>
             <Card className={classes.cardRoot}>
               <CardContent className={classes.productCard}>
                 {allPublishProduct?.length > 0 ? (

@@ -1,4 +1,6 @@
-import { Container, Grid } from "@material-ui/core";
+"use client";
+
+import { Container, Grid } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Loader from "../Loader";
@@ -7,7 +9,7 @@ import SellerInfo from "./SellerInfo";
 import useStyles from "./TopSeller.style";
 
 export const TopSeller = (props) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const {homeTopSeller, adminDashBoard} = props;
   const [isLoading, setIsLoading] = useState(false);
   const [topSeller, setTopSeller] = useState([]);
@@ -16,7 +18,7 @@ export const TopSeller = (props) => {
   useEffect(() => {
     try {
       axios
-        .get(`${process.env.REACT_APP_API_URL}/contributor/top/?limit=4`)
+        .get(`${process.env.NEXT_PUBLIC_API_URL}/contributor/top/?limit=4`)
         .then(({ data }) => {
           if (data?.success) {
             setTopSeller(data.sellers);
@@ -39,14 +41,7 @@ export const TopSeller = (props) => {
               <>
                 {topSeller.length ? (
                   topSeller?.map((photo) => (
-                    <Grid
-                      key={photo.id}
-                      item
-                      xs={6}
-                      sm={4}
-                      md={3}
-                      className={classes.productItem}
-                    >
+                    <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo.id} className={classes.productItem}>
                       <SellerInfo photo={photo} />
                     </Grid>
                   ))
@@ -66,14 +61,7 @@ export const TopSeller = (props) => {
             <>
               {topSeller.length ? (
                 topSeller?.map((photo) => (
-                  <Grid
-                    key={photo.id}
-                    item
-                    xs={6}
-                    sm={6}
-                    md={3}
-                    className={classes.productItem}
-                  >
+                  <Grid size={{ xs: 6, sm: 6, md: 3 }} key={photo.id} className={classes.productItem}>
                     <SellerInfo photo={photo} />
                   </Grid>
                 ))

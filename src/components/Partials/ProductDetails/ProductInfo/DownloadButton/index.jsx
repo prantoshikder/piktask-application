@@ -1,14 +1,16 @@
-import { Button } from "@material-ui/core";
+"use client";
+
+import { Button } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import downArrowIconWhite from "../../../../../assets/icons/downArrowIconWhite.svg";
-import SignUpModal from "../../../../../pages/Authentication/SignUpModal";
+import SignUpModal from "../../../../../views/Authentication/SignUpModal";
 import useStyles from "./DownloadButton.styles";
 
 const DownloadButton = ({ productDetails }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const user = useSelector((state) => state.user);
 
   const [role, setRole] = useState("");
@@ -21,7 +23,7 @@ const DownloadButton = ({ productDetails }) => {
     setButtonLoading(true);
 
     const downloadAPI = {
-      url: `${process.env.REACT_APP_API_URL}/images/${productDetails?.imageID}/download/`,
+      url: `${process.env.NEXT_PUBLIC_API_URL}/images/${productDetails?.imageID}/download/`,
       method: "get",
     };
 

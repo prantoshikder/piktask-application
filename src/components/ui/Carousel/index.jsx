@@ -1,6 +1,8 @@
-import { Grid } from "@material-ui/core";
-import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
-import NavigateNextIcon from "@material-ui/icons/NavigateNext";
+"use client";
+
+import { Grid } from "@mui/material";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Slider from "react-slick";
@@ -29,7 +31,7 @@ function NavigatePrevArrow(props) {
 }
 
 const CategoryCarousel = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const categories = useSelector((state) => state.popularCategories);
   const [isLoading, setLoading] = useState(true);
 
@@ -103,7 +105,7 @@ const CategoryCarousel = () => {
               <>
                 {Array.isArray(categories) &&
                   categories?.map((photo) => (
-                    <Grid key={photo?.id} item xs={6} sm={4} md={3} className={classes.productItem}>
+                    <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo?.id} className={classes.productItem}>
                       <PopularCategory key={photo.id} photo={photo} />
                     </Grid>
                   ))}

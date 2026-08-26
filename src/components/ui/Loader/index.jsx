@@ -1,10 +1,12 @@
-import { Box, CardContent, Container, Grid } from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
+"use client";
+
+import { Box, CardContent, Container, Grid } from "@mui/material";
+import { Skeleton } from "@mui/material";
 import React from "react";
 import useStyles, { CardFooter } from "./Loader.style";
 
 const Loader = ({ item }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   return (
     <Container>
       <Grid container wrap="nowrap">

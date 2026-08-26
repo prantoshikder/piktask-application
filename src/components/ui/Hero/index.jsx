@@ -1,12 +1,14 @@
-import { Button, Container, Typography, useMediaQuery } from "@material-ui/core";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+"use client";
+
+import { Button, Container, Typography, useMediaQuery } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import contributorBG from "../../../assets/banner/contributorBG.jpg";
 import contributorLogo from "../../../assets/Logo/piktask.png";
-import SignUpModal from "../../../pages/Authentication/SignUpModal";
+import SignUpModal from "../../../views/Authentication/SignUpModal";
 import CustomPopper from "../CustomPopper";
 import SectionHeading from "../Heading";
 import Search from "../Search";
@@ -14,7 +16,7 @@ import SearchKeyWords from "../SearchKeyWords";
 import useStyles from "./Hero.styles";
 
 const HeroSection = (props) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const recentButtonRef = useRef();
   const anchorRef = useRef(null);
   const popularButtonRef = useRef();

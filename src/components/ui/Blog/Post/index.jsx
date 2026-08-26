@@ -1,18 +1,20 @@
-import { Grid, Typography } from "@material-ui/core";
+"use client";
+
+import { Grid, Typography } from "@mui/material";
 import moment from "moment";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import { getBaseURL, getWords } from "../../../../helpers";
 import useStyles from "./Post.styles";
 
 const Post = ({ post, recentBlog }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   return (
     <>
       {recentBlog ? (
         <div style={{ marginBottom: "2rem", width: "100%" }}>
-          <Grid item xs={12} sm={12} md={12} className={classes.root}>
+          <Grid size={{ xs: 12, sm: 12, md: 12 }} className={classes.root}>
             <div className={classes.postWrapper}>
               <div className={classes.imageWrapper}>
                 <Link to={`/blog/${post?.id}`} className={classes.singlePost} />
@@ -44,7 +46,7 @@ const Post = ({ post, recentBlog }) => {
           </Grid>
         </div>
       ) : (
-        <Grid item xs={6} sm={6} md={3} className={classes.root}>
+        <Grid size={{ xs: 6, sm: 6, md: 3 }} className={classes.root}>
           <div className={classes.postWrapper}>
             <div className={classes.imageWrapper}>
               <Link to={`/blog/${post?.id}`} className={classes.singlePost} />

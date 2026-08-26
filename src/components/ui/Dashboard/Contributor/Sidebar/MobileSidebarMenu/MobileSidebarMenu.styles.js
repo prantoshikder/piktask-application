@@ -1,8 +1,10 @@
-import { makeStyles } from "@material-ui/core";
+"use client";
+
+import { makeStyles } from "tss-react/mui";
 
 // const drawerWidth = 280;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   // Mobile Menu
   mobileSidebarMenu: {
     backgroundColor: "#001c30",

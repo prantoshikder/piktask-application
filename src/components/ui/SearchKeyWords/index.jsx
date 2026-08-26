@@ -1,17 +1,19 @@
-import { Typography } from "@material-ui/core";
+"use client";
+
+import { Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import useStyles from "./SearchKeyWords.styles";
 
 const SearchKeyWords = ({ popularKeywords }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [popularSearchKeywords, setPopularSearchKeywords] = useState([]);
 
   useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_API_URL}/client/search/popular_keyword?limit=10`
+        `${process.env.NEXT_PUBLIC_API_URL}/client/search/popular_keyword?limit=10`
       )
       .then(({ data }) => {
         if (data?.status) {

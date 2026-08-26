@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 
 // type SearchType = {
@@ -6,11 +8,7 @@ import { useEffect, useState } from "react";
 //   callback: () => void;
 // };
 
-export const useDebounce = (
-  value,
-  timeout,
-  callback: () => void
-): void => {
+export const useDebounce = (value, timeout, callback) => {
   const [timer, setTimer] = useState("");
 
   const clearTimer = () => {

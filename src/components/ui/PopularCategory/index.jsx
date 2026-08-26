@@ -1,11 +1,13 @@
-import { Button } from "@material-ui/core";
+"use client";
+
+import { Button } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import { getBaseURL } from "../../../helpers";
 import useStyles from "./Category.styles";
 
 const PopularCategory = ({ photo }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   return (
     <div className={classes.catItemWrapper}>

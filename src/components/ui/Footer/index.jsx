@@ -1,16 +1,18 @@
-import { Collapse, Container, Grid, List, ListItem, ListItemIcon, Typography } from "@material-ui/core";
+"use client";
+
+import { Collapse, Container, Grid, List, ListItem, ListItemIcon, Typography } from "@mui/material";
 import ExpandLessRoundedIcon from "@mui/icons-material/ExpandLessRounded";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import ListItemButton from "@mui/material/ListItemButton";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import SignUpModal from "../../../pages/Authentication/SignUpModal";
+import { Link } from "@/lib/router";
+import SignUpModal from "../../../views/Authentication/SignUpModal";
 import Copyright from "./CopyRight";
 import { useStyles } from "./Footer.styles";
 
 const Footer = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const user = useSelector((state) => state.user);
 
   const [openAuthModal, setOpenAuthModal] = useState(false);
@@ -57,7 +59,7 @@ const Footer = () => {
       {!mobileView ? (
         <Container classes={{ root: classes.root }}>
           <Grid container spacing={3}>
-            <Grid item xs={6} sm={3} md={3} className={classes.footerWrapper}>
+            <Grid size={{ xs: 6, sm: 3, md: 3 }} className={classes.footerWrapper}>
               <Typography variant="h3" className={classes.footerHeading}>
                 Categories
               </Typography>
@@ -86,7 +88,7 @@ const Footer = () => {
               </List>
             </Grid>
 
-            <Grid item xs={6} sm={3} md={3} className={classes.footerWrapper}>
+            <Grid size={{ xs: 6, sm: 3, md: 3 }} className={classes.footerWrapper}>
               <Typography variant="h3" className={classes.footerHeading}>
                 Content
               </Typography>
@@ -115,7 +117,7 @@ const Footer = () => {
               </List>
             </Grid>
 
-            <Grid item xs={6} sm={3} md={3} className={classes.footerWrapper}>
+            <Grid size={{ xs: 6, sm: 3, md: 3 }} className={classes.footerWrapper}>
               <Typography variant="h3" className={classes.footerHeading}>
                 Information
               </Typography>
@@ -150,7 +152,7 @@ const Footer = () => {
               </List>
             </Grid>
 
-            <Grid item xs={6} sm={3} md={3} className={classes.footerWrapper}>
+            <Grid size={{ xs: 6, sm: 3, md: 3 }} className={classes.footerWrapper}>
               <Typography variant="h3" className={classes.footerHeading}>
                 Legal
               </Typography>

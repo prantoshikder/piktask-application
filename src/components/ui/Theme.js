@@ -1,4 +1,4 @@
-import { createTheme } from "@material-ui/core/styles";
+import { createTheme } from "@mui/material/styles";
 
 const dark = "#143340";
 const lightDark = "#1B3F4E";
@@ -10,17 +10,24 @@ const lightBlack = "#14323F";
 
 const theme = createTheme({
   breakpoints: {
+    // NOTE: these are the project's original v4 values. `xl` had no explicit
+    // value under MUI v4; v5+ requires every key in the scale to be defined,
+    // so it is added here above `lg`.
     values: {
       xs: 480,
       sm: 960,
       md: 1280,
       lg: 1540,
+      xl: 1920,
     },
   },
-  overrides: {
+  components: {
+    // v4 `overrides.MuiTypography.body1` -> v5+ `components.MuiTypography.styleOverrides.body1`
     MuiTypography: {
-      body1: {
-        margin: 0,
+      styleOverrides: {
+        body1: {
+          margin: 0,
+        },
       },
     },
   },
@@ -69,6 +76,8 @@ const theme = createTheme({
       borderRadius: "3rem",
       opacity: 1,
     },
+    // Non-standard keys the app spreads into makeStyles rules
+    // (e.g. `...theme.typography.darkButton`). Kept as-is.
     secondary: {
       blue,
     },

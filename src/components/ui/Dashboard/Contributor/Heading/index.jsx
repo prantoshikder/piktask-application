@@ -1,4 +1,6 @@
-import { Typography } from "@material-ui/core";
+"use client";
+
+import { Typography } from "@mui/material";
 import React from "react";
 
 const Heading = ({ tag, children, ...rest }) => {

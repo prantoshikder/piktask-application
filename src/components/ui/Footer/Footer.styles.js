@@ -1,6 +1,8 @@
-import { makeStyles } from "@material-ui/core/styles";
+"use client";
 
-export const useStyles = makeStyles((theme) => ({
+import { makeStyles } from "tss-react/mui";
+
+export const useStyles = makeStyles()((theme) => ({
   footerRoot: {
     backgroundColor: "#001c30",
   },

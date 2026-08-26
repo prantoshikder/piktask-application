@@ -1,13 +1,16 @@
-import { Button, makeStyles, Tooltip } from "@material-ui/core";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+"use client";
+
+import { makeStyles } from "tss-react/mui";
+import { Button, Tooltip } from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import likeIcon from "../../../../../assets/icons/likeIcon.svg";
-import SignUpModal from "../../../../../pages/Authentication/SignUpModal";
+import SignUpModal from "../../../../../views/Authentication/SignUpModal";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   likeBtn: {
     padding: "1rem 1.5rem",
     backgroundColor: theme.palette.primary.main,
@@ -40,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FavouriteButton = ({ productDetails }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const user = useSelector((state) => state.user);
 
   const [role, setRole] = useState("");
@@ -53,7 +56,7 @@ const FavouriteButton = ({ productDetails }) => {
       setOpenAuthModal(true);
     } else if (user?.id !== productDetails?.imageDetails?.user_id && user && user?.isLoggedIn && user?.role === "user") {
       axios
-        .post(`${process.env.REACT_APP_API_URL}/images/${productDetails?.imageID}/like`, {}, { headers: { Authorization: user?.token } })
+        .post(`${process.env.NEXT_PUBLIC_API_URL}/images/${productDetails?.imageID}/like`, {}, { headers: { Authorization: user?.token } })
         .then(({ data }) => {
           if (data?.status) {
             productDetails?.setLike(true);

@@ -1,4 +1,6 @@
-import { Card, Grid } from "@material-ui/core";
+"use client";
+
+import { Card, Grid } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -6,7 +8,7 @@ import { expiredLoginTime } from "../../../../../helpers";
 import useStyles from "./TotalCountHistory.style";
 
 const TotalCountHistory = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const user = useSelector((state) => state.user);
 
   const [totalSummary, setTotalSummery] = useState({});
@@ -18,7 +20,7 @@ const TotalCountHistory = () => {
     // Total earning summary API integration
     if (user?.isLoggedIn && user?.role === "contributor") {
       axios
-        .get(`${process.env.REACT_APP_API_URL}/contributor/earning/summary`, { cancelToken: source.token, headers: { Authorization: user?.token } })
+        .get(`${process.env.NEXT_PUBLIC_API_URL}/contributor/earning/summary`, { cancelToken: source.token, headers: { Authorization: user?.token } })
         .then(({ data }) => {
           if (data?.status) {
             setTotalSummery(data?.total_summery);
@@ -36,7 +38,7 @@ const TotalCountHistory = () => {
   return (
     <>
       <Grid container spacing={0}>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <Card className={classes.cardWrapper}>
             <div className={classes.graphBox}>
               <div className={classes.amount}>${totalSummary?.total_earning}</div>

@@ -1,12 +1,14 @@
-import { Button, Container, Grid, Typography } from "@material-ui/core";
+"use client";
+
+import { Button, Container, Grid, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import useStyles from "./Blog.styles";
 import Post from "./Post";
 
 const Blog = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   const [blogsPost, setBlogsPost] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -15,7 +17,7 @@ const Blog = () => {
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
 
-    axios.get(`${process.env.REACT_APP_API_URL}/blogs/`, { cancelToken: source.token }).then(({ data }) => {
+    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/blogs/`, { cancelToken: source.token }).then(({ data }) => {
       if (data?.status) {
         setBlogsPost(data?.blogs);
         setLoading(false);

@@ -1,12 +1,14 @@
-import { Button, Typography } from "@material-ui/core";
-import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+"use client";
+
+import { Button, Typography } from "@mui/material";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import NotFoundImage from "../../../assets/banner/uploadFiles.png";
 import useStyles from "./ProductNotFound.style";
 
 const ProductNotFound = ({ keywords, noCollection, contributorProductNotFound, publishContent, revisionContent, pendingContent, rejectFileContent }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   return (
     <>

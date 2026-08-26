@@ -1,11 +1,13 @@
-import { Button, Container, Typography } from "@material-ui/core";
+"use client";
+
+import { Button, Container, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import SignUpModal from "../../../pages/Authentication/SignUpModal";
+import { Link } from "@/lib/router";
+import SignUpModal from "../../../views/Authentication/SignUpModal";
 import useStyles from "./CallToAction.styles";
 
 const CallToAction = (props) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const {title, subtitle, buttonText, buttonLink, buttonClicked, uppercase, contributorJoinNow,} = props;
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const [role, setRole] = useState("");

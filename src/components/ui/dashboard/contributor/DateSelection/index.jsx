@@ -1,10 +1,12 @@
-import { Button, FormControl, Select, Typography } from "@material-ui/core";
+"use client";
+
+import { Button, FormControl, Select, Typography } from "@mui/material";
 import moment from "moment";
 import React, { useState } from "react";
 import useStyles from "./DateSelection.style";
 
 const DateSelection = (props) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const { setSearchInput, earningManagementBtn } = props;
 
   const fromMonths = moment.months();

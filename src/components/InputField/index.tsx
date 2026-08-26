@@ -1,4 +1,6 @@
-import { Button, CircularProgress, TextField } from "@material-ui/core";
+"use client";
+
+import { Button, CircularProgress, TextField } from "@mui/material";
 import React, { ChangeEvent, FC, MouseEvent } from "react";
 import useStyles from "./inputField.styles";
 
@@ -15,7 +17,7 @@ type inputProps = {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 export const InputField: FC<inputProps> = (props) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const {
     type,
     label,
@@ -57,7 +59,7 @@ type ButtonProps = {
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 };
 export const CustomBtn: FC<ButtonProps> = (props) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const { disabledBtn, isLoading, text, onClick, styles, ...rest } = props;
 
   return (

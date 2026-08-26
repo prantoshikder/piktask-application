@@ -1,8 +1,10 @@
-import { Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Typography } from "@material-ui/core";
+"use client";
+
+import { Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory } from "@/lib/router";
 import { toast } from "react-toastify";
 import useStyles from "./CloseAccountModal.style";
 
@@ -24,7 +26,7 @@ function a11yProps(index) {
 }
 
 const CloseAccountModal = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -47,7 +49,7 @@ const CloseAccountModal = () => {
 
   const handleCloseAccount = (e) => {
     e.preventDefault();
-    const URL = `${process.env.REACT_APP_API_URL}/user`;
+    const URL = `${process.env.NEXT_PUBLIC_API_URL}/user`;
     axios
       .delete(URL, {
         headers: { Authorization: user?.token },

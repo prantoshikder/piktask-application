@@ -1,10 +1,12 @@
-import { makeStyles } from "@material-ui/core";
+"use client";
+
+import { makeStyles } from "tss-react/mui";
 import PinterestIcon from "@mui/icons-material/Pinterest";
 import React from "react";
 import { PinterestShareButton } from "react-share";
 import { getBaseURL } from "../../../../../helpers";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   tooltip: {
     fontSize: "1.3rem",
   },
@@ -40,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SaveButton = ({ location, productDetails }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   return (
     <PinterestShareButton url={location} media={encodeURI(`${getBaseURL().bucket_base_url}${getBaseURL().images}${productDetails?.imageDetails?.preview}`)}>
       <div className={classes.button}>

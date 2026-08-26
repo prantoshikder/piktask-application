@@ -1,9 +1,11 @@
-import { List } from "@material-ui/core";
+"use client";
+
+import { List } from "@mui/material";
 import React from "react";
 import useStyles from "./SocialShare.styles";
 
 const SocialShare = (props) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const { socials, copyRightSocial, width = "20px", height = "20px" } = props;
 
   return (

@@ -1,4 +1,6 @@
-import { Container, Grid, Tab, Tabs } from "@material-ui/core";
+"use client";
+
+import { Container, Grid, Tab, Tabs } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -6,11 +8,12 @@ import Loader from "../Loader";
 import ProductNotFound from "../ProductNotFound";
 import Product from "../Products/Product";
 import Pagination from "./../Pagination/index";
+import { usePathname } from "next/navigation";
 import useStyles from "./AuthorItems.styles";
 
 const AuthorItems = ({ imageSummery, userId }) => {
-  const classes = useStyles();
-  const locationPath = document.location.pathname;
+  const { classes } = useStyles();
+  const locationPath = usePathname();
   const user = useSelector((state) => state.user);
 
   const [authorAllResource, setAuthorAllResource] = useState([]);
@@ -42,9 +45,9 @@ const AuthorItems = ({ imageSummery, userId }) => {
       let url;
 
       if (user?.isLoggedIn && user?.id) {
-        url = `${process.env.REACT_APP_API_URL}/contributor/${userId}/images/${productExtension}?limit=${limit}&page=${pageCount}&userId=${user?.id}`;
+        url = `${process.env.NEXT_PUBLIC_API_URL}/contributor/${userId}/images/${productExtension}?limit=${limit}&page=${pageCount}&userId=${user?.id}`;
       } else {
-        url = `${process.env.REACT_APP_API_URL}/contributor/${userId}/images/${productExtension}?limit=${limit}&page=${pageCount}`;
+        url = `${process.env.NEXT_PUBLIC_API_URL}/contributor/${userId}/images/${productExtension}?limit=${limit}&page=${pageCount}`;
       }
 
       axios
@@ -105,7 +108,7 @@ const AuthorItems = ({ imageSummery, userId }) => {
           <>
             {authorAllResource?.length ? (
               authorAllResource?.map((photo) => (
-                <Grid key={photo.image_id} item xs={6} sm={4} md={3} className={classes.productItem}>
+                <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo.image_id} className={classes.productItem}>
                   <Product photo={photo} />
                 </Grid>
               ))

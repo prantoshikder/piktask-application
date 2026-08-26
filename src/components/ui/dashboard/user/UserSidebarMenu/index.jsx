@@ -1,17 +1,19 @@
-import { Card, CardContent, List, ListItem } from "@material-ui/core";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import GetAppIcon from "@material-ui/icons/GetApp";
-import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
-import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
+"use client";
+
+import { Card, CardContent, List, ListItem } from "@mui/material";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import GetAppIcon from "@mui/icons-material/GetApp";
+import PeopleOutlineIcon from "@mui/icons-material/PeopleOutlined";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutlined";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
+import { useHistory } from "@/lib/router";
+import { Link } from "@/lib/router";
 import useStyles from "./UserSidebarMenu.style";
 
 const UserSidebarMenu = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);

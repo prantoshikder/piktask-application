@@ -1,6 +1,8 @@
-import { makeStyles } from "@material-ui/core/styles";
+"use client";
 
-const useStyles = makeStyles((theme) => ({
+import { makeStyles } from "tss-react/mui";
+
+const useStyles = makeStyles()((theme) => ({
   searchItemWrapper: {
     display: "flex",
     alignItems: "flex-start",

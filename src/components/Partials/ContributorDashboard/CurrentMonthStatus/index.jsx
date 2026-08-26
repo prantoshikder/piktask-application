@@ -1,8 +1,10 @@
-import { Button, CardContent, CircularProgress, Grid, Typography } from "@material-ui/core";
+"use client";
+
+import { Button, CardContent, CircularProgress, Grid, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import box from "../../../../assets/dashboardicons/box.svg";
 import arrowDown from "../../../../assets/dashboardicons/icon1.svg";
 import moneyIcon from "../../../../assets/dashboardicons/money.svg";
@@ -12,7 +14,7 @@ import Heading from "../../../ui/dashboard/contributor/Heading";
 import useStyles from "./CurrentMonthStatus.styles";
 
 const CurrentMonthStatus = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const user = useSelector((state) => state.user);
 
   const [isLoading, setLoading] = useState(true);
@@ -31,7 +33,7 @@ const CurrentMonthStatus = () => {
       var todayCurrentMonth = newDate.toISOString().substring(0, 10);
 
       axios
-        .get(`${process.env.REACT_APP_API_URL}/contributor/dashboard/summery/?start=${firstDay}&end=${todayCurrentMonth}`, {
+        .get(`${process.env.NEXT_PUBLIC_API_URL}/contributor/dashboard/summery/?start=${firstDay}&end=${todayCurrentMonth}`, {
           cancelToken: source.token,
           headers: { Authorization: user?.token },
         })
@@ -62,7 +64,7 @@ const CurrentMonthStatus = () => {
       var previousFirstDay = previousMonthLastDay.toISOString().substring(0, 10);
 
       axios
-        .get(`${process.env.REACT_APP_API_URL}/contributor/dashboard/summery/?start=${previousFirstDays}&end=${previousFirstDay}`, {
+        .get(`${process.env.NEXT_PUBLIC_API_URL}/contributor/dashboard/summery/?start=${previousFirstDays}&end=${previousFirstDay}`, {
           cancelToken: source.token,
           headers: { Authorization: user?.token },
         })
@@ -109,7 +111,7 @@ const CurrentMonthStatus = () => {
             </Button>
           </div>
           <Grid container>
-            <Grid item xs={6} sm={6} md={3} className={classes.loaderItem}>
+            <Grid size={{ xs: 6, sm: 6, md: 3 }} className={classes.loaderItem}>
               <CardContent className={classes.statisticsContent}>
                 <div className={`${classes.arrowIcon} ${classes.statisticsIcon}`}>
                   <img src={moneyIcon} alt="Money" width="20px" height="20px" />
@@ -122,7 +124,7 @@ const CurrentMonthStatus = () => {
               </CardContent>
             </Grid>
 
-            <Grid item xs={6} sm={6} md={3} className={classes.loaderItem}>
+            <Grid size={{ xs: 6, sm: 6, md: 3 }} className={classes.loaderItem}>
               <CardContent className={classes.statisticsContent}>
                 <div className={`${classes.arrowIcon} ${classes.statisticsIcon}`}>
                   <img src={arrowDown} alt="Download" width="20px" height="20px" />
@@ -135,7 +137,7 @@ const CurrentMonthStatus = () => {
               </CardContent>
             </Grid>
 
-            <Grid item xs={6} sm={6} md={3} className={classes.loaderItem}>
+            <Grid size={{ xs: 6, sm: 6, md: 3 }} className={classes.loaderItem}>
               <CardContent className={classes.statisticsContent}>
                 <div className={`${classes.arrowIcon} ${classes.statisticsIcon}`}>
                   <img src={followerIcon} alt="FollowerIcon" width="20px" height="20px" />
@@ -148,7 +150,7 @@ const CurrentMonthStatus = () => {
               </CardContent>
             </Grid>
 
-            <Grid item xs={6} sm={6} md={3} className={classes.loaderItem}>
+            <Grid size={{ xs: 6, sm: 6, md: 3 }} className={classes.loaderItem}>
               <CardContent className={classes.statisticsContent}>
                 <div className={`${classes.arrowIcon} ${classes.statisticsIcon}`}>
                   <img src={box} alt="Products" width="20px" height="20px" />

@@ -1,10 +1,13 @@
-import { makeStyles, Typography } from "@material-ui/core";
+"use client";
+
+import { makeStyles } from "tss-react/mui";
+import { Typography } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import authorPhoto from "../../../assets/author.png";
 import { getBaseURL } from "./../../../helpers/index";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   authorProfile: {
     display: "flex",
     alignItems: "center",
@@ -55,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AuthorProfileInfo = ({ productDetails }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   return (
     <div className={classes.authorProfile}>
       <Link to={`/author/${productDetails?.imageDetails?.user?.username}`}>

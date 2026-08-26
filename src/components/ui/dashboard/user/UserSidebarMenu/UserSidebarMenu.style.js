@@ -1,5 +1,7 @@
-import { makeStyles } from "@material-ui/core";
-const useStyles = makeStyles((theme) => ({
+"use client";
+
+import { makeStyles } from "tss-react/mui";
+const useStyles = makeStyles()((theme) => ({
   userMenuList: {
     boxShadow: "0 1px 2px 0 rgb(0 0 0 / 10%)",
   },

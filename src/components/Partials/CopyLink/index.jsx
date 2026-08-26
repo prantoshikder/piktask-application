@@ -1,8 +1,11 @@
-import { Button, ClickAwayListener, makeStyles, Tooltip } from "@material-ui/core";
+"use client";
+
+import { makeStyles } from "tss-react/mui";
+import { Button, ClickAwayListener, Tooltip } from "@mui/material";
 import React, { useState } from "react";
 import copyIcon from "../../../assets/icons/copy.svg";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   tooltip: {
     fontSize: "1.3rem",
   },
@@ -35,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CopyLink = ({ location }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   const [copySuccess, setCopySuccess] = useState("");
   const [openCopyLink, setOpenCopyLink] = useState(false);

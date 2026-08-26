@@ -1,6 +1,8 @@
-import { makeStyles } from "@material-ui/core";
+"use client";
 
-const useStyles = makeStyles((theme) => ({
+import { makeStyles } from "tss-react/mui";
+
+const useStyles = makeStyles()((theme) => ({
   heading: {
     fontSize: "2.2rem",
     fontWeight: 500,

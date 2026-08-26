@@ -1,8 +1,10 @@
-import { makeStyles } from "@material-ui/core";
+"use client";
+
+import { makeStyles } from "tss-react/mui";
 import React, { useEffect } from "react";
 import { getBaseURL } from "../../../../helpers";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   imageWrapper: {
     backgroundColor: theme.palette.common.white,
     [theme.breakpoints.down(480)]: {
@@ -25,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductImage = ({ imageDetails, setThumbnail }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const imageThumbnail = encodeURI(`${getBaseURL().bucket_base_url}${getBaseURL().images}${imageDetails?.preview}`);
 
   useEffect(() => {

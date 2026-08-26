@@ -1,13 +1,15 @@
-import { Collapse, List, ListItem, ListItemText } from "@material-ui/core";
-import { ExpandLess, ExpandMore } from "@material-ui/icons";
+"use client";
+
+import { Collapse, List, ListItem, ListItemText } from "@mui/material";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import useStyles from "./MobileSidebarMenu.styles";
 
 const MobileSidebarMenu = () => {
   const user = useSelector((state) => state.user);
-  const classes = useStyles();
+  const { classes } = useStyles();
   const anchorRef = useRef(null);
   const [value, setValue] = useState(0);
   const [open, setOpen] = useState(false);

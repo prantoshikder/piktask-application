@@ -1,14 +1,16 @@
-import { Button, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+"use client";
+
+import { Button, Grid } from "@mui/material";
+import { makeStyles } from "tss-react/mui";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import SectionHeading from "../Heading";
 import Loader from "../Loader";
 import Product from "./Product";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   container: {
     marginBottom: "2.2rem",
   },
@@ -34,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Products = (props) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const { category, count, showHeading, piktaskCollection } = props;
@@ -52,9 +54,9 @@ const Products = (props) => {
 
     if (category?.id) {
       if (user?.id && user?.role === "user") {
-        categoryURL = `${process.env.REACT_APP_API_URL}/categories/${category?.id}?user_id=${user?.id}`;
+        categoryURL = `${process.env.NEXT_PUBLIC_API_URL}/categories/${category?.id}?user_id=${user?.id}`;
       } else {
-        categoryURL = `${process.env.REACT_APP_API_URL}/categories/${category?.id}`;
+        categoryURL = `${process.env.NEXT_PUBLIC_API_URL}/categories/${category?.id}`;
       }
 
       axios
@@ -92,9 +94,9 @@ const Products = (props) => {
 
     if (piktaskCollection) {
       if (user?.id && user?.role === "user") {
-        categoryURL = `${process.env.REACT_APP_API_URL}/categories/53?limit=16&user_id=${user?.id}`;
+        categoryURL = `${process.env.NEXT_PUBLIC_API_URL}/categories/53?limit=16&user_id=${user?.id}`;
       } else {
-        categoryURL = `${process.env.REACT_APP_API_URL}/categories/53/?limit=16`;
+        categoryURL = `${process.env.NEXT_PUBLIC_API_URL}/categories/53/?limit=16`;
       }
       axios
         .get(categoryURL, { cancelToken: source.token })
@@ -139,7 +141,7 @@ const Products = (props) => {
               <>
                 {piktaskProduct?.length > 0 &&
                   piktaskProduct?.slice(0, 16).map((photo) => (
-                    <Grid key={photo?.image_id} item xs={6} sm={4} md={3} className={classes.productItem}>
+                    <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo?.image_id} className={classes.productItem}>
                       <Product key={photo?.image_id} catId={piktaskProduct?.id} photo={photo} />
                     </Grid>
                   ))}
@@ -164,7 +166,7 @@ const Products = (props) => {
               <>
                 {images?.length > 0 &&
                   images?.slice(0, count).map((photo) => (
-                    <Grid key={photo?.image_id} item xs={6} sm={4} md={3} className={classes.productItem}>
+                    <Grid size={{ xs: 6, sm: 4, md: 3 }} key={photo?.image_id} className={classes.productItem}>
                       <Product key={photo?.image_id} catId={category?.id} photo={photo} />
                     </Grid>
                   ))}

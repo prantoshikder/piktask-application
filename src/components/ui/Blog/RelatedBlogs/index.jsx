@@ -1,10 +1,13 @@
-import { Grid, makeStyles } from '@material-ui/core';
+"use client";
+
+import { makeStyles } from "tss-react/mui";
+import { Grid } from "@mui/material";
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Post from '../Post';
 import SectionHeading from '../../Heading';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   postsWrapper: {
     marginBottom: "2rem",
     display: "flex",
@@ -17,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RelatedBlogs = ({blogID}) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   const [relatedBlogs, setRelatedBlogs] = useState([]);
   const [isLoading, setLoading] = useState(false);
@@ -25,7 +28,7 @@ const RelatedBlogs = ({blogID}) => {
   useEffect(() => {
     setLoading(true);
     axios
-    .get(`${process.env.REACT_APP_API_URL}/blogs/${blogID}/related_blog`)
+    .get(`${process.env.NEXT_PUBLIC_API_URL}/blogs/${blogID}/related_blog`)
     .then(({data}) => {
       if(data?.status){
         setRelatedBlogs(data?.related_blogs);

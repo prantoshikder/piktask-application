@@ -1,7 +1,9 @@
-import { makeStyles } from "@material-ui/core";
+"use client";
+
+import { makeStyles } from "tss-react/mui";
 import styled from "styled-components";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
     rootWrapper:{
         display:"flex",
     },

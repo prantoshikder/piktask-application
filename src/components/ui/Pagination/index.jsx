@@ -1,11 +1,13 @@
-import { Button } from "@material-ui/core";
+"use client";
+
+import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory } from "@/lib/router";
 import Spacing from "../../Spacing";
 import useStyles from "./Pagination.style";
 
 const Pagination = (props) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const history = useHistory();
   const { pageCount, setPageCount, count, locationPath, productPagination } = props;
   const [selected, setSelected] = useState(false);

@@ -1,7 +1,9 @@
-import { makeStyles } from "@material-ui/core";
+"use client";
+
+import { makeStyles } from "tss-react/mui";
 import userBackground from "../../../../../assets/user/user-background.png";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   userProfile: {
     padding: "0",
     marginBottom: "1.6rem",

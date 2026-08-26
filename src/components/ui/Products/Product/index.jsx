@@ -1,20 +1,23 @@
-import { Button, CardContent, CardMedia, IconButton, Typography } from "@material-ui/core";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+"use client";
+
+import { Button, CardContent, CardMedia, IconButton, Typography } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import axios from "axios";
 // import crownIcon from "../../../../assets/icons/crown.svg";
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import { PinterestIcon, PinterestShareButton } from "react-share";
 import { toast } from "react-toastify";
 import downloadIcon from "../../../../assets/download.svg";
 import { getBaseURL, getWords } from "../../../../helpers";
-import SignUpModal from "../../../../pages/Authentication/SignUpModal";
+import SignUpModal from "../../../../views/Authentication/SignUpModal";
 import { ButtonWrapper, CardFooter, CardWrapper, useStyles } from "./Product.styles";
 
 const Product = ({ photo = null }) => {
-  const classes = useStyles();
+  const pathname = usePathname();
+  const { classes } = useStyles();
   const likeRef = useRef();
   const user = useSelector((state) => state.user);
 
@@ -28,7 +31,7 @@ const Product = ({ photo = null }) => {
   const handleLikeBtn = () => {
     if (user?.id !== photo?.user_id && user?.isLoggedIn && user?.role === "user") {
       axios
-        .post(`${process.env.REACT_APP_API_URL}/images/${photo?.image_id}/like`, {}, { headers: { Authorization: user?.token } })
+        .post(`${process.env.NEXT_PUBLIC_API_URL}/images/${photo?.image_id}/like`, {}, { headers: { Authorization: user?.token } })
         .then(({ data }) => {
           if (data?.status) {
             setLike(true);
@@ -84,7 +87,7 @@ const Product = ({ photo = null }) => {
             component={Link}
             to={`/subscription`}
           >
-            <PinterestShareButton url={document.location.pathname} media={encodeURI(`${getBaseURL().bucket_base_url}${getBaseURL().images}${photo?.preview}`)}>
+            <PinterestShareButton url={pathname} media={encodeURI(`${getBaseURL().bucket_base_url}${getBaseURL().images}${photo?.preview}`)}>
               <PinterestIcon size={30} round={true} />
             </PinterestShareButton>
           </IconButton>

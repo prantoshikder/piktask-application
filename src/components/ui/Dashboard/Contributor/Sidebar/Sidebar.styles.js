@@ -1,6 +1,8 @@
-import { makeStyles } from "@material-ui/core";
+"use client";
+
+import { makeStyles } from "tss-react/mui";
 const drawerWidth = 280;
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   sidebarWrapper: {
     backgroundColor: "#012036",
     width: "28rem",

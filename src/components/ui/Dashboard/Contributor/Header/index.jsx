@@ -1,11 +1,13 @@
-import { useMediaQuery } from "@material-ui/core";
+"use client";
+
+import { useMediaQuery } from "@mui/material";
 import React from "react";
 import useStyles from "./AdminHeader.styles";
 import DashboardDesktopMenu from "./DashboardDesktopMenu";
 import DashboardMobileMenu from "./DashboardMobileMenu/index";
 
 const AdminHeader = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const mobileView = useMediaQuery("(max-width:769px)");
 
   return (

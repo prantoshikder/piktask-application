@@ -1,9 +1,11 @@
-import { makeStyles } from "@material-ui/core/styles";
+"use client";
+
+import { makeStyles } from "tss-react/mui";
 import heroBG from "../../../assets/banner/hero-banner.jpg";
 import mobileHeroBG from "../../../assets/banner/mobileHero-banner.jpg";
 import tabletHeroBG from "../../../assets/banner/tabletHero-banner.jpg";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   heroWrapper: {
     backgroundImage: `url(${heroBG})`,
     backgroundPosition: "center center",

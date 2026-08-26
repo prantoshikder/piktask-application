@@ -1,5 +1,8 @@
-import { Dialog, DialogContent, DialogTitle, IconButton, makeStyles } from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
+"use client";
+
+import { makeStyles } from "tss-react/mui";
+import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import React from "react";
 import {
   FacebookIcon,
@@ -17,7 +20,7 @@ import {
 } from "react-share";
 import { getBaseURL } from "./../../../helpers/index";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   socialShareWrapper: {
     display: "flex",
     justifyContent: "space-between",
@@ -37,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SocialShareDialog = ({ productDetails, setOpen, open }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   const handleClose = () => {
     setOpen(false);

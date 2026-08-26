@@ -1,8 +1,11 @@
-import { Card, makeStyles } from "@material-ui/core";
+"use client";
+
+import { makeStyles } from "tss-react/mui";
+import { Card } from "@mui/material";
 import styled from "styled-components";
 import photoBackground from "../../../../assets/transparent_bg.jpg";
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles()((theme) => ({
   container: {
     backgroundColor: "#F8F8F8",
     boxShadow: "0 1px 2px 0 rgb(0 0 0 / 10%)",

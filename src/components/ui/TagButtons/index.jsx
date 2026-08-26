@@ -1,15 +1,17 @@
-import { Button, Grid, Typography } from "@material-ui/core";
+"use client";
+
+import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import useStyles from "./TagButtons.styles";
 
 const TagButtons = ({ allTags }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   return (
     <>
       <Grid container>
-        <Grid item className={classes.tagsContainer}>
+        <Grid className={classes.tagsContainer}>
           <Typography className={classes.tagTitle} variant="h3">
             Related tags
           </Typography>

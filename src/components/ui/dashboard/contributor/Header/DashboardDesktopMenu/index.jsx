@@ -1,17 +1,19 @@
-import { Button, Typography } from "@material-ui/core";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-// import NotificationsIcon from "@material-ui/icons/Notifications";
+"use client";
+
+import { Button, Typography } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+// import NotificationsIcon from "@mui/icons-material/Notifications";
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import { getBaseURL } from "../../../../../../helpers/index";
 import CustomPopper from "../../../../CustomPopper/index";
 import useStyles from "./DashboardDesktopMenu.styles";
 
 const DashboardDesktopMenu = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const anchorRef = useRef(null);
   const user = useSelector((state) => state.user);
 

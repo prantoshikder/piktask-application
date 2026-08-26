@@ -1,18 +1,20 @@
-import { Button, Container, Grid, Typography } from "@material-ui/core";
+"use client";
+
+import { Button, Container, Grid, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import useStyles from "./PopularKeyWords.style";
 
 const PopularKeyWords = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [isLoading, setLoading] = useState(true);
   const [popularSearchKeywords, setPopularSearchKeywords] = useState([]);
 
   useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_API_URL}/client/search/popular_keyword?limit=30`
+        `${process.env.NEXT_PUBLIC_API_URL}/client/search/popular_keyword?limit=30`
       )
       .then(({ data }) => {
         if (data?.status) {
@@ -31,7 +33,7 @@ const PopularKeyWords = () => {
       <div className={classes.tagWrapper}>
         <Container>
           <Grid container>
-            <Grid item className={classes.tagsContainer}>
+            <Grid className={classes.tagsContainer}>
               <Typography className={classes.tagTitle} variant="h3">
                 Popular Search:
               </Typography>

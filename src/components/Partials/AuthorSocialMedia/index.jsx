@@ -1,4 +1,6 @@
-import { Grid, Typography } from "@material-ui/core";
+"use client";
+
+import { Grid, Typography } from "@mui/material";
 import React from "react";
 import behanceIcon from "../../../assets/icons/behance.svg";
 import dribbbleIcon from "../../../assets/icons/dribble.svg";
@@ -47,7 +49,7 @@ const AuthorSocialMedia = ({ productDetails }) => {
   ];
 
   return (
-    <Grid item style={{ display: "flex", alignItems: "center" }}>
+    <Grid style={{ display: "flex", alignItems: "center" }}>
       {socialMedia?.length > 0 && <Typography>Follow me: </Typography>}
       <SocialShare socials={socialMedia} />
     </Grid>

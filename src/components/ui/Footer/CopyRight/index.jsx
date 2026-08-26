@@ -1,6 +1,8 @@
-import { Container, Grid, Typography } from "@material-ui/core";
+"use client";
+
+import { Container, Grid, Typography } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import behance from "../../../../assets/icons/behance.svg";
 import dribbble from "../../../../assets/icons/dribble.svg";
 import facebook from "../../../../assets/icons/facebook.svg";
@@ -13,7 +15,7 @@ import SocialShare from "../../SocialShare";
 import useStyles from "./CopyRight.styles";
 
 const CopyRight = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const socialMedia = [
     {
       socialUrl: "https://dribbble.com/piktask",
@@ -50,17 +52,17 @@ const CopyRight = () => {
       <Container className={classes.root}>
         <div>
           <Grid className={classes.gridRoot}>
-            <Grid item xs={12} sm={3} md={3} className={classes.logoWrapper}>
+            <Grid size={{ xs: 12, sm: 3, md: 3 }} className={classes.logoWrapper}>
               <Link to="/">
                 <img className={classes.logo} src={logo} alt="Piktask" width="135px" height="40px" />
               </Link>
             </Grid>
 
-            <Grid item xs={12} sm={6} md={6}>
+            <Grid size={{ xs: 12, sm: 6, md: 6 }}>
               <Typography className={classes.copyRightText}>copyright &copy; Piktask - All Right Reserved, {new Date().getFullYear()}</Typography>
             </Grid>
 
-            <Grid item xs={12} sm={3} md={3}>
+            <Grid size={{ xs: 12, sm: 3, md: 3 }}>
               <SocialShare copyRightSocial socials={socialMedia} width="28px" height="28px" />
             </Grid>
           </Grid>
